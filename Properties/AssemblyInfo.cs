@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+
 [assembly: AssemblyTitle("MoreIngots")]
 [assembly: AssemblyDescription("Adds more ingots to the game")]
 [assembly: AssemblyConfiguration("")]

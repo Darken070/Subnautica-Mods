@@ -1,6 +1,6 @@
-# MoreIngots
+# AlexejheroYTB/Subnautica-Mods 
 
-MoreIngots mod for Subnautica
+## MoreIngots
 
 Build for QModManager
 

@@ -126,7 +126,8 @@ set y[12]=1
 
 
 
-echo using SMLHelper; > QPatch.cs
+echo using Harmony; > QPatch.cs
+echo using SMLHelper; >> QPatch.cs
 echo using SMLHelper.Patchers; >> QPatch.cs
 echo using System; >> QPatch.cs
 echo using System.Collections.Generic; >> QPatch.cs
@@ -137,6 +138,15 @@ echo namespace MoreIngots >> QPatch.cs
 echo { >> QPatch.cs
 echo public class QPatch >> QPatch.cs
 echo { >> QPatch.cs
+echo try
+echo {
+echo var harmony = HarmonyInstance.Create("com.alexejheroytb.moreingots");
+echo harmony.PatchAll(Assembly.GetExecutingAssembly());
+echo }
+echo catch (Exception e)
+echo {
+echo Console.WriteLine($"MoreIngots patch failed!\n{FormatException(e)}");
+echo }
 echo private static readonly ConfigFile Config = new ConfigFile("config"); >> QPatch.cs
 set i=1
 

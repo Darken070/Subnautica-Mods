@@ -15,14 +15,14 @@ set x[1]=1
 set y[1]=1
 
 rem Diamond
-set e[2]=2
-rem set namespace[2]=MIDiamond
-rem set name[2]=Graphite
-rem set tooltip[2]=C. Condensed diamond. Added by MoreIngots mod
-rem set from[2]=Diamond
-rem set fromcount[2]=10
-rem set x[2]=1
-rem set y[2]=1
+set e[2]=1
+set namespace[2]=MIDiamond
+set name[2]=Graphite
+set tooltip[2]=C. Condensed diamond. Added by MoreIngots mod
+set from[2]=Diamond
+set fromcount[2]=10
+set x[2]=1
+set y[2]=1
 
 rem Lithium
 set e[3]=1
@@ -85,24 +85,24 @@ set x[8]=1
 set y[8]=1
 
 rem Kyanite
-set e[9]=2
-rem set namespace[9]=MIKyanite
-rem set name[9]=Topaz
-rem set tooltip[9]=Al2(F,OH)2SiO4. Condensed kyanite. Added by MoreIngots mod
-rem set from[9]=Kyanite
-rem set fromcount[9]=10
-rem set x[9]=1
-rem set y[9]=1
+set e[9]=1
+set namespace[9]=MIKyanite
+set name[9]=Topaz
+set tooltip[9]=Al2(F,OH)2SiO4. Condensed kyanite. Added by MoreIngots mod
+set from[9]=Kyanite
+set fromcount[9]=10
+set x[9]=1
+set y[9]=1
 
 rem Ruby
-set e[10]=2
-rem set namespace[10]=MIRuby
-rem set name[10]=Bauxite
-rem set tooltip[10]=Al(OH)3. Condensed ruby. Added by MoreIngots mod
-rem set from[10]=AluminumOxide
-rem set fromcount[10]=10
-rem set x[10]=1
-rem set y[10]=1
+set e[10]=1
+set namespace[10]=MIRuby
+set name[10]=Bauxite
+set tooltip[10]=Al(OH)3. Condensed ruby. Added by MoreIngots mod
+set from[10]=AluminumOxide
+set fromcount[10]=10
+set x[10]=1
+set y[10]=1
 
 rem Uraninite
 set e[11]=1
@@ -149,12 +149,6 @@ echo private static int _x!namespace[%i%]! = !x[%i%]!; >> QPatch.cs
 echo private static int _y!namespace[%i%]! = !y[%i%]!; >> QPatch.cs
 set /a i+=1
 if !e[%i%]! == 1 goto loop1
-if !e[%i%]! == 2 goto loop1add
-goto continue1
-:loop1add
-set /a i+=1
-goto loop1
-:continue1
 echo public static void Patch() >> QPatch.cs
 echo { >> QPatch.cs
 echo var assetBundle = AssetBundle.LoadFromFile(@"./QMods/MoreIngots/moreingots.assets"); >> QPatch.cs
@@ -171,12 +165,6 @@ echo ^|Config.TryGet(ref _x!namespace[%i%]!, "!name[%i%]! - !from[%i%]!", "Size"
 echo ^|Config.TryGet(ref _y!namespace[%i%]!, "!name[%i%]! - !from[%i%]!", "Size", "y") >> QPatch.cs
 set /a i+=1
 if !e[%i%]! == 1 goto loop2
-if !e[%i%]! == 2 goto loop2add
-goto continue2
-:loop2add
-set /a i+=1
-goto loop2
-:continue2
 echo ; >> QPatch.cs
 echo if (_xTitaniumIngot ^<= 0) >> QPatch.cs
 echo { >> QPatch.cs
@@ -213,12 +201,6 @@ echo   configChanged = true; >> QPatch.cs
 echo } >> QPatch.cs
 set /a i+=1
 if !e[%i%]! == 1 goto loop3
-if !e[%i%]! == 2 goto loop3add
-goto continue3
-:loop3add
-set /a i+=1
-goto loop3
-:continue3
 echo if (configChanged) >> QPatch.cs
 echo { >> QPatch.cs
 echo Config.Save(); >> QPatch.cs
@@ -231,12 +213,6 @@ set i=1
 echo var techType!namespace[%i%]! = TechTypePatcher.AddTechType("!namespace[%i%]!", "!name[%i%]!", "!tooltip[%i%]!"); >> QPatch.cs
 set /a i+=1
 if !e[%i%]! == 1 goto loop4
-if !e[%i%]! == 2 goto loop4add
-goto continue4
-:loop4add
-set /a i+=1
-goto loop4
-:continue4
 set i=1
 
 
@@ -263,12 +239,6 @@ echo }; >> QPatch.cs
 echo KnownTechPatcher.unlockedAtStart.Add(TechType.!from[%i%]!); >> QPatch.cs
 set /a i+=1
 if !e[%i%]! == 1 goto loop5
-if !e[%i%]! == 2 goto loop5add
-goto continue5
-:loop5add
-set /a i+=1
-goto loop5
-:continue5
 set i=1
 
 
@@ -283,17 +253,11 @@ echo CraftTreePatcher.customCraftNodes.Add("Resources/BasicMaterials/!from[%i%]!
 echo CraftDataPatcher.customItemSizes[key: techType!namespace[%i%]!] = new Vector2int(x: _x!namespace[%i%]!, y: _y!namespace[%i%]!); >> QPatch.cs
 set /a i+=1
 if !e[%i%]! == 1 goto loop6
-if !e[%i%]! == 2 goto loop6add
-goto continue6
-:loop6add
-set /a i+=1
-goto loop6
-:continue6
 set i=1
 
 
 echo CraftDataPatcher.customItemSizes[key: TechType.TitaniumIngot] = new Vector2int(x: _xTitaniumIngot, y: _yTitaniumIngot); >> QPatch.cs
 echo }}} >> QPatch.cs
 move /y QPatch.cs "Subnautica Mods\MoreIngots\"
-echo y | del "Subnautica Mods\MoreIngots\moreingots.bat"
-copy "moreingots.bat" "Subnautica Mods\MoreIngots\"
+echo y | del "Subnautica Mods\MoreIngots\moreingots Backup.bat"
+copy "moreingots Backup.bat" "Subnautica Mods\MoreIngots\"

@@ -138,15 +138,6 @@ echo namespace MoreIngots >> QPatch.cs
 echo { >> QPatch.cs
 echo public class QPatch >> QPatch.cs
 echo { >> QPatch.cs
-echo try
-echo {
-echo var harmony = HarmonyInstance.Create("com.alexejheroytb.moreingots");
-echo harmony.PatchAll(Assembly.GetExecutingAssembly());
-echo }
-echo catch (Exception e)
-echo {
-echo Console.WriteLine($"MoreIngots patch failed!\n{FormatException(e)}");
-echo }
 echo private static readonly ConfigFile Config = new ConfigFile("config"); >> QPatch.cs
 set i=1
 
@@ -161,6 +152,15 @@ set /a i+=1
 if !e[%i%]! == 1 goto loop1
 echo public static void Patch() >> QPatch.cs
 echo { >> QPatch.cs
+echo try >> QPatch.cs
+echo { >> QPatch.cs
+echo var harmony = HarmonyInstance.Create("com.alexejheroytb.moreingots"); >> QPatch.cs
+echo harmony.PatchAll(Assembly.GetExecutingAssembly()); >> QPatch.cs
+echo } >> QPatch.cs
+echo catch (Exception e) >> QPatch.cs
+echo { >> QPatch.cs
+echo Console.WriteLine($"MoreIngots patch failed!\n{FormatException(e)}"); >> QPatch.cs
+echo } >> QPatch.cs
 echo var assetBundle = AssetBundle.LoadFromFile(@"./QMods/MoreIngots/moreingots.assets"); >> QPatch.cs
 echo Config.Load(); >> QPatch.cs
 echo var configChanged =  >> QPatch.cs

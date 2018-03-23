@@ -94,25 +94,25 @@ rem set fromcount[9]=10
 rem set x[9]=1
 rem set y[9]=1
 
-rem Ruby
-set e[10]=2
-rem set namespace[10]=MIRuby
-rem set name[10]=Bauxite
-rem set tooltip[10]=Al(OH)3. Condensed ruby. Added by MoreIngots mod
-rem set from[10]=AluminumOxide
-rem set fromcount[10]=10
-rem set x[10]=1
-rem set y[10]=1
-
 rem Uraninite
-set e[11]=1
-set namespace[11]=MIUraninite
-set name[11]=Triuranium octoxide
-set tooltip[11]=U3O8. Condensed uraninite. Added by MoreIngots mod
-set from[11]=UraniniteCrystal
-set fromcount[11]=10
-set x[11]=1
-set y[11]=1
+set e[10]=1
+set namespace[10]=MIUraninite
+set name[10]=Triuranium octoxide
+set tooltip[10]=U3O8. Condensed uraninite. Added by MoreIngots mod
+set from[10]=UraniniteCrystal
+set fromcount[10]=10
+set x[10]=1
+set y[10]=1
+
+rem Ruby
+set e[11]=2
+rem set namespace[11]=MIRuby
+rem set name[11]=Bauxite
+rem set tooltip[11]=Al(OH)3. Condensed ruby. Added by MoreIngots mod
+rem set from[11]=AluminumOxide
+rem set fromcount[11]=10
+rem set x[11]=1
+rem set y[11]=1
 
 rem Quartz
 set e[12]=1

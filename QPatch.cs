@@ -1,11 +1,12 @@
+using Harmony; 
 using SMLHelper; 
 using SMLHelper.Patchers; 
 using System; 
 using System.Collections.Generic; 
 using System.Reflection; 
 using UnityEngine; 
-using Utilites.Config; 
-namespace MoreIngots 
+using Utilites.Config;
+namespace MoreIngots
 {
     public class QPatch
     {
@@ -14,6 +15,8 @@ namespace MoreIngots
         private static int _yTitaniumIngot = 1;
         private static int _xMIGold = 1;
         private static int _yMIGold = 1;
+        private static int _xMIDiamond = 1;
+        private static int _yMIDiamond = 1;
         private static int _xMILithium = 1;
         private static int _yMILithium = 1;
         private static int _xMICopper = 1;
@@ -26,12 +29,25 @@ namespace MoreIngots
         private static int _yMIMagnetite = 1;
         private static int _xMINickel = 1;
         private static int _yMINickel = 1;
+        private static int _xMIKyanite = 1;
+        private static int _yMIKyanite = 1;
+        private static int _xMIRuby = 1;
+        private static int _yMIRuby = 1;
         private static int _xMIUraninite = 1;
         private static int _yMIUraninite = 1;
         private static int _xMIQuartz = 1;
         private static int _yMIQuartz = 1;
         public static void Patch()
         {
+            try
+            {
+                var harmony = HarmonyInstance.Create("com.alexejheroytb.moreingots");
+                harmony.PatchAll(Assembly.GetExecutingAssembly());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"MoreIngots patch failed\n{FormatException(e)}");
+            }
             var assetBundle = AssetBundle.LoadFromFile(@"./QMods/MoreIngots/moreingots.assets");
             Config.Load();
             var configChanged =
@@ -39,6 +55,8 @@ namespace MoreIngots
             | Config.TryGet(ref _yTitaniumIngot, "Titanium Ingot - Titanium", "Size", "y")
             | Config.TryGet(ref _xMIGold, "Gold Ingot - Gold", "Size", "x")
             | Config.TryGet(ref _yMIGold, "Gold Ingot - Gold", "Size", "y")
+            | Config.TryGet(ref _xMIDiamond, "Graphite - Diamond", "Size", "x")
+            | Config.TryGet(ref _yMIDiamond, "Graphite - Diamond", "Size", "y")
             | Config.TryGet(ref _xMILithium, "Lithium Bar - Lithium", "Size", "x")
             | Config.TryGet(ref _yMILithium, "Lithium Bar - Lithium", "Size", "y")
             | Config.TryGet(ref _xMICopper, "Copper Ingot - Copper", "Size", "x")
@@ -51,6 +69,10 @@ namespace MoreIngots
             | Config.TryGet(ref _yMIMagnetite, "Maghemite - Magnetite", "Size", "y")
             | Config.TryGet(ref _xMINickel, "Nickel Sheets - Nickel", "Size", "x")
             | Config.TryGet(ref _yMINickel, "Nickel Sheets - Nickel", "Size", "y")
+            | Config.TryGet(ref _xMIKyanite, "Topaz - Kyanite", "Size", "x")
+            | Config.TryGet(ref _yMIKyanite, "Topaz - Kyanite", "Size", "y")
+            | Config.TryGet(ref _xMIRuby, "Bauxite - AluminumOxide", "Size", "x")
+            | Config.TryGet(ref _yMIRuby, "Bauxite - AluminumOxide", "Size", "y")
             | Config.TryGet(ref _xMIUraninite, "Triuranium octoxide - UraniniteCrystal", "Size", "x")
             | Config.TryGet(ref _yMIUraninite, "Triuranium octoxide - UraniniteCrystal", "Size", "y")
             | Config.TryGet(ref _xMIQuartz, "Silicate - Quartz", "Size", "x")
@@ -82,6 +104,20 @@ namespace MoreIngots
                 _yMIGold = 1;
                 Config["Gold Ingot - Gold", "Size", "y"] = _yMIGold;
                 Utilites.Logger.Logger.Error("Size of Gold Ingot can't be less or equal to 0 Y was set to 1", Utilites.Logger.LogType.Custom | Utilites.Logger.LogType.Console);
+                configChanged = true;
+            }
+            if (_xMIDiamond <= 0)
+            {
+                _xMIDiamond = 1;
+                Config["Graphite - Diamond", "Size", "x"] = _xMIDiamond;
+                Utilites.Logger.Logger.Error("Size of Graphite can't be less or equal to 0 X was set to 1", Utilites.Logger.LogType.Custom | Utilites.Logger.LogType.Console);
+                configChanged = true;
+            }
+            if (_yMIDiamond <= 0)
+            {
+                _yMIDiamond = 1;
+                Config["Graphite - Diamond", "Size", "y"] = _yMIDiamond;
+                Utilites.Logger.Logger.Error("Size of Graphite can't be less or equal to 0 Y was set to 1", Utilites.Logger.LogType.Custom | Utilites.Logger.LogType.Console);
                 configChanged = true;
             }
             if (_xMILithium <= 0)
@@ -168,6 +204,34 @@ namespace MoreIngots
                 Utilites.Logger.Logger.Error("Size of Nickel Sheets can't be less or equal to 0 Y was set to 1", Utilites.Logger.LogType.Custom | Utilites.Logger.LogType.Console);
                 configChanged = true;
             }
+            if (_xMIKyanite <= 0)
+            {
+                _xMIKyanite = 1;
+                Config["Topaz - Kyanite", "Size", "x"] = _xMIKyanite;
+                Utilites.Logger.Logger.Error("Size of Topaz can't be less or equal to 0 X was set to 1", Utilites.Logger.LogType.Custom | Utilites.Logger.LogType.Console);
+                configChanged = true;
+            }
+            if (_yMIKyanite <= 0)
+            {
+                _yMIKyanite = 1;
+                Config["Topaz - Kyanite", "Size", "y"] = _yMIKyanite;
+                Utilites.Logger.Logger.Error("Size of Topaz can't be less or equal to 0 Y was set to 1", Utilites.Logger.LogType.Custom | Utilites.Logger.LogType.Console);
+                configChanged = true;
+            }
+            if (_xMIRuby <= 0)
+            {
+                _xMIRuby = 1;
+                Config["Bauxite - AluminumOxide", "Size", "x"] = _xMIRuby;
+                Utilites.Logger.Logger.Error("Size of Bauxite can't be less or equal to 0 X was set to 1", Utilites.Logger.LogType.Custom | Utilites.Logger.LogType.Console);
+                configChanged = true;
+            }
+            if (_yMIRuby <= 0)
+            {
+                _yMIRuby = 1;
+                Config["Bauxite - AluminumOxide", "Size", "y"] = _yMIRuby;
+                Utilites.Logger.Logger.Error("Size of Bauxite can't be less or equal to 0 Y was set to 1", Utilites.Logger.LogType.Custom | Utilites.Logger.LogType.Console);
+                configChanged = true;
+            }
             if (_xMIUraninite <= 0)
             {
                 _xMIUraninite = 1;
@@ -201,12 +265,15 @@ namespace MoreIngots
                 Config.Save();
             }
             var techTypeMIGold = TechTypePatcher.AddTechType("MIGold", "Gold Ingot", "Au. Condensed gold. Added by MoreIngots mod. ");
+            var techTypeMIDiamond = TechTypePatcher.AddTechType("MIDiamond", "Graphite", "C. Condensed diamond. Added by MoreIngots mod");
             var techTypeMILithium = TechTypePatcher.AddTechType("MILithium", "Lithium Bar", "Li. Condensed lithium. Added by MoreIngots mod");
             var techTypeMICopper = TechTypePatcher.AddTechType("MICopper", "Copper Ingot", "Cu. Condensed copper. Added by MoreIngots mod");
             var techTypeMILead = TechTypePatcher.AddTechType("MILead", "Lead Bar", "Pb. Condensed lead. Added by MoreIngots mod");
             var techTypeMISilver = TechTypePatcher.AddTechType("MISilver", "Silver Ingot", "Ag. Condensed silver. Added by MoreIngots mod");
             var techTypeMIMagnetite = TechTypePatcher.AddTechType("MIMagnetite", "Maghemite", "γ-Fe2O3. Condensed magnetite. Added by MoreIngots mod");
             var techTypeMINickel = TechTypePatcher.AddTechType("MINickel", "Nickel Sheets", "Ni. Condensed nickel. Added by MoreIngots mod");
+            var techTypeMIKyanite = TechTypePatcher.AddTechType("MIKyanite", "Topaz", "Al2(F,OH)2SiO4. Condensed kyanite. Added by MoreIngots mod");
+            var techTypeMIRuby = TechTypePatcher.AddTechType("MIRuby", "Bauxite", "Al(OH)3. Condensed ruby. Added by MoreIngots mod");
             var techTypeMIUraninite = TechTypePatcher.AddTechType("MIUraninite", "Triuranium octoxide", "U3O8. Condensed uraninite. Added by MoreIngots mod");
             var techTypeMIQuartz = TechTypePatcher.AddTechType("MIQuartz", "Silicate", "SiO4. Condensed quartz. Added by MoreIngots mod");
             var techDataMIGold = new TechDataHelper
@@ -228,6 +295,25 @@ new IngredientHelper(techTypeMIGold, 1)
                 _techType = TechType.Gold
             };
             KnownTechPatcher.unlockedAtStart.Add(TechType.Gold);
+            var techDataMIDiamond = new TechDataHelper
+            {
+                _craftAmount = 1,
+                _ingredients = new List<IngredientHelper>()
+{
+new IngredientHelper(TechType.Diamond, 10)
+},
+                _techType = techTypeMIDiamond
+            };
+            var techDataMIDiamondB = new TechDataHelper
+            {
+                _craftAmount = 10,
+                _ingredients = new List<IngredientHelper>()
+{
+new IngredientHelper(techTypeMIDiamond, 1)
+},
+                _techType = TechType.Diamond
+            };
+            KnownTechPatcher.unlockedAtStart.Add(TechType.Diamond);
             var techDataMILithium = new TechDataHelper
             {
                 _craftAmount = 1,
@@ -342,6 +428,44 @@ new IngredientHelper(techTypeMINickel, 1)
                 _techType = TechType.Nickel
             };
             KnownTechPatcher.unlockedAtStart.Add(TechType.Nickel);
+            var techDataMIKyanite = new TechDataHelper
+            {
+                _craftAmount = 1,
+                _ingredients = new List<IngredientHelper>()
+{
+new IngredientHelper(TechType.Kyanite, 10)
+},
+                _techType = techTypeMIKyanite
+            };
+            var techDataMIKyaniteB = new TechDataHelper
+            {
+                _craftAmount = 10,
+                _ingredients = new List<IngredientHelper>()
+{
+new IngredientHelper(techTypeMIKyanite, 1)
+},
+                _techType = TechType.Kyanite
+            };
+            KnownTechPatcher.unlockedAtStart.Add(TechType.Kyanite);
+            var techDataMIRuby = new TechDataHelper
+            {
+                _craftAmount = 1,
+                _ingredients = new List<IngredientHelper>()
+{
+new IngredientHelper(TechType.AluminumOxide, 10)
+},
+                _techType = techTypeMIRuby
+            };
+            var techDataMIRubyB = new TechDataHelper
+            {
+                _craftAmount = 10,
+                _ingredients = new List<IngredientHelper>()
+{
+new IngredientHelper(techTypeMIRuby, 1)
+},
+                _techType = TechType.AluminumOxide
+            };
+            KnownTechPatcher.unlockedAtStart.Add(TechType.AluminumOxide);
             var techDataMIUraninite = new TechDataHelper
             {
                 _craftAmount = 1,
@@ -387,6 +511,13 @@ new IngredientHelper(techTypeMIQuartz, 1)
             CraftTreePatcher.customCraftNodes.Add("Resources/AdvancedMaterials/MIGold", techTypeMIGold);
             CraftTreePatcher.customCraftNodes.Add("Resources/BasicMaterials/Gold", TechType.Gold);
             CraftDataPatcher.customItemSizes[key: techTypeMIGold] = new Vector2int(x: _xMIGold, y: _yMIGold);
+            var spriteMIDiamond = assetBundle.LoadAsset<Sprite>("MIDiamond");
+            CustomSpriteHandler.customSprites.Add(new CustomSprite(techTypeMIDiamond, spriteMIDiamond));
+            CraftDataPatcher.customTechData.Add(techTypeMIDiamond, techDataMIDiamond);
+            CraftDataPatcher.customTechData.Add(TechType.Diamond, techDataMIDiamondB);
+            CraftTreePatcher.customCraftNodes.Add("Resources/AdvancedMaterials/MIDiamond", techTypeMIDiamond);
+            CraftTreePatcher.customCraftNodes.Add("Resources/BasicMaterials/Diamond", TechType.Diamond);
+            CraftDataPatcher.customItemSizes[key: techTypeMIDiamond] = new Vector2int(x: _xMIDiamond, y: _yMIDiamond);
             var spriteMILithium = assetBundle.LoadAsset<Sprite>("MILithium");
             CustomSpriteHandler.customSprites.Add(new CustomSprite(techTypeMILithium, spriteMILithium));
             CraftDataPatcher.customTechData.Add(techTypeMILithium, techDataMILithium);
@@ -429,6 +560,20 @@ new IngredientHelper(techTypeMIQuartz, 1)
             CraftTreePatcher.customCraftNodes.Add("Resources/AdvancedMaterials/MINickel", techTypeMINickel);
             CraftTreePatcher.customCraftNodes.Add("Resources/BasicMaterials/Nickel", TechType.Nickel);
             CraftDataPatcher.customItemSizes[key: techTypeMINickel] = new Vector2int(x: _xMINickel, y: _yMINickel);
+            var spriteMIKyanite = assetBundle.LoadAsset<Sprite>("MIKyanite");
+            CustomSpriteHandler.customSprites.Add(new CustomSprite(techTypeMIKyanite, spriteMIKyanite));
+            CraftDataPatcher.customTechData.Add(techTypeMIKyanite, techDataMIKyanite);
+            CraftDataPatcher.customTechData.Add(TechType.Kyanite, techDataMIKyaniteB);
+            CraftTreePatcher.customCraftNodes.Add("Resources/AdvancedMaterials/MIKyanite", techTypeMIKyanite);
+            CraftTreePatcher.customCraftNodes.Add("Resources/BasicMaterials/Kyanite", TechType.Kyanite);
+            CraftDataPatcher.customItemSizes[key: techTypeMIKyanite] = new Vector2int(x: _xMIKyanite, y: _yMIKyanite);
+            var spriteMIRuby = assetBundle.LoadAsset<Sprite>("MIRuby");
+            CustomSpriteHandler.customSprites.Add(new CustomSprite(techTypeMIRuby, spriteMIRuby));
+            CraftDataPatcher.customTechData.Add(techTypeMIRuby, techDataMIRuby);
+            CraftDataPatcher.customTechData.Add(TechType.AluminumOxide, techDataMIRubyB);
+            CraftTreePatcher.customCraftNodes.Add("Resources/AdvancedMaterials/MIRuby", techTypeMIRuby);
+            CraftTreePatcher.customCraftNodes.Add("Resources/BasicMaterials/AluminumOxide", TechType.AluminumOxide);
+            CraftDataPatcher.customItemSizes[key: techTypeMIRuby] = new Vector2int(x: _xMIRuby, y: _yMIRuby);
             var spriteMIUraninite = assetBundle.LoadAsset<Sprite>("MIUraninite");
             CustomSpriteHandler.customSprites.Add(new CustomSprite(techTypeMIUraninite, spriteMIUraninite));
             CraftDataPatcher.customTechData.Add(techTypeMIUraninite, techDataMIUraninite);
@@ -445,5 +590,12 @@ new IngredientHelper(techTypeMIQuartz, 1)
             CraftDataPatcher.customItemSizes[key: techTypeMIQuartz] = new Vector2int(x: _xMIQuartz, y: _yMIQuartz);
             CraftDataPatcher.customItemSizes[key: TechType.TitaniumIngot] = new Vector2int(x: _xTitaniumIngot, y: _yTitaniumIngot);
         }
+        private static string FormatException(Exception e)
+        {
+            if (e == null)
+                return string.Empty;
+            return $"\"Exception: {e.GetType()}\"\n\tMessage: {e.Message}\n\tStacktrace: {e.StackTrace}\n" +
+                   FormatException(e.InnerException);
+        }
     }
-} 
+}

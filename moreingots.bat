@@ -8,7 +8,7 @@ rem Gold
 set e[1]=1
 set namespace[1]=MIGold
 set name[1]=Gold Ingot
-set tooltip[1]=Au. Condensed gold. To turn it back into gold, enter this command in the debug console: \"unlock gold\". Added by MoreIngots mod. 
+set tooltip[1]=Au. Condensed gold. Added by MoreIngots mod. 
 set from[1]=Gold
 set fromcount[1]=10
 set x[1]=1
@@ -18,7 +18,7 @@ rem Diamond
 set e[2]=1
 set namespace[2]=MIDiamond
 set name[2]=Graphite
-set tooltip[2]=C. Condensed diamond. To turn it back into diamond, enter this command in the debug console: \"unlock diamond\". Added by MoreIngots mod
+set tooltip[2]=C. Condensed diamond. Added by MoreIngots mod
 set from[2]=Diamond
 set fromcount[2]=10
 set x[2]=1
@@ -28,7 +28,7 @@ rem Lithium
 set e[3]=1
 set namespace[3]=MILithium
 set name[3]=Lithium Bar
-set tooltip[3]=Li. Condensed lithium. To turn it back into lithium, enter this command in the debug console: \"unlock lithium\". Added by MoreIngots mod
+set tooltip[3]=Li. Condensed lithium. Added by MoreIngots mod
 set from[3]=Lithium
 set fromcount[3]=10
 set x[3]=1
@@ -38,7 +38,7 @@ rem Copper
 set e[4]=1
 set namespace[4]=MICopper
 set name[4]=Copper Ingot
-set tooltip[4]=Cu. Condensed copper. To turn it back into copper, enter this command in the debug console: \"unlock copper\". Added by MoreIngots mod
+set tooltip[4]=Cu. Condensed copper. Added by MoreIngots mod
 set from[4]=Copper
 set fromcount[4]=10
 set x[4]=1
@@ -48,7 +48,7 @@ rem Lead
 set e[5]=1
 set namespace[5]=MILead
 set name[5]=Lead Bar
-set tooltip[5]=Pb. Condensed lead. To turn it back into lead, enter this command in the debug console: \"unlock lead\". Added by MoreIngots mod
+set tooltip[5]=Pb. Condensed lead. Added by MoreIngots mod
 set from[5]=Lead
 set fromcount[5]=10
 set x[5]=1
@@ -58,7 +58,7 @@ rem Silver
 set e[6]=1
 set namespace[6]=MISilver
 set name[6]=Silver Ingot
-set tooltip[6]=Ag. Condensed silver. To turn it back into silver, enter this command in the debug console: \"unlock silver\". Added by MoreIngots mod
+set tooltip[6]=Ag. Condensed silver. Added by MoreIngots mod
 set from[6]=Silver
 set fromcount[6]=10
 set x[6]=1
@@ -68,7 +68,7 @@ rem Magnetite
 set e[7]=1
 set namespace[7]=MIMagnetite
 set name[7]=Maghemite
-set tooltip[7]=γ-Fe2O3. Condensed magnetite. To turn it back into magnetite, enter this command in the debug console: \"unlock magnetite\". Added by MoreIngots mod
+set tooltip[7]=γ-Fe2O3. Condensed magnetite. Added by MoreIngots mod
 set from[7]=Magnetite
 set fromcount[7]=10
 set x[7]=1
@@ -78,7 +78,7 @@ rem Nickel
 set e[8]=1
 set namespace[8]=MINickel
 set name[8]=Nickel Sheets
-set tooltip[8]=Ni. Condensed nickel. To turn it back into nickel, enter this command in the debug console: \"unlock nickel\". Added by MoreIngots mod
+set tooltip[8]=Ni. Condensed nickel. Added by MoreIngots mod
 set from[8]=Nickel
 set fromcount[8]=10
 set x[8]=1
@@ -88,7 +88,7 @@ rem Kyanite
 set e[9]=1
 set namespace[9]=MIKyanite
 set name[9]=Topaz
-set tooltip[9]=Al2(F,OH)2SiO4. Condensed kyanite. To turn it back into kyanite, enter this command in the debug console: \"unlock kyanite\". Added by MoreIngots mod
+set tooltip[9]=Al2(F,OH)2SiO4. Condensed kyanite. Added by MoreIngots mod
 set from[9]=Kyanite
 set fromcount[9]=10
 set x[9]=1
@@ -98,7 +98,7 @@ rem Ruby
 set e[10]=1
 set namespace[10]=MIRuby
 set name[10]=Bauxite
-set tooltip[10]=Al(OH)3. Condensed ruby. To turn it back into ruby, enter this command in the debug console: \"unlock aluminiumoxide\". Added by MoreIngots mod
+set tooltip[10]=Al(OH)3. Condensed ruby. Added by MoreIngots mod
 set from[10]=AluminumOxide
 set fromcount[10]=10
 set x[10]=1
@@ -108,7 +108,7 @@ rem Uraninite
 set e[11]=1
 set namespace[11]=MIUraninite
 set name[11]=Triuranium octoxide
-set tooltip[11]=U3O8. Condensed uraninite. To turn it back into uraninite, enter this command in the debug console: \"unlock uraninitecrystal\". Added by MoreIngots mod
+set tooltip[11]=U3O8. Condensed uraninite. Added by MoreIngots mod
 set from[11]=UraniniteCrystal
 set fromcount[11]=10
 set x[11]=1
@@ -118,7 +118,7 @@ rem Quartz
 set e[12]=1
 set namespace[12]=MIQuartz
 set name[12]=Silicate
-set tooltip[12]=SiO4. Condensed quartz. To turn it back into quartz, enter this command in the debug console: \"unlock quartz\". Added by MoreIngots mod
+set tooltip[12]=SiO4. Condensed quartz. Added by MoreIngots mod
 set from[12]=Quartz
 set fromcount[12]=10
 set x[12]=1

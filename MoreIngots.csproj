@@ -73,6 +73,10 @@
     <VisualStudio AllowExistingFolder="true" />
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy /y "C:\Users\user\Desktop\Subnautica Mods\MoreIngots\bin\Debug\MoreIngots.dll" "D:\Games\Subnautica\QMods\MoreIngots"</PostBuildEvent>
+    <PostBuildEvent>copy /y "C:\Users\user\Desktop\Subnautica Mods\MoreIngots\bin\Debug\MoreIngots.dll" "D:\Games\Subnautica\QMods\MoreIngots"
+move /y "C:\Users\user\Desktop\Subnautica Mods\MoreIngots\bin\Debug\MoreIngots.dll" "C:\Users\user\Desktop\Subnautica Mods\MoreIngots\"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>echo y | del "C:\Users\user\Desktop\Subnautica Mods\MoreIngots\MoreIngots.dll"</PreBuildEvent>
   </PropertyGroup>
 </Project>

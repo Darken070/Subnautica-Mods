@@ -1,6 +1,6 @@
 # AlexejheroYTB/Subnautica-Mods 
 
-| Name | Description | Nexus Page Link | 
-|-|-|-|
-| <a href=https://github.com/AlexejheroYTB/Subnautica-Mods/tree/master/MoreIngots> MoreIngots </a> | Allows basic resources to be turned into compressed ones to save storage space | <strike>https://www.nexusmods.com/subnautica/mods/60</strike> (Not yet published) |
-| <a href=https://github.com/AlexejheroYTB/Subnautica-Mods/tree/master/ReplenishReactorRods> ReplenishReactorRods </a> | Allows depleted reactor rods to be replenished with 3 uraninite crystals | (Not yet published) |
+| Name | Status | Description | Nexus Page Link | 
+|-|-|-|-|
+| <a href=https://github.com/AlexejheroYTB/Subnautica-Mods/tree/master/MoreIngots> MoreIngots </a> | Work in progress | Allows basic resources to be turned into compressed ones to save storage space | <strike>https://www.nexusmods.com/subnautica/mods/60</strike> (Not yet published) |
+| <a href=https://github.com/AlexejheroYTB/Subnautica-Mods/tree/master/ReplenishReactorRods> ReplenishReactorRods </a> | Work in progress | Allows depleted reactor rods to be replenished with 3 uraninite crystals | <strike>https://www.nexusmods.com/subnautica/mods/62</strike> (Not yet published) |

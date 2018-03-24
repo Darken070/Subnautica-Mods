@@ -1,0 +1,11 @@
+{
+  "Id": "CustomItemSizes",
+  "DisplayName": "CustomItemSizes",
+  "Author": "AlexejheroYTB",
+  "Version": "1.0.0",
+  "Requires": [],
+  "Enable": true,
+  "AssemblyName": "CustomItemSizes.dll",
+  "EntryMethod": "CustomItemSizes.QPatch.Patch",
+  "Config": {}
+}

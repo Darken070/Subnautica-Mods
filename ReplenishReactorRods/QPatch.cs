@@ -1,3 +1,4 @@
+using SMLHelper;
 using SMLHelper.Patchers;
 using System.Collections.Generic;
 
@@ -18,9 +19,9 @@ namespace ReplenishReactorRods
                 },
                 _techType = techType
             };
-            CraftDataPatcher.customTechData.Add(TechType.ReactorRod, techData);
-            CraftTreePatcher.customCraftNodes.Add("Resources/Electronics/ReactorRod", TechType.ReactorRod);
-            KnownTechPatcher.unlockedAtStart.Add(TechType.ReactorRod);
+            var sprite = SpriteManager.Get(TechType.ReactorRod);
+            CraftDataPatcher.customTechData.Add(techType, techData);
+            CraftTreePatcher.customCraftNodes.Add("Resources/Electronics/RRR", techType);
         }
     }
 }

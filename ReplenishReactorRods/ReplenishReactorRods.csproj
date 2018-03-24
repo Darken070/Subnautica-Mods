@@ -49,6 +49,7 @@
     <Reference Include="SMLHelper">
       <HintPath>D:\Games\Subnautica\QMods\Modding Helper\SMLHelper.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Utilites">
       <HintPath>D:\Games\Subnautica\QMods\Utilites\Utilites.dll</HintPath>
     </Reference>

@@ -2,7 +2,7 @@
 
 ## ReplenishReactorRods
 
-Allows depleted reactor rods to be replenished with 3 uraninite crystals
+Allows depleted reactor rods to be replenished ONCE with 3 uraninite crystals
 
 Made for QModManager
 

@@ -7,6 +7,7 @@ namespace ReplenishReactorRods
     {
         public static void Patch()
         {
+            var techType = TechTypePatcher.AddTechType("RRR", "Replenished Reactor Rod", "Used to power nuclear reactors. Cannot be replenished. Added by ReplenishReactorRods mod");
             var techData = new TechDataHelper
             {
                 _craftAmount = 1,
@@ -15,7 +16,7 @@ namespace ReplenishReactorRods
                     new IngredientHelper(TechType.DepletedReactorRod, 1),
                     new IngredientHelper(TechType.UraniniteCrystal, 3)
                 },
-                _techType = TechType.ReactorRod
+                _techType = techType
             };
             CraftDataPatcher.customTechData.Add(TechType.ReactorRod, techData);
             CraftTreePatcher.customCraftNodes.Add("Resources/Electronics/ReactorRod", TechType.ReactorRod);

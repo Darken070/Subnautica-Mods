@@ -2,4 +2,4 @@
 
 | Name | Description | Nexus Page Link | 
 |-|-|-|
-| MoreIngots | Allows basic resources to be turned into compressed ones to save storage space | Not yet published (https://www.nexusmods.com/subnautica/mods/60)
+| <a href=https://github.com/AlexejheroYTB/Subnautica-Mods/tree/master/MoreIngots> MoreIngots </a> | Allows basic resources to be turned into compressed ones to save storage space | <strike>https://www.nexusmods.com/subnautica/mods/60</strike> (Not yet published)

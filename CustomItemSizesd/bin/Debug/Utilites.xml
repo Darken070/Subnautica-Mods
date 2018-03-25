@@ -1,0 +1,360 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Utilites</name>
+    </assembly>
+    <members>
+        <member name="T:Utilites.Config.ConfigFile">
+            <summary>
+            This code is based on open-source project Oxide.Core - https://github.com/OxideMod/Oxide.Core
+            </summary>
+        </member>
+        <member name="P:Utilites.Config.ConfigFile.Settings">
+            <summary>
+            Json setializer setting that would be used to save\load configs. You can add your won if you need to load custom classes
+            </summary>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.Exists(System.String)">
+            <summary>
+            Check if specified file exists. If filename is null checks the initial file.
+            </summary>
+            <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.#ctor(System.String)">
+            <summary>
+            Generic config file. Extension would be automaticly added to the filename.
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.Load(System.String)">
+            <summary>
+            Loads the config from the specified file, or the initilized one.
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.Save(System.String)">
+            <summary>
+            Saves the config from the specified file, or the initilized one.
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.Clear">
+            <summary>
+            Removes all entries from the config.
+            </summary>
+        </member>
+        <member name="P:Utilites.Config.ConfigFile.Item(System.String[])">
+            <summary>
+            Gets or sets a setting on this config by key
+            </summary>
+            <param name="keys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.Get(System.String[])">
+            <summary>
+            Gets a configuration value at the specified path
+            </summary>
+            <param name="keys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.Set(System.Object[])">
+            <summary>
+            Sets a configuration value at the specified path
+            </summary>
+            <param name="pathAndTrailingValue"></param>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.ConvertValue(System.Object,System.Type)">
+            <summary>
+            Converts a configuration value to another type
+            </summary>
+            <param name="value"></param>
+            <param name="destinationType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.TryGet``1(``0@,System.String[])">
+            <summary>
+            Tries to get the value out of config. If it's persist - sets the value to the config one.
+            If it's not - Adds the provided value to the config.
+            If the config was changed returns true, overwise - false.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="variable"></param>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.ConverValues``1(System.Object)">
+            <summary>
+            Tries to convert object to type of T
+            </summary>
+            <param name="value"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.Get``1(System.String[])">
+            <summary>
+            Gets the value from the config stored at path, then tries to convert it to requested type of T
+            </summary>
+            <param name="path"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.ReadObject``1(``0,System.String)">
+            <summary>
+            Tries to read object of type T from the config file. If it doesnt' exists creates the new one with the default object of type T.
+            </summary>
+            <param name="defaultValue"></param>
+            <param name="filename"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.WriteObject``1(``0,System.String,System.Boolean)">
+            <summary>
+            Saves the config to the specified file, or the initilized one. Sync determines if the config would get the data as well.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="config"></param>
+            <param name="filename"></param>
+            <param name="sync"></param>
+        </member>
+        <member name="T:Utilites.Config.ConfigFile.KeyValuesConverter">
+            <summary>
+            Public code from the Oxide.Core - https://github.com/OxideMod/Oxide.Core
+            </summary>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.KeyValuesConverter.CanConvert(System.Type)">
+            <summary>
+            Returns if this converter can convert the specified type or not
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.KeyValuesConverter.ReadJson(Oculus.Newtonsoft.Json.JsonReader,System.Type,System.Object,Oculus.Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads an instance of the specified type from json
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Config.ConfigFile.KeyValuesConverter.WriteJson(Oculus.Newtonsoft.Json.JsonWriter,System.Object,Oculus.Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes an instance of the specified type to json
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="T:Utilites.Logger.LogLevel">
+            <summary>
+            Determinies the type of the log. Currently this is nothig but a prefix before the message.
+            </summary>
+        </member>
+        <member name="F:Utilites.Logger.LogLevel.Info">
+            <summary>
+            Just an information message.
+            </summary>
+        </member>
+        <member name="F:Utilites.Logger.LogLevel.Warning">
+            <summary>
+            Something goes wrong, but we can handle it.
+            </summary>
+        </member>
+        <member name="F:Utilites.Logger.LogLevel.Error">
+            <summary>
+            The error has occur.
+            </summary>
+        </member>
+        <member name="F:Utilites.Logger.LogLevel.Debug">
+            <summary>
+            Debug messages that should be removed in the relized versions.
+            </summary>
+        </member>
+        <member name="T:Utilites.Logger.LogType">
+            <summary>
+            Determines where the log would be stored
+            </summary>
+        </member>
+        <member name="F:Utilites.Logger.LogType.None">
+            <summary>
+            Placeholder. If set - Custom LogType would be used
+            </summary>
+        </member>
+        <member name="F:Utilites.Logger.LogType.Custom">
+            <summary>
+            Print the information to the custom logfile located in the mod folder.
+            </summary>
+        </member>
+        <member name="F:Utilites.Logger.LogType.Harmony">
+            <summary>
+            Print the information to the file "harmony.log.txt" located at the desktop. Keep in mind - it's one file that can be accessed by any mod.
+            </summary>
+        </member>
+        <member name="F:Utilites.Logger.LogType.Console">
+            <summary>
+            Print the information to the "output_log.txt".
+            </summary>
+        </member>
+        <member name="F:Utilites.Logger.LogType.PlayerScreen">
+            <summary>
+            Print the information on the player screen
+            </summary>
+        </member>
+        <member name="T:Utilites.Logger.Logger">
+            <summary>
+            Main class that allows you to log anything way simplier
+            </summary>
+        </member>
+        <member name="M:Utilites.Logger.Logger.Debug(System.Object,Utilites.Logger.LogType)">
+            <summary>
+            Created [Debug] prefixed message in the desired location
+            </summary>
+            <param name="text"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:Utilites.Logger.Logger.Error(System.Object,Utilites.Logger.LogType)">
+            <summary>
+            Creates [Error] prefixes message in the desired location
+            </summary>
+            <param name="text"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:Utilites.Logger.Logger.Info(System.Object,Utilites.Logger.LogType)">
+            <summary>
+            Creates [Info] prefixed message in the desired loaction
+            </summary>
+            <param name="text"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:Utilites.Logger.Logger.Warning(System.Object,Utilites.Logger.LogType)">
+            <summary>
+            Creates [Warning] prefixed message in the desired location
+            </summary>
+            <param name="text"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:Utilites.Logger.Logger.Log(System.Object,Utilites.Logger.LogType)">
+            <summary>
+            Creates [Info] prefixed message in the desired loaction
+            </summary>
+            <param name="text"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:Utilites.Logger.Logger.Log(System.Exception,Utilites.Logger.LogType)">
+            <summary>
+            Logs the formatted exception as an error in the desired location
+            </summary>
+            <param name="e"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Utilites.Logger.Logger.Log(System.Collections.Generic.IEnumerable{Harmony.CodeInstruction},Utilites.Logger.LogType)">
+            <summary>
+            Logs list of CodeInstruction as the debug message in the desired location
+            </summary>
+            <param name="instructions"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Utilites.Logger.Logger.LogPatches(System.Reflection.MethodBase,Harmony.HarmonyInstance,Utilites.Logger.LogType)">
+            <summary>
+            Logs all patches applied to method
+            </summary>
+            <param name="method"></param>
+            <param name="harmony"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Utilites.Logger.Logger.Contains(System.Enum,System.Enum)">
+            <summary>
+            Checks if the enum containes value. This is .net 3.5 project, so there is no Enum.HasFlag =(
+            </summary>
+            <param name="keys"></param>
+            <param name="flag"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Logger.Logger.ClearCustomLog">
+            <summary>
+            Clears custom log file.
+            </summary>
+        </member>
+        <member name="T:Utilites.Logger.ReflectionUtilites">
+            <summary>
+            This class provides additional help for logging methods\constructors and fields
+            </summary>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.GetAllFields(System.Type)">
+            <summary>
+            Returns list of all Fileds existing in class
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.LogAllFields(System.Type,Utilites.Logger.LogType)">
+            <summary>
+            Log all the fileds existing in class as the debug messages in the desired location
+            </summary>
+            <param name="type"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.Log(System.Reflection.FieldInfo,Utilites.Logger.LogType)">
+            <summary>
+            Log FieldInfo as the debug message in the desired location
+            </summary>
+            <param name="info"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.Log(System.Reflection.FieldInfo,System.Object,Utilites.Logger.LogType)">
+            <summary>
+            Log FieldInfo and the value it has on instance as the debug messages in the desired location
+            </summary>
+            <param name="info"></param>
+            <param name="instance"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.GetAllMethods(System.Type)">
+            <summary>
+            Outputs list of all methods existing in method
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.LogAllMethods(System.Type,Utilites.Logger.LogType)">
+            <summary>
+            Logs all methods as the debug messages in the desired location
+            </summary>
+            <param name="type"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.Log(System.Reflection.MethodInfo,Utilites.Logger.LogType)">
+            <summary>
+            Log MethodInfo as the debug message in the desired location
+            </summary>
+            <param name="info"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.GetAllConstructors(System.Type)">
+            <summary>
+            Returns the list if all Constructors existing in the class
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.LogAllConstructors(System.Type,Utilites.Logger.LogType)">
+            <summary>
+            Log all constructos of class as the debug messages in the desired location
+            </summary>
+            <param name="type"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Utilites.Logger.ReflectionUtilites.Log(System.Reflection.ConstructorInfo,Utilites.Logger.LogType)">
+            <summary>
+            Log ConstructorInfo as the debug message in the desired location
+            </summary>
+            <param name="info"></param>
+            <param name="logType"></param>
+        </member>
+    </members>
+</doc>

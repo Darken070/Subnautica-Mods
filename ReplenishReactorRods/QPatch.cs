@@ -25,7 +25,7 @@ namespace ReplenishReactorRods
             CustomSpriteHandler.customSprites.Add(new CustomSprite(RRR, RRRsprite));
             CustomSpriteHandler.customSprites.Add(new CustomSprite(URR, URRsprite));
             CraftDataPatcher.customTechData.Add(RRR, RRRcraft);
-            CraftTreePatcher.customCraftNodes.Add("AlexejheroYTB's Mods/ReplenishReactorRods/RRR", RRR);
+            CraftTreePatcher.customCraftNodes.Add("Resources/Electronics/RRR", RRR);
         }
     }
 }

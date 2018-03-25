@@ -8,8 +8,9 @@ namespace ReplenishReactorRods
     {
         public static void Patch()
         {
-            var techType = TechTypePatcher.AddTechType("RRR", "Replenished Reactor Rod", "Used to power nuclear reactors. Cannot be replenished. Added by ReplenishReactorRods mod");
-            var techData = new TechDataHelper
+            var RRR = TechTypePatcher.AddTechType("RRR", "Replenished Reactor Rod", "Used to power nuclear reactors. Cannot be replenished. Added by ReplenishReactorRods mod");
+            var URR = TechTypePatcher.AddTechType("URR", "Unreplenishable Reactor Rod", "Good for throwing away. Added by ReplenishReactorRods mod")
+            var RRRcraft = new TechDataHelper
             {
                 _craftAmount = 1,
                 _ingredients = new List<IngredientHelper>()
@@ -17,11 +18,13 @@ namespace ReplenishReactorRods
                     new IngredientHelper(TechType.DepletedReactorRod, 1),
                     new IngredientHelper(TechType.UraniniteCrystal, 3)
                 },
-                _techType = techType
+                _techType = RRR
             };
-            var sprite = SpriteManager.Get(TechType.ReactorRod);
-            CraftDataPatcher.customTechData.Add(techType, techData);
-            CraftTreePatcher.customCraftNodes.Add("Resources/Electronics/RRR", techType);
+            var RRRsprite = SpriteManager.Get(TechType.ReactorRod);
+            var URRsprite = SpriteManager.Get(TechType.DepletedReactorRod);
+            CustomSpriteHandler.customSprites.Add(new CustomSprite(RRR, sprite));
+            CraftDataPatcher.customTechData.Add(RRR, RRRcraft);
+            CraftTreePatcher.customCraftNodes.Add("AlexejheroYTB's Mods/ReplenishReactorRods/RRR", RRR);
         }
     }
 }

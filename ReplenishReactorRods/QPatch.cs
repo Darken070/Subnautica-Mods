@@ -8,7 +8,7 @@ namespace ReplenishReactorRods
     {
         public static void Patch()
         {
-            var RRR = TechTypePatcher.AddTechType("RRR", "Replenished Reactor Rod", "Used to power nuclear reactors. Cannot be replenished. Added by ReplenishReactorRods mod");
+            var RRR = TechTypePatcher.AddTechType("RRR", "Replenished Reactor Rod", "Used to power nuclear reactors. Cannot be replenished once it is consumed. Added by ReplenishReactorRods mod");
             var URR = TechTypePatcher.AddTechType("URR", "Unreplenishable Reactor Rod", "Good for throwing away. Added by ReplenishReactorRods mod");
             var RRRcraft = new TechDataHelper
             {

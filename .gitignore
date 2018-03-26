@@ -445,30 +445,6 @@ ReplenishReactorRods/bin/Debug/QModInstaller.dll
 ReplenishReactorRods/bin/Debug/Poly2Tri.dll
 ReplenishReactorRods/bin/Debug/Newtonsoft.Json.dll
 ReplenishReactorRods/bin/Debug/MoreIngots.pdb
-CustomItemSizes/obj/Debug/MoreIngots.pdb
-CustomItemSizes/obj/Debug/MoreIngots.dll
-CustomItemSizes/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-CustomItemSizes/obj/Debug/CustomItemSizes.csprojResolveAssemblyReference.cache
-CustomItemSizes/obj/Debug/CustomItemSizes.csproj.FileListAbsolute.txt
-CustomItemSizes/obj/Debug/CustomItemSizes.csproj.CoreCompileInputs.cache
-CustomItemSizes/obj/Debug/CustomItemSizes.csproj.CopyComplete
-CustomItemSizes/CustomItemSizes.sln
-CustomItemSizes/bin/Debug/Utilites.xml
-CustomItemSizes/bin/Debug/Utilites.dll
-CustomItemSizes/bin/Debug/UnityEngine.UI.dll
-CustomItemSizes/bin/Debug/UnityEngine.dll
-CustomItemSizes/bin/Debug/SMLHelper.dll
-CustomItemSizes/bin/Debug/QModInstaller.dll
-CustomItemSizes/bin/Debug/Poly2Tri.dll
-CustomItemSizes/bin/Debug/Newtonsoft.Json.dll
-CustomItemSizes/bin/Debug/MoreIngots.pdb
-CustomItemSizes/bin/Debug/Mono.Cecil.dll
-CustomItemSizes/bin/Debug/LumenWorks.dll
-CustomItemSizes/bin/Debug/LitJson.dll
-CustomItemSizes/bin/Debug/LibNoise.dll
-CustomItemSizes/bin/Debug/iTween.dll
-CustomItemSizes/bin/Debug/Assembly-CSharp.dll
-CustomItemSizes/bin/Debug/Assembly-CSharp-firstpass.dll
-CustomItemSizes/.vs/CustomItemSizes/v15/Server/sqlite3/storage.ide
-CustomItemSizes/.vs/CustomItemSizes/v15/Server/sqlite3/db.lock
-CustomItemSizes/.vs/CustomItemSizes/v15/.suo
+MoreIngots/Unity/New Unity Project/obj/Debug/Assembly-CSharp-Editor.csprojResolveAssemblyReference.cache
+MoreIngots/Unity/New Unity Project/obj/Debug/Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
+MoreIngots/Unity/New Unity Project/.vs/New Unity Project/v15/.suo

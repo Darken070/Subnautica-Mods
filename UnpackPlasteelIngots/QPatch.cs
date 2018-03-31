@@ -16,7 +16,7 @@ namespace UnpackPlasteelIngots
                 },
                 _linkedItems = new List<TechType>()
                 {
-                    TechType.Titanium
+                    TechType.TitaniumIngot
                 },
                 _techType = TechType.Lithium
             };

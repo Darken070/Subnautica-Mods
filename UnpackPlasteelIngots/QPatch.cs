@@ -18,10 +18,10 @@ namespace UnpackPlasteelIngots
                 {
                     TechType.TitaniumIngot
                 },
-                _techType = TechType.LithiumIngot
+                _techType = TechType.TitaniumIngot
             };
             CraftDataPatcher.customTechData.Add(TechType.Lithium, techData);
-            CraftTreePatcher.customNodes.Add(new CustomCraftNode(TechType.Lithium, CraftScheme.Fabricator, "Resources/BasicResources"));
+            CraftTreePatcher.customNodes.Add(new CustomCraftNode(TechType.Lithium, CraftScheme.Fabricator, "Resources/AdvancedMaterials/Replenish"));
             KnownTechPatcher.unlockedAtStart.Add(TechType.Lithium);
         }
     }

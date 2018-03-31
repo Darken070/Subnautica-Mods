@@ -1,0 +1,11 @@
+{
+  "Id": "UnpackPlasteelIngots",
+  "DisplayName": "UnpackPlasteelIngots",
+  "Author": "AlexejheroYTB",
+  "Version": "1.0.0",
+  "Requires": [],
+  "Enable": true,
+  "AssemblyName": "UnpackPlasteelIngots.dll",
+  "EntryMethod": "UnpackPlasteelIngots.QPatch.Patch",
+  "Config": {}
+}

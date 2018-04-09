@@ -115,7 +115,7 @@ namespace UnpackIngots
             var sprite2 = SpriteManager.Get(TechType.Titanium);
             Logger.Debug("Loading sprites... (2/3)");
             var tabsprite = assetBundle.LoadAsset<Sprite>("tab");
-            if (tabsprite = null)
+            if (tabsprite == null)
             {
                 Logger.Error("Tab sprite is null");
             }

@@ -16,6 +16,7 @@ namespace UnpackIngots
         private static int _y = 2;
         public static void Patch()
         {
+            try { 
             Logger.Info("Started loading", LogType.Console);
             Logger.Debug("Loading assets... (0/1)", LogType.Console);
             var assetBundle = AssetBundle.LoadFromFile(@"./QMods/UnpackIngots/Assets/asset.assets");
@@ -140,6 +141,10 @@ namespace UnpackIngots
             CraftTreePatcher.customNodes.Add(new CustomCraftNode(dummy2, CraftScheme.Fabricator, "Resources/BasicMaterials/UnpackIngots/dummy2"));
             Logger.Debug("Fabricator nodes added (2/2)", LogType.Console);
             Logger.Info("Finished loading", LogType.Console);
+            } catch (Exception e)
+            {
+                Logger.Error(e.Message + " " + e.StackTrace, LogType.Console);
+            }
         }
     }
 }

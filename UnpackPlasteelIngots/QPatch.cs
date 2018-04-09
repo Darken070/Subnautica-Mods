@@ -1,7 +1,6 @@
 ﻿using SMLHelper;
 using SMLHelper.Patchers;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace UnpackPlasteelIngots
 {
@@ -20,12 +19,10 @@ namespace UnpackPlasteelIngots
                 {
                     TechType.TitaniumIngot
                 },
-                _techType = TechType.TitaniumIngot
+                _techType = TechType.Lithium
             };
-            var sprites = SpriteManager.Get(TechType.DepletedReactorRod);
             CraftDataPatcher.customTechData.Add(TechType.Lithium, techData);
-            CraftTreePatcher.customNodes.Add(new CustomCraftNode(TechType.Lithium, CraftScheme.Fabricator, "Resources/AdvancedMaterials/Replenish"));
-            CraftTreePatcher.customTabs.Add(new CustomCraftTab("Resources/AdvancedMaterials/Replenish", "ReplenishReactorRods", CraftScheme.Fabricator, sprites));
+            CraftTreePatcher.customNodes.Add(new CustomCraftNode(TechType.Lithium, CraftScheme.Fabricator, "Resources/BasicMaterials/Lithium"));
             KnownTechPatcher.unlockedAtStart.Add(TechType.Lithium);
         }
     }

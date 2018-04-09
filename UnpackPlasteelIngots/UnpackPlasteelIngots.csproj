@@ -56,4 +56,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /y "C:\Users\user\Desktop\Subnautica Mods\UnpackPlasteelIngots\bin\Debug\UnpackPlasteelIngots.dll" "D:\Games\Subnautica\QMods\UnpackPlasteelIngots"
+move /y "C:\Users\user\Desktop\Subnautica Mods\UnpackPlasteelIngots\bin\Debug\UnpackPlasteelIngots.dll" "C:\Users\user\Desktop\Subnautica Mods\UnpackPlasteelIngots\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

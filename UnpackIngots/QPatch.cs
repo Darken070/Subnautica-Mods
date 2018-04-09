@@ -26,11 +26,25 @@ namespace UnpackIngots
                 Logger.Error("Size of scrap metal can't be less or equal of 0! X was set to 2", LogType.Custom | LogType.Console);
                 configChanged = true;
             }
+            if (_x > 6)
+            {
+                _x = 2;
+                Config["Scrap metal", "Size", "x"] = _x;
+                Logger.Error("Size of scrap metal can't be bigger than 6! X was set to 2", LogType.Custom | LogType.Console);
+                configChanged = true;
+            }
             if (_y <= 0)
             {
                 _y = 2;
                 Config["Scrap metal", "Size", "y"] = _y;
                 Logger.Error("Size of the scrap metal can't be less or equal of 0! Y was set to 2", LogType.Custom | LogType.Console);
+                configChanged = true;
+            }
+            if (_y > 8)
+            {
+                _y = 8;
+                Config["Scrap metal", "Size", "y"] = _y;
+                Logger.Error("Size of scrap metal can't be bigger than 8! Y was set to 2", LogType.Custom | LogType.Console);
                 configChanged = true;
             }
             if (configChanged)

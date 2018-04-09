@@ -15,7 +15,7 @@ namespace UnpackIngots
         private static int _y = 2;
         public static void Patch()
         {
-            var assetBundle = AssetBundle.LoadFromFile(@"./QMods/UnpackIngots/Assets/yenzen-ingotsplus.assets");
+            var assetBundle = AssetBundle.LoadFromFile(@"./QMods/UnpackIngots/Assets/asset.assets");
             Config.Load();
             var configChanged = Config.TryGet(ref _x, "Scrap metal", "Size", "x")
                                 | Config.TryGet(ref _y, "Scrap metal", "Size", "y");

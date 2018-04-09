@@ -77,7 +77,7 @@ namespace UnpackIngots
             };
             var sprite = SpriteManager.Get(TechType.Lithium);
             var sprite2 = SpriteManager.Get(TechType.Titanium);
-            var tabsprite = assetBundle.LoadAsset<Sprite>("IPMagnetite");
+            var tabsprite = assetBundle.LoadAsset<Sprite>("tab");
             CustomSpriteHandler.customSprites.Add(new CustomSprite(dummy, sprite));
             CustomSpriteHandler.customSprites.Add(new CustomSprite(dummy2, sprite2));
             CraftDataPatcher.customTechData.Add(dummy, techData);

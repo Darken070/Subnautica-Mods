@@ -6,6 +6,7 @@ using LogType = Utilites.Logger.LogType;
 using Utilites.Config;
 using UnityEngine;
 using System;
+using Utilites.Logger;
 
 namespace UnpackIngots
 {
@@ -143,7 +144,7 @@ namespace UnpackIngots
             Logger.Info("Finished loading", LogType.Console);
             } catch (Exception e)
             {
-                Logger.Error(e.Message + " " + e.StackTrace, LogType.Console);
+                e.Log(LogType.Console);
             }
         }
     }

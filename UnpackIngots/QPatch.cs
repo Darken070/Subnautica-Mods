@@ -35,7 +35,6 @@ namespace UnpackIngots
             }
             if (configChanged)
                 Config.Save();
-                Config.Save();
             var dummy = TechTypePatcher.AddTechType("UIdummyP", "Unpack Plasteel Ingots", "Turn one plasteel ingot into 1 titanium ingot and 2 lithium");
             var dummy2 = TechTypePatcher.AddTechType("UIdummyT", "Unpack Titanium Ingots", "Turn one titanium ingot into 10 titanium");
             var techData = new TechDataHelper

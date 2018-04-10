@@ -23,15 +23,14 @@ namespace UnpackIngots
             try
             {
                 Log.Info("Started loading");
-                Log.Debug("Loading asset bundle...");
-                var assetBundle = AssetBundle.LoadFromFile(@"./QMods/UnpackIngots/Assets/unpackingotsassets.assets");
-                Log.Debug("Asset bundle loaded");
-                Log.Debug("Loading config...");
                 Config.Load();
                 var configChanged = Config.TryGet(ref _x, "Scrap metal", "Size", "x")
                                     | Config.TryGet(ref _y, "Scrap metal", "Size", "y")
                                     | Config.TryGet(ref _debug, "Enable debugging");
                 Log.Debug("Config loaded");
+                Log.Debug("Loading asset bundle...");
+                var assetBundle = AssetBundle.LoadFromFile(@"./QMods/UnpackIngots/Assets/unpackingotsassets.assets");
+                Log.Debug("Asset bundle loaded");
                 Log.Debug("Checking config for errors... (0/4)");
                 if (_x <= 0)
                 {

@@ -24,7 +24,7 @@ namespace UnpackIngots
             {
                 Log.Info("Started loading");
                 Log.Debug("Loading asset bundle...");
-                var assetBundle = AssetBundle.LoadFromFile(@"./QMods/UnpackIngots/Assets/asset.assets");
+                var assetBundle = AssetBundle.LoadFromFile(@"./QMods/UnpackIngots/Assets/unpackingotsassets.assets");
                 Log.Debug("Asset bundle loaded");
                 Log.Debug("Loading config...");
                 Config.Load();
@@ -130,7 +130,7 @@ namespace UnpackIngots
                 Log.Debug("Loading Atlas sprites... (2/2)");
                 Log.Debug("Atlas sprites loaded");
                 Log.Debug("Loading UnityEngine sprite...");
-                var tabsprite = assetBundle.LoadAsset<Sprite>("tab");
+                var tabsprite = assetBundle.LoadAsset<Sprite>("unpackingotsfabricatortab");
                 if (tabsprite == null)
                 {
                     Log.Error("UnityEngine sprite is null");

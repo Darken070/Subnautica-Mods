@@ -1,78 +1,88 @@
 ﻿using SMLHelper;
 using SMLHelper.Patchers;
 using System.Collections.Generic;
+using UnityEngine;
+using Utilites.Config;
 using Logger = Utilites.Logger.Logger;
 using LogType = Utilites.Logger.LogType;
-using Utilites.Config;
-using UnityEngine;
+using LogLevel = Utilites.Logger.LogLevel;
 using System;
 using Utilites.Logger;
+using UnpackIngots.UI;
 
 namespace UnpackIngots
 {
     public class QPatch
     {
-        private static readonly ConfigFile Config = new ConfigFile("config");
-        private static int _x = 2;
-        private static int _y = 2;
+        public static readonly ConfigFile Config = new ConfigFile("config");
+        public static int _x = 2;
+        public static int _y = 2;
+        public static bool _debug = false;
         public static void Patch()
         {
             try
             {
-                Logger.Info("Started loading", LogType.Console);
-                Logger.Debug("Loading assets... (0/1)", LogType.Console);
+                Log.Info("Started loading");
+                Log.Debug("Loading asset bundle...");
                 var assetBundle = AssetBundle.LoadFromFile(@"./QMods/UnpackIngots/Assets/asset.assets");
-                Logger.Debug("Assets loaded (1/1)", LogType.Console);
-                Logger.Debug("Loading config... (0/1)", LogType.Console);
+                Log.Debug("Asset bundle loaded");
+                Log.Debug("Loading config...");
                 Config.Load();
                 var configChanged = Config.TryGet(ref _x, "Scrap metal", "Size", "x")
-                                    | Config.TryGet(ref _y, "Scrap metal", "Size", "y");
-                Logger.Debug("Config loaded (1/1)", LogType.Console);
-                Logger.Debug("Checking config for errors... (0/4)", LogType.Console);
+                                    | Config.TryGet(ref _y, "Scrap metal", "Size", "y")
+                                    | Config.TryGet(ref _debug, "Enable debugging");
+                Log.Debug("Config loaded");
+                Log.Debug("Checking config for errors... (0/4)");
                 if (_x <= 0)
                 {
                     _x = 2;
                     Config["Scrap metal", "Size", "x"] = _x;
-                    Logger.Error("Size of scrap metal can't be less or equal of 0! X was set to 2", LogType.Custom | LogType.Console);
+                    Log.Warning("Scrap metal size can't be less than 1");
+                    Log.Info("X was set to 1");
                     configChanged = true;
                 }
-                Logger.Debug("Checking config for errors... (1/4)", LogType.Console);
+                Log.Debug("Checking config for errors... (1/4)");
                 if (_x > 6)
                 {
                     _x = 2;
                     Config["Scrap metal", "Size", "x"] = _x;
-                    Logger.Error("Size of scrap metal can't be bigger than 6! X was set to 2", LogType.Custom | LogType.Console);
+                    Log.Warning("Scrap metal size can't be greater than 6");
+                    Log.Info("X was set to 1");
                     configChanged = true;
                 }
-                Logger.Debug("Checking config for errors... (2/4)", LogType.Console);
+                Log.Debug("Checking config for errors... (2/4)");
                 if (_y <= 0)
                 {
                     _y = 2;
                     Config["Scrap metal", "Size", "y"] = _y;
-                    Logger.Error("Size of the scrap metal can't be less or equal of 0! Y was set to 2", LogType.Custom | LogType.Console);
+                    Log.Warning("Scrap metal size can't be less than 1");
+                    Log.Info("Y was set to 1");
                     configChanged = true;
                 }
-                Logger.Debug("Checking config for errors... (3/4)", LogType.Console);
+                Log.Debug("Checking config for errors... (3/4)");
                 if (_y > 8)
                 {
                     _y = 8;
                     Config["Scrap metal", "Size", "y"] = _y;
-                    Logger.Error("Size of scrap metal can't be bigger than 8! Y was set to 2", LogType.Custom | LogType.Console);
+                    Log.Warning("Scrap metal size can't be greater than 8");
+                    Log.Info("Y was set to 1");
                     configChanged = true;
                 }
-                Logger.Debug("Error check complete (4/4)", LogType.Console);
+                Log.Debug("Checking config for errors... (4/4)");
+                Log.Debug("Error check complete");
                 if (configChanged)
                 {
-                    Logger.Debug("Saving config... (0/1)", LogType.Console);
+                    Log.Debug("Saving config...");
                     Config.Save();
-                    Logger.Debug("Config saved (1/1)", LogType.Console);
+                    Log.Debug("Config saved");
                 }
-                Logger.Debug("Loading items... (0/2)", LogType.Console);
+                Log.Debug("Adding TechTypes... (0/2)");
                 var dummy = TechTypePatcher.AddTechType("UIdummyP", "Unpack Plasteel Ingots", "Turn one plasteel ingot into 1 titanium ingot and 2 lithium");
-                Logger.Debug("Loading items... (1/2)", LogType.Console);
+                Log.Debug("Adding TechTypes... (1/2)");
                 var dummy2 = TechTypePatcher.AddTechType("UIdummyT", "Unpack Titanium Ingots", "Turn one titanium ingot into 10 titanium");
-                Logger.Debug("Items loaded (2/2)", LogType.Console);
-                Logger.Debug("Loading recipes... (0/2)", LogType.Console);
+                Log.Debug("Adding TechTypes... (2/2)");
+                Log.Debug("TechTypes added");
+                Log.Debug("Loading TechDatas... (0/2)");
                 var techData = new TechDataHelper
                 {
                     _craftAmount = 0,
@@ -88,7 +98,7 @@ namespace UnpackIngots
                 },
                     _techType = dummy
                 };
-                Logger.Debug("Loading recipes... (1/2)", LogType.Console);
+                Log.Debug("Loading TechDatas... (1/2)");
                 var techData2 = new TechDataHelper
                 {
                     _craftAmount = 0,
@@ -111,42 +121,47 @@ namespace UnpackIngots
                 },
                     _techType = dummy2
                 };
-                Logger.Debug("Recipes loaded (2/2)", LogType.Console);
-                Logger.Debug("Loading atlas sprites... (0/2)", LogType.Console);
+                Log.Debug("Loading TechDatas... (2/2)");
+                Log.Debug("TechDatas loaded");
+                Log.Debug("Loading Atlas sprites... (0/2)");
                 var sprite = SpriteManager.Get(TechType.Lithium);
-                Logger.Debug("Loading atlas sprites... (1/2)", LogType.Console);
+                Log.Debug("Loading Atlas sprites... (1/2)");
                 var sprite2 = SpriteManager.Get(TechType.Titanium);
-                Logger.Debug("Atlas sprites loaded (2/2)", LogType.Console);
-                Logger.Debug("Loading unity sprites... (0/1)", LogType.Console);
+                Log.Debug("Loading Atlas sprites... (2/2)");
+                Log.Debug("Atlas sprites loaded");
+                Log.Debug("Loading UnityEngine sprite...");
                 var tabsprite = assetBundle.LoadAsset<Sprite>("tab");
                 if (tabsprite == null)
                 {
-                    Logger.Error("Unity sprite is null", LogType.Console);
+                    Log.Error("UnityEngine sprite is null");
                 }
-                Logger.Debug("Unity sprites loaded (1/1)", LogType.Console);
-                Logger.Debug("Applying atlas sprites... (0/2)", LogType.Console);
+                Log.Debug("UnityEngine sprite loaded");
+                Log.Debug("Applying Atlas sprites... (0/2)");
                 CustomSpriteHandler.customSprites.Add(new CustomSprite(dummy, sprite));
-                Logger.Debug("Applying atlas sprites... (1/2)", LogType.Console);
+                Log.Debug("Applying Atlas sprites... (1/2)");
                 CustomSpriteHandler.customSprites.Add(new CustomSprite(dummy2, sprite2));
-                Logger.Debug("Atlas sprites applied (2/2)", LogType.Console);
-                Logger.Debug("Assigning recipes... (0/2)", LogType.Console);
+                Log.Debug("Applying Atlas sprites... (2/2)");
+                Log.Debug("Atlas sprites applied");
+                Log.Debug("Linking TechDatas and TechTypes... (0/2)");
                 CraftDataPatcher.customTechData.Add(dummy, techData);
-                Logger.Debug("Assigning recipes... (1/2)", LogType.Console);
+                Log.Debug("Linking TechDatas and TechTypes... (1/2)");
                 CraftDataPatcher.customTechData.Add(dummy2, techData2);
-                Logger.Debug("Recipes Assigned (2/2)", LogType.Console);
-                Logger.Debug("Adding fabricator tabs... (0/1)", LogType.Console);
+                Log.Debug("Linking TechDatas and TechTypes... (2/2)");
+                Log.Debug("TechDatas and TechTypes linked");
+                Log.Debug("Adding Fabricator tab...");
                 CraftTreePatcher.customTabs.Add(new CustomCraftTab("Resources/BasicMaterials/UnpackIngots", "Unpack Ingots", CraftScheme.Fabricator, tabsprite));
-                Logger.Debug("Fabricator tabs added (1/1)", LogType.Console);
-                Logger.Debug("Adding fabricator nodes... (0/2)", LogType.Console);
+                Log.Debug("Fabricator tabs added");
+                Log.Debug("Adding Fabricator nodes... (0/2)");
                 CraftTreePatcher.customNodes.Add(new CustomCraftNode(dummy, CraftScheme.Fabricator, "Resources/BasicMaterials/UnpackIngots/dummy"));
-                Logger.Debug("Adding fabricator nodes... (1/2)", LogType.Console);
+                Log.Debug("Adding Fabricator nodes... (1/2)");
                 CraftTreePatcher.customNodes.Add(new CustomCraftNode(dummy2, CraftScheme.Fabricator, "Resources/BasicMaterials/UnpackIngots/dummy2"));
-                Logger.Debug("Fabricator nodes added (2/2)", LogType.Console);
-                Logger.Info("Finished loading", LogType.Console);
+                Log.Debug("Adding Fabricator nodes... (2/2)");
+                Log.Debug("Fabricator nodes added");
+                Log.Info("Finished loading");
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                e.Log(LogType.Console);;
             }
         }
     }

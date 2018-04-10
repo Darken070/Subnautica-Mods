@@ -36,6 +36,9 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>D:\Games\Subnautica\Subnautica_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="MoreIngots">
+      <HintPath>D:\Games\Subnautica\QMods\MoreIngots\MoreIngots.dll</HintPath>
+    </Reference>
     <Reference Include="SMLHelper">
       <HintPath>D:\Games\Subnautica\QMods\Modding Helper\SMLHelper.dll</HintPath>
     </Reference>
@@ -55,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QPatch.cs" />
   </ItemGroup>

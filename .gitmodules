@@ -1,0 +1,3 @@
+[submodule "Dependencies/SMLHelper"]
+	path = Dependencies/SMLHelper
+	url = git://github.com/ahk1221/smlhelper

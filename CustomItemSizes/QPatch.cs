@@ -21,7 +21,6 @@ namespace CustomItemSizes
         {
             foreach (TechType tt in Enum.GetValues(typeof(TechType)))
             {
-
             }
         }
     }

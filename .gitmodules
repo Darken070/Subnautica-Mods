@@ -1,3 +1,6 @@
 [submodule "Dependencies/SMLHelper"]
 	path = Dependencies/SMLHelper
 	url = git://github.com/ahk1221/smlhelper
+[submodule "Dependencies/Utilities"]
+	path = Dependencies/Utilities
+	url = git://github.com/vlad-00003/QModManager-Utilites

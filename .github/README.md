@@ -1,5 +1,3 @@
-## Mods
-
 | Name | Status | Version | Description | Download Link | 
 |-|-|-|-|-|
 | <a href=../MoreIngots> MoreIngots </a> | Actively being worked on | 1.2.2 | Allows basic resources to be turned into compressed ones to save storage space | <a href=https://nexusmods.com/subnautica/mods/60> nexusmods.com/subnautica/mods/60 </a> |

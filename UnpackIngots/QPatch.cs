@@ -160,7 +160,7 @@ namespace UnpackIngots
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);;
+                Log.e(e);
             }
         }
     }

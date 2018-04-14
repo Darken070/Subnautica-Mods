@@ -43,7 +43,7 @@ namespace UnpackIngots.UI
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                Log.e(e);
             }
         }
 
@@ -61,7 +61,7 @@ namespace UnpackIngots.UI
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                Log.e(e);
             }
         }
 
@@ -73,12 +73,12 @@ namespace UnpackIngots.UI
         public static void Warning(string message, LogType type = LogType.Console)
         {
             try
-            { 
+            {
                 Logger.Warning(message, type);
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                Log.e(e);
             }
         }
 
@@ -96,7 +96,7 @@ namespace UnpackIngots.UI
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                Log.e(e);
             }
         }
 
@@ -108,12 +108,12 @@ namespace UnpackIngots.UI
         public static void Error(string message, LogType type = LogType.Console)
         {
             try
-            { 
+            {
                 Logger.Error(message, type);
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                Log.e(e);
             }
         }
 
@@ -126,12 +126,12 @@ namespace UnpackIngots.UI
         public static void Error(string prefix, string message, LogType type = LogType.Console)
         {
             try
-            { 
+            {
                 Logger.Error("[" + prefix + "] " + message, type);
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                Log.e(e);
             }
         }
 
@@ -144,7 +144,7 @@ namespace UnpackIngots.UI
         public static void Debug(string message, bool always = false, LogType type = LogType.Console)
         {
             try
-            { 
+            {
                 if (QPatch._debug || always)
                 {
                     Logger.Debug(message, type);
@@ -152,7 +152,7 @@ namespace UnpackIngots.UI
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                Log.e(e);
             }
         }
 
@@ -166,7 +166,7 @@ namespace UnpackIngots.UI
         public static void Debug(string prefix, string message, bool always = false, LogType type = LogType.Console)
         {
             try
-            { 
+            {
                 if (QPatch._debug || always)
                 {
                     Logger.Debug("[" + prefix + "] " + message, type);
@@ -174,7 +174,7 @@ namespace UnpackIngots.UI
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                Log.e(e);
             }
         }
 
@@ -187,7 +187,7 @@ namespace UnpackIngots.UI
         public static void Debug(string name, Status status, bool always = false)
         {
             try
-            { 
+            {
                 if (status == Status.Start)
                 {
                     if (QPatch._debug || always)
@@ -205,8 +205,16 @@ namespace UnpackIngots.UI
             }
             catch (Exception e)
             {
-                e.Log(LogType.Console);
+                Log.e(e);
             }
+        }
+        /// <summary>
+        /// Logs an exception
+        /// </summary>
+        /// <param name="e">Exception</param>
+        public static void e(Exception e)
+        {
+            e.Log(LogType.Console);
         }
     }
 }

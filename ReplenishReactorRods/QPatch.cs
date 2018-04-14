@@ -8,19 +8,25 @@ namespace ReplenishReactorRods
     {
         public static void Patch()
         {
+            var techType = TechTypePatcher.AddTechType("RRRdummy", "Replenish Reactor Rod", "Allows you to craft a reactor rod from a depleted reactor rod and 3 uraninite crystals");
             var techData = new TechDataHelper
             {
-                _craftAmount = 1,
+                _craftAmount = 0,
                 _ingredients = new List<IngredientHelper>()
                 {
                     new IngredientHelper(TechType.DepletedReactorRod, 1),
                     new IngredientHelper(TechType.UraniniteCrystal, 3)
                 },
-                _techType = TechType.ReactorRod
+                _linkedItems = new List<TechType>()
+                {
+                    TechType.ReactorRod
+                },
+                _techType = techType
             };
             var sprite = SpriteManager.Get(TechType.DepletedReactorRod);
-            CraftDataPatcher.customTechData.Add(TechType.ReactorRod, techData);
-            CraftTreePatcher.customNodes.Add(new CustomCraftNode(TechType.ReactorRod, CraftScheme.Fabricator, "Resources/BasicMaterials"));
+            CustomSpriteHandler.customSprites.Add(new CustomSprite(techType, sprite));
+            CraftDataPatcher.customTechData.Add(techType, techData);
+            CraftTreePatcher.customNodes.Add(new CustomCraftNode(techType, CraftScheme.Fabricator, "Resources/Electronics"));
         }
     }
 }

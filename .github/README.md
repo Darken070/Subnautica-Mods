@@ -10,5 +10,5 @@
 ## Mods I'm currently not working on
 | Name | Status | Version | Description | Download Link | 
 |-|-|-|-|-|
-| <a href=../ReplenishReactorRods> ReplenishReactorRods </a> | Mod loader does not lod file | | Allows depleted reactor rods to be replenished with 3 uraninite crystals | <strike><a href=https://www.nexusmods.com/subnautica/mods/62>nexusmods.com/subnautica/mods/62</a></strike> |
+| <a href=../ReplenishReactorRods> ReplenishReactorRods </a> | Mod loader does not load file | | Allows depleted reactor rods to be replenished with 3 uraninite crystals | <strike><a href=https://www.nexusmods.com/subnautica/mods/62>nexusmods.com/subnautica/mods/62</a></strike> |
 | <a href=../CustomItemSizes> CustomItemSizes </a> | Ideea | | Ads an option to change the item sizes of every item in the game | |

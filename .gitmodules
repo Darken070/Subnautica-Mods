@@ -7,3 +7,6 @@
 [submodule ".github/Dependencies/QModManager"]
 	path = .github/Dependencies/QModManager
 	url = git://github.com/qwiso/qmodmanager
+[submodule "CustomFood"]
+	path = CustomFood
+	url = git://github.com/yenzgamingyt/subnauticamods

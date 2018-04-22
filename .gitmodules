@@ -1,9 +1,0 @@
-[submodule ".github/Dependencies/SMLHelper"]
-	path = .github/Dependencies/SMLHelper
-	url = git://github.com/ahk1221/smlhelper
-[submodule ".github/Dependencies/Utilities"]
-	path = .github/Dependencies/Utilities
-	url = git://github.com/vlad-00003/qmodmanager-utilites
-[submodule ".github/Dependencies/QModManager"]
-	path = .github/Dependencies/QModManager
-	url = git://github.com/qwiso/qmodmanager

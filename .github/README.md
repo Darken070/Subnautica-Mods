@@ -5,7 +5,7 @@
 |-|-|-|-|-|
 | <a href=../CustomItemSizes> CustomItemSizes </a> | Actively being wokred on | 1.0.0 | Adds an option to change the item sizes of every item in the game | <a href=https://nexusmods.com/subnautica/mods/79> nexusmods.com/subnautica/mods/79 </a> |
 | <a href=../MoreIngots> MoreIngots </a> | Actively being worked on | 1.2.2 | Allows basic resources to be turned into compressed ones to save storage space | <a href=https://nexusmods.com/subnautica/mods/60> nexusmods.com/subnautica/mods/60 </a> |
-| <a href=../UnpackPlasteelIngots> UnpackPlasteelIngots </a> | Actively being worked on | 1.0.0 | Allows you to turn plasteel and titanium ingots back into their component parts | <a href=https://nexusmods.com/subnautica/mods/69> nexusmods.com/subnautica/mods/69 </a> |
+| <a href=../UnpackIngots> UnpackIngots </a> | Actively being worked on | 1.0.0 | Allows you to turn plasteel and titanium ingots back into their component parts | <a href=https://nexusmods.com/subnautica/mods/69> nexusmods.com/subnautica/mods/69 </a> |
 
 
 ## Mods I'm currently not working on

@@ -8,5 +8,5 @@
 	path = .github/Dependencies/QModManager
 	url = git://github.com/qwiso/qmodmanager
 [submodule "CustomFood"]
-	path = CustomFood
+	path = yenzen
 	url = git://github.com/yenzgamingyt/subnauticamods

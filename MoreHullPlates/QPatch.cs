@@ -27,63 +27,72 @@ namespace MoreHullPlates
         public static Atlas.Sprite sprite = SpriteManager.Get(TechType.SpecialHullPlate);
         public static GameObject Main(TechType techType, string classId, string spritePath)
         {
-            var assetbundle = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlated/Assets/{spritePath}.asstes");
-            var sprite = assetbundle.LoadAsset<Sprite>(spritePath);
-            var texture = sprite.texture;
-            if (sprite == null)
+            try
             {
-                Log.Error("Sprite is null");
+                var assetbundle = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/{spritePath}.assets");
+                var sprite = assetbundle.LoadAsset<Sprite>(spritePath);
+                var texture = sprite.texture;
+
+                var prefab = Resources.Load<GameObject>("Submarine/Build/IGPHullPlate");
+                var obj = UnityEngine.Object.Instantiate(prefab);
+
+                var constructable = obj.GetComponent<Constructable>();
+                var techTag = obj.GetComponent<TechTag>();
+                var prefabIdentifier = obj.GetComponent<PrefabIdentifier>();
+                var mesh = obj.GetComponent<MeshRenderer>();
+                var skyapplier = obj.GetComponent<SkyApplier>();
+
+                constructable.techType = techType;
+                constructable.allowedInBase = true;
+                constructable.allowedInSub = true;
+                constructable.allowedOutside = false;
+                constructable.allowedOnCeiling = false;
+                constructable.allowedOnConstructables = false;
+                constructable.allowedOnGround = false;
+                constructable.allowedOnWall = true;
+                constructable.controlModelState = true;
+                constructable.forceUpright = false;
+                constructable.rotationEnabled = false;
+                constructable.deconstructionAllowed = true;
+                constructable.placeMaxDistance = 5;
+                constructable.placeMinDistance = 1.2f;
+                constructable.placeDefaultDistance = 2;
+                constructable.surfaceType = VFXSurfaceTypes.metal;
+
+                techTag.type = techType;
+
+                prefabIdentifier.ClassId = classId;
+
+                mesh.material.mainTexture = texture;
+
+                // I don't know what this is for,
+                // but it was in the hull plates added by Subnautica,
+                // So I just went with it
+                skyapplier.anchorSky = Skies.Auto;
+                skyapplier.customSkyPrefab = new GameObject();
+                skyapplier.dynamic = false;
+                skyapplier.emissiveFromPower = false;
+
+                return obj;
             }
-            if (texture == null)
+            catch (Exception e)
             {
-                Log.Error("Texture is null");
+                e.Log();
+                return null;
             }
-            var prefab = Resources.Load<GameObject>("Submarine/Build/IGPHullPlate");
-            var obj = UnityEngine.Object.Instantiate(prefab);
-
-            var constructable = obj.GetComponent<Constructable>();
-            var techTag = obj.GetComponent<TechTag>();
-            var prefabIdentifier = obj.GetComponent<PrefabIdentifier>();
-            var mesh = obj.GetComponent<MeshRenderer>();
-            var skyapplier = obj.GetComponent<SkyApplier>();
-
-            constructable.techType = techType;
-            constructable.allowedInBase = true;
-            constructable.allowedInSub = true;
-            constructable.allowedOutside = false;
-            constructable.allowedOnCeiling = false;
-            constructable.allowedOnConstructables = false;
-            constructable.allowedOnGround = false;
-            constructable.allowedOnWall = true;
-            constructable.controlModelState = true;
-            constructable.forceUpright = false;
-            constructable.rotationEnabled = false;
-            constructable.deconstructionAllowed = true;
-            constructable.placeMaxDistance = 5;
-            constructable.placeMinDistance = 1.2f;
-            constructable.placeDefaultDistance = 2;
-            constructable.surfaceType = VFXSurfaceTypes.metal;
-           
-            techTag.type = techType;
-
-            prefabIdentifier.ClassId = classId;
-
-            mesh.material.mainTexture = texture;
-
-            // I don't know what this is for,
-            // but it was in the hull plates added by Subnautica,
-            // So I just went with it
-            skyapplier.anchorSky = Skies.Auto;
-            skyapplier.customSkyPrefab = new GameObject();
-            skyapplier.dynamic = false;
-            skyapplier.emissiveFromPower = false;
-
-            return obj;
         }
         public static TechType alexejheroytbtt;
         public static GameObject AlexejheroYTB()
         {
-            return Main(alexejheroytbtt, "HullAlexejheroYTB", "alexejheroytb");
+            try
+            {
+                return Main(alexejheroytbtt, "HullAlexejheroYTB", "alexejheroytb");
+            }
+            catch (Exception e)
+            {
+                e.Log();
+                return null;
+            }
         }
         public static TechType randy;
         /*public static GameObject RandyKnapp()

@@ -54,13 +54,15 @@
     <Reference Include="UnityEngine">
       <HintPath>D:\Games\Subnautica\Subnautica_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Games\Subnautica\Subnautica_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Utilites">
       <HintPath>D:\Games\Subnautica\QMods\Utilites\Utilites.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormatException.cs" />
-    <Compile Include="HarmonyPatch.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="QPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -144,7 +144,7 @@ namespace MoreHullPlates
         {
             try
             {
-                if (QPatch._debug || always)
+                if (true || always)
                 {
                     Logger.Debug(message, type);
                 }
@@ -166,7 +166,7 @@ namespace MoreHullPlates
         {
             try
             {
-                if (QPatch._debug || always)
+                if (true || always)
                 {
                     Logger.Debug("[" + prefix + "] " + message, type);
                 }
@@ -189,13 +189,13 @@ namespace MoreHullPlates
             {
                 if (status == Status.Start)
                 {
-                    if (QPatch._debug || always)
+                    if (true || always)
                     {
                         Logger.Debug("Loading " + name + "...");
                     }
                     if (status == Status.Stop)
                     {
-                        if (QPatch._debug || always)
+                        if (true || always)
                         {
                             Logger.Debug(name + " loaded");
                         }

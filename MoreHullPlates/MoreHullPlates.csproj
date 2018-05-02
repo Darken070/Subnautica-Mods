@@ -63,10 +63,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConvertSprite.cs" />
-    <Compile Include="Log.cs" />
+    <Compile Include="Data\GameObject.cs" />
+    <Compile Include="Data\HullPlates\AlexejheroYTB.cs" />
+    <Compile Include="Data\HullPlates\_existing.cs" />
+    <Compile Include="Data\Sprite.cs" />
+    <Compile Include="Data\TechData.cs" />
     <Compile Include="QPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /y "D:\Subnautica Mods\MoreHullPlates\bin\Debug\MoreHullPlates.dll" "D:\Games\Subnautica\QMods\MoreHullPlates"
+move /y "D:\Subnautica Mods\MoreHullPlates\bin\Debug\MoreHullPlates.dll" "D:\Subnautica Mods\MoreHullPlates\"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>echo y | del "D:\Subnautica Mods\MoreHullPlates\MoreHullPlates.dll"</PreBuildEvent>
+  </PropertyGroup>
 </Project>

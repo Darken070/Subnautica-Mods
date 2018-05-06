@@ -21,6 +21,8 @@ namespace MoreHullPlates
             {
                 HullPlates.Load.Existing();
                 HullPlates.Load.AlexejheroYTB();
+                HullPlates.Load.AHK1221();
+                HullPlates.Load.yenzgaming();
             }
             catch (Exception e)
             {

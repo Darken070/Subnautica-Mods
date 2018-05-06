@@ -64,11 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\GameObject.cs" />
+    <Compile Include="Data\HullPlates\yenzgaming.cs" />
+    <Compile Include="Data\HullPlates\AHK1221.cs" />
     <Compile Include="Data\HullPlates\AlexejheroYTB.cs" />
     <Compile Include="Data\HullPlates\_existing.cs" />
     <Compile Include="Data\Sprite.cs" />
     <Compile Include="Data\TechData.cs" />
-    <Compile Include="QPatch.cs" />
+    <Compile Include="Data\QPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

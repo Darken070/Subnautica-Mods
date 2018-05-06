@@ -20,6 +20,11 @@ namespace MoreHullPlates.HullPlates
             LanguagePatcher.customLines.Add("Marki2", "Markiplier Bobblehead");
             LanguagePatcher.customLines.Add("Tooltip_Marki2", "Subnautica content creator. https://www.youtube.com/markiplierGAME (Item added by Subnautica)");
 
+            // Jacksepticeye's Tank (Existing)
+            KnownTechPatcher.unlockedAtStart.Add(TechType.JackSepticEye);
+            LanguagePatcher.customLines.Add("JackSepticEye", "Jacksepticeye's Tank");
+            LanguagePatcher.customLines.Add("Tooltip_JackSepticEye", "Subnautica content creator. https://www.youtube.com/jacksepticeye (Item added by Subnautica)");
+
             // Charlie Cleveland (Existing)
             KnownTechPatcher.unlockedAtStart.Add(TechType.DevTestItem);
             LanguagePatcher.customLines.Add("DevTestItem", "Charlie Cleveland Hull Plate");
@@ -50,7 +55,7 @@ namespace MoreHullPlates.HullPlates
             LanguagePatcher.customLines.Add("MarkiplierHullPlate", "Markiplier Hull Plate");
             LanguagePatcher.customLines.Add("Tooltip_MarkiplierHullPlate", "Subnautica content creator. https://www.youtube.com/markiplierGAME (Item added by Subnautica)");
 
-            // muyskerm (Existing)
+            // Muyskerm (Existing)
             KnownTechPatcher.unlockedAtStart.Add(TechType.MuyskermHullPlate);
             LanguagePatcher.customLines.Add("MuyskermHullPlate", "Muyskerm Hull Plate");
             LanguagePatcher.customLines.Add("Tooltip_MuyskermHullPlate", "Subnautica content creator. https://www.youtube.com/muyskerm (Item added by Subnautica)");
@@ -60,7 +65,7 @@ namespace MoreHullPlates.HullPlates
             LanguagePatcher.customLines.Add("LordMinionHullPlate", "LordMinion777 Hull Plate");
             LanguagePatcher.customLines.Add("Tooltip_LordMinionHullPlate", "Former Subnautica content creator. https://www.youtube.com/LordMinion777 (Item added by Subnautica)");
 
-            // jacksepticeye (Existing)
+            // Jacksepticeye (Existing)
             KnownTechPatcher.unlockedAtStart.Add(TechType.JackSepticEyeHullPlate);
             LanguagePatcher.customLines.Add("JackSepticEyeHullPlate", "Jacksepticeye Hull Plate");
             LanguagePatcher.customLines.Add("Tooltip_JackSepticEyeHullPlate", "Subnautica content creator. https://www.youtube.com/jacksepticeye (Item added by Subnautica)");

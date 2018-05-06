@@ -1,21 +1,17 @@
 ﻿using SMLHelper;
 using SMLHelper.Patchers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace MoreHullPlates.HullPlates
 {
     public partial class Load
     {
-        public static UnityEngine.GameObject AYTBGameObject()
+        private static UnityEngine.GameObject AYTBGameObject()
         {
             return GameObject.Get(alexejheroytbtt, "HullAlexejheroYTB", texture);
         }
-        public static TechType alexejheroytbtt = TechTypePatcher.AddTechType("HullAlexejheroYTB", "AlexejheroYTB Hull Plate", "Modder. Creator of MoreIngots and MoreHullPlates (Item added by MoreHullPlates)");
-        public static Texture2D texture = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/alexejheroytb.assets").LoadAsset<UnityEngine.Sprite>("alexejheroytb").texture;
+        private static TechType alexejheroytbtt = TechTypePatcher.AddTechType("HullAlexejheroYTB", "AlexejheroYTB Hull Plate", "Modder. Creator of MoreIngots and MoreHullPlates (Item added by MoreHullPlates)");
+        private static Texture2D texture = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/alexejheroytb.assets").LoadAsset<UnityEngine.Sprite>("AlexejheroYTB").texture;
         public static void AlexejheroYTB()
         {
             CraftDataPatcher.customBuildables.Add(alexejheroytbtt);

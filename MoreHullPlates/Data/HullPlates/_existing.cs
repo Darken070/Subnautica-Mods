@@ -8,7 +8,7 @@ namespace MoreHullPlates.HullPlates
 {
     public partial class Load
     {
-        public static void Existing()
+        public static void _existing()
         {
             // Markiplier Straight Arms Bobblehead (Existing)
             KnownTechPatcher.unlockedAtStart.Add(TechType.Marki1);

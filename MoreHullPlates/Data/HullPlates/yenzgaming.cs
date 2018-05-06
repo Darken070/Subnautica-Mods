@@ -8,10 +8,15 @@ namespace MoreHullPlates.HullPlates
     {
         private static UnityEngine.GameObject YenzenGObject()
         {
-            return GameObject.Get(yenztt, "HullAHK1221", yenztexture);
+            return GameObject.Get(yenztt, "Hullyenzgaming", yenztexture);
         }
-        private static TechType yenztt = TechTypePatcher.AddTechType("HullAHK1221", "AHK1221 Hull Plate", "Modder. Creator of Modding Helper, Warp Cannon, Exterior Plant Pots and much more (Item added by MoreHullPlates)");
-        private static Texture2D yenztexture = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/ahk1221.assets").LoadAsset<UnityEngine.Sprite>("AHK1221").texture;
+
+        private static TechType yenztt = TechTypePatcher.AddTechType("Hullyenzgaming", "yenzgaming Hull Plate", "Modder. Creator of Custom Food and Egg Info (Item added by MoreHullPlates)");
+
+        private static Texture2D yenztexture = 
+            AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/yenzgaming.assets").
+            LoadAsset<UnityEngine.Sprite>("yenzgaming").texture;
+
         public static void yenzgaming()
         {
             CraftDataPatcher.customBuildables.Add(yenztt);

@@ -1,8 +1,4 @@
 ﻿using SMLHelper.Patchers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MoreHullPlates.HullPlates
 {
@@ -14,16 +10,22 @@ namespace MoreHullPlates.HullPlates
             KnownTechPatcher.unlockedAtStart.Add(TechType.Marki1);
             LanguagePatcher.customLines.Add("Marki1", "Markiplier Straight Arms Bobblehead");
             LanguagePatcher.customLines.Add("Tooltip_Marki1", "Subnautica content creator. https://www.youtube.com/markiplierGAME (Item added by Subnautica)");
+            CraftDataPatcher.AddToCustomGroup(TechGroup.Miscellaneous, TechCategory.Misc, TechType.Marki1);
+            CraftDataPatcher.RemoveFromCustomGroup(TechGroup.Miscellaneous, TechCategory.MiscHullplates, TechType.Marki1);
 
             // Markiplier Bobblehead (Existing)
             KnownTechPatcher.unlockedAtStart.Add(TechType.Marki2);
             LanguagePatcher.customLines.Add("Marki2", "Markiplier Bobblehead");
             LanguagePatcher.customLines.Add("Tooltip_Marki2", "Subnautica content creator. https://www.youtube.com/markiplierGAME (Item added by Subnautica)");
+            CraftDataPatcher.AddToCustomGroup(TechGroup.Miscellaneous, TechCategory.Misc, TechType.Marki2);
+            CraftDataPatcher.RemoveFromCustomGroup(TechGroup.Miscellaneous, TechCategory.MiscHullplates, TechType.Marki2);
 
             // Jacksepticeye's Tank (Existing)
             KnownTechPatcher.unlockedAtStart.Add(TechType.JackSepticEye);
             LanguagePatcher.customLines.Add("JackSepticEye", "Jacksepticeye's Tank");
             LanguagePatcher.customLines.Add("Tooltip_JackSepticEye", "Subnautica content creator. https://www.youtube.com/jacksepticeye (Item added by Subnautica)");
+            CraftDataPatcher.AddToCustomGroup(TechGroup.Miscellaneous, TechCategory.Misc, TechType.JackSepticEye);
+            CraftDataPatcher.RemoveFromCustomGroup(TechGroup.Miscellaneous, TechCategory.MiscHullplates, TechType.JackSepticEye);
 
             // Charlie Cleveland (Existing)
             KnownTechPatcher.unlockedAtStart.Add(TechType.DevTestItem);

@@ -1,15 +1,5 @@
-﻿using Harmony;
-using SMLHelper;
-using SMLHelper.Patchers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using UnityEngine;
+﻿using System;
 using Utilites.Logger;
-using Logger = Utilites.Logger.Logger;
-using LogType = Utilites.Logger.LogType;
 
 namespace MoreHullPlates
 {

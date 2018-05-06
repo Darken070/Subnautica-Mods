@@ -745,3 +745,5 @@ MoreHullPlates/bin/Debug/Assembly-CSharp.dll
 MoreHullPlates/Properties/AssemblyInfo.cs
 MoreHullPlates/.vs/MoreHullPlates/v15/Server/sqlite3/storage.ide-shm
 MoreHullPlates/.vs/MoreHullPlates/v15/Server/sqlite3/storage.ide-wal
+MoreHullPlates/obj/Debug/build.force
+SMLHelper/

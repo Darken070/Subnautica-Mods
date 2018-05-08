@@ -8,7 +8,7 @@ namespace MoreHullPlates.HullPlates
     {
         private static UnityEngine.GameObject YenzenGObject()
         {
-            return GameObject.Get(yenztt, "Hullyenzgaming", yenztexture);
+            return Prefab.Get(yenztt, "Hullyenzgaming", yenztexture);
         }
 
         private static TechType yenztt = TechTypePatcher.AddTechType("Hullyenzgaming", "yenzgaming Hull Plate", "Modder. Creator of Custom Food and Egg Info (Item added by MoreHullPlates)");

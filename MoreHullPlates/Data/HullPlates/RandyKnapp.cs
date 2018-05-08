@@ -8,7 +8,7 @@ namespace MoreHullPlates.HullPlates
     {
         private static UnityEngine.GameObject randyobj()
         {
-            return GameObject.Get(randytt, "HullRandyKnapp", randytexture);
+            return Prefab.Get(randytt, "HullRandyKnapp", randytexture);
         }
 
         private static TechType randytt = TechTypePatcher.AddTechType("HullRandyKnapp", "RandyKnapp Hull Plate", "Modder. Creator of Autosort Lockers and many many other great mods. Special thanks for helping me with the prefabs (Item added by MoreHullPlates)");

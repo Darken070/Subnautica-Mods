@@ -8,7 +8,7 @@ namespace MoreHullPlates.HullPlates
     {
         private static UnityEngine.GameObject campobj()
         {
-            return GameObject.Get(camptt, "HullCampsOlderBrother", camptexture);
+            return Prefab.Get(camptt, "HullCampsOlderBrother", camptexture);
         }
 
         private static TechType camptt = TechTypePatcher.AddTechType("HullCampsOlderBrother", "Camp's Older Brother Hull Plate", "\"Multiplayer is not out yet.\" A better version of Camp running on a souped up version of Linux with bigger hard drives and more CPU");

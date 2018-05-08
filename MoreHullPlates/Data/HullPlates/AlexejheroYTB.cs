@@ -8,7 +8,7 @@ namespace MoreHullPlates.HullPlates
     {
         private static UnityEngine.GameObject AYTBGameObject()
         {
-            return GameObject.Get(alexejheroytbtt, "HullAlexejheroYTB", texture);
+            return Prefab.Get(alexejheroytbtt, "HullAlexejheroYTB", texture);
         }
         private static TechType alexejheroytbtt = TechTypePatcher.AddTechType("HullAlexejheroYTB", "AlexejheroYTB Hull Plate", "Modder. Creator of MoreIngots and MoreHullPlates (Item added by MoreHullPlates)");
         private static Texture2D texture = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/alexejheroytb.assets").LoadAsset<UnityEngine.Sprite>("AlexejheroYTB").texture;

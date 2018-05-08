@@ -8,7 +8,7 @@ namespace MoreHullPlates.HullPlates
     {
         private static UnityEngine.GameObject AHK1221GameObject()
         {
-            return GameObject.Get(ahktt, "HullAHK1221", textureahk);
+            return Prefab.Get(ahktt, "HullAHK1221", textureahk);
         }
         private static TechType ahktt = TechTypePatcher.AddTechType("HullAHK1221", "AHK1221 Hull Plate", "Modder. Creator of Modding Helper, Warp Cannon, Exterior Plant Pots and much more (Item added by MoreHullPlates)");
         private static Texture2D textureahk = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/ahk1221.assets").LoadAsset<UnityEngine.Sprite>("AHK1221").texture;

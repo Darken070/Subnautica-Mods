@@ -13,8 +13,10 @@ namespace MoreHullPlates
                 HullPlates.Load.AlexejheroYTB();
                 HullPlates.Load.AHK1221();
                 HullPlates.Load.CampsOlderBrother();
+                HullPlates.Load.Cougarific();
                 HullPlates.Load.RandyKnapp();
                 HullPlates.Load.yenzgaming();
+                HullPlates.Load.specialTest();
             }
             catch (Exception e)
             {

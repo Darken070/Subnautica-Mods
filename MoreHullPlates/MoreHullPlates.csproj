@@ -63,7 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\GameObject.cs" />
+    <Compile Include="Data\HullPlates\specialTest.cs" />
+    <Compile Include="Data\HullPlates\Cougarific.cs" />
+    <Compile Include="Data\Prefab.cs" />
     <Compile Include="Data\HullPlates\Camp%27s Older Brother.cs" />
     <Compile Include="Data\HullPlates\RandyKnapp.cs" />
     <Compile Include="Data\HullPlates\yenzgaming.cs" />

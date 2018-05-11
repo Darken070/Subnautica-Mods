@@ -1,4 +1,4 @@
-﻿namespace MoreHullPlates
+﻿namespace MoreHullPlates.Data
 {
     public class Sprite
     {

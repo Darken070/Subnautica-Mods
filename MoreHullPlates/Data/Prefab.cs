@@ -2,7 +2,7 @@
 using UnityEngine;
 using Utilites.Logger;
 
-namespace MoreHullPlates
+namespace MoreHullPlates.Data
 {
     public class Prefab
     {
@@ -35,7 +35,8 @@ namespace MoreHullPlates
                 return null;
             }
         }
-        public static GameObject Special(TechType techtype, string Classid, Texture2D texture)
+
+        /*public static GameObject Special(TechType techtype, string Classid, Texture2D texture)
         {
             try
             {
@@ -74,6 +75,6 @@ namespace MoreHullPlates
                 e.Log();
                 return null;
             }
-        }
+        }*/
     }
 }

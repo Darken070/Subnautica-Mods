@@ -1,7 +1,7 @@
 ﻿using SMLHelper.Patchers;
 using System.Collections.Generic;
 
-namespace MoreHullPlates
+namespace MoreHullPlates.Data
 {
     public class TechData
     {

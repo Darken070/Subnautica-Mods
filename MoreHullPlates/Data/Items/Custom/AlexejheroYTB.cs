@@ -14,7 +14,7 @@ namespace MoreHullPlates.Items
             {
                 return Prefab.Get(alexejheroytbtt, "HullAlexejheroYTB", texture);
             }
-            private protected static TechType alexejheroytbtt = TechTypePatcher.AddTechType("HullAlexejheroYTB", "AlexejheroYTB Hull Plate", "Modder. Creator of MoreIngots and MoreHullPlates (Item added by MoreHullPlates)");
+            private static TechType alexejheroytbtt = TechTypePatcher.AddTechType("HullAlexejheroYTB", "AlexejheroYTB Hull Plate", "Modder. Creator of MoreIngots and MoreHullPlates (Item added by MoreHullPlates)");
             private static Texture2D texture = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/alexejheroytb.assets").LoadAsset<UnityEngine.Sprite>("AlexejheroYTB").texture;
             public static void AlexejheroYTB()
             {

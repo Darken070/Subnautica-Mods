@@ -63,18 +63,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\HullPlates\specialTest.cs" />
-    <Compile Include="Data\HullPlates\Cougarific.cs" />
+    <Compile Include="Data\Items\Custom\Cougarific.cs" />
+    <Compile Include="Data\Items\Custom\Vlad-00003.cs" />
     <Compile Include="Data\Prefab.cs" />
-    <Compile Include="Data\HullPlates\Camp%27s Older Brother.cs" />
-    <Compile Include="Data\HullPlates\RandyKnapp.cs" />
-    <Compile Include="Data\HullPlates\yenzgaming.cs" />
-    <Compile Include="Data\HullPlates\AHK1221.cs" />
-    <Compile Include="Data\HullPlates\AlexejheroYTB.cs" />
-    <Compile Include="Data\HullPlates\_existing.cs" />
+    <Compile Include="Data\Items\Custom\Camp%27s Older Brother.cs" />
+    <Compile Include="Data\Items\Custom\RandyKnapp.cs" />
+    <Compile Include="Data\Items\Custom\yenzgaming.cs" />
+    <Compile Include="Data\Items\Custom\AHK1221.cs" />
+    <Compile Include="Data\Items\Custom\AlexejheroYTB.cs" />
+    <Compile Include="Data\Items\Existing\All.cs" />
     <Compile Include="Data\Sprite.cs" />
     <Compile Include="Data\TechData.cs" />
-    <Compile Include="Data\QPatch.cs" />
+    <Compile Include="QPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

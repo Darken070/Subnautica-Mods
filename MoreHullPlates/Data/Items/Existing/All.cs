@@ -8,16 +8,16 @@ namespace MoreHullPlates.Items
         {
             public static void All()
             {
-                // Markiplier Straight Arms Bobblehead (Existing)
+                // Markiplier Straight Arms Bobble-Head (Existing)
                 KnownTechPatcher.unlockedAtStart.Add(TechType.Marki1);
-                LanguagePatcher.customLines.Add("Marki1", "Markiplier Straight Arms Bobblehead");
+                LanguagePatcher.customLines.Add("Marki1", "Markiplier Straight Arms Bobble-Head");
                 LanguagePatcher.customLines.Add("Tooltip_Marki1", "Subnautica content creator. https://www.youtube.com/markiplierGAME (Item added by Subnautica)");
                 CraftDataPatcher.AddToCustomGroup(TechGroup.Miscellaneous, TechCategory.Misc, TechType.Marki1);
                 CraftDataPatcher.RemoveFromCustomGroup(TechGroup.Miscellaneous, TechCategory.MiscHullplates, TechType.Marki1);
 
-                // Markiplier Bobblehead (Existing)
+                // Markiplier Bobble-Head (Existing)
                 KnownTechPatcher.unlockedAtStart.Add(TechType.Marki2);
-                LanguagePatcher.customLines.Add("Marki2", "Markiplier Bobblehead");
+                LanguagePatcher.customLines.Add("Marki2", "Markiplier Bobble-Head");
                 LanguagePatcher.customLines.Add("Tooltip_Marki2", "Subnautica content creator. https://www.youtube.com/markiplierGAME (Item added by Subnautica)");
                 CraftDataPatcher.AddToCustomGroup(TechGroup.Miscellaneous, TechCategory.Misc, TechType.Marki2);
                 CraftDataPatcher.RemoveFromCustomGroup(TechGroup.Miscellaneous, TechCategory.MiscHullplates, TechType.Marki2);

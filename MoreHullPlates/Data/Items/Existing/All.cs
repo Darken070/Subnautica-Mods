@@ -66,7 +66,7 @@ namespace MoreHullPlates.Items
                 LanguagePatcher.customLines.Add("MarkiplierHullPlate", "Markiplier Hull Plate");
                 LanguagePatcher.customLines.Add("Tooltip_MarkiplierHullPlate", "Subnautica content creator. https://www.youtube.com/markiplierGAME (Item added by Subnautica)");
 
-                // Muyskerm (Existing)
+                // muyskerm (Existing)
                 KnownTechPatcher.unlockedAtStart.Add(TechType.MuyskermHullPlate);
                 LanguagePatcher.customLines.Add("MuyskermHullPlate", "muyskerm Hull Plate");
                 LanguagePatcher.customLines.Add("Tooltip_MuyskermHullPlate", "Subnautica content creator. https://www.youtube.com/muyskerm (Item added by Subnautica)");

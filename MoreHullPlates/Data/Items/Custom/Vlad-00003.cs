@@ -12,7 +12,7 @@ namespace MoreHullPlates.Items
         {
             private static GameObject vladgo()
             {
-                return Prefab.Get(vladtt, "HullAlexejheroYTB", vladt);
+                return Prefab.Get(vladtt, "HullVlad00003", vladt);
             }
             private static TechType vladtt = TechTypePatcher.AddTechType("HullVlad00003", "Vlad-00003 Hull Plate", "Modder. Creator of Utilities and Drillable Scan (Item added by MoreHullPlates)");
             private static Texture2D vladt = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/vlad00003.assets").LoadAsset<UnityEngine.Sprite>("Vlad-00003").texture;

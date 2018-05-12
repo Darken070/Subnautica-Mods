@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Items\Custom\S0n3.cs" />
+    <Compile Include="Data\Items\Custom\qwiso.cs" />
     <Compile Include="Data\Items\Custom\Cougarific.cs" />
     <Compile Include="Data\Items\Custom\Vlad-00003.cs" />
     <Compile Include="Data\Prefab.cs" />

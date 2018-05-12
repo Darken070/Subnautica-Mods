@@ -14,7 +14,9 @@ namespace MoreHullPlates
                 Items.Load.Custom.AHK1221();
                 Items.Load.Custom.Camp_s_Older_Brother();
                 Items.Load.Custom.Cougarific();
+                Items.Load.Custom.qwiso();
                 Items.Load.Custom.RandyKnapp();
+                Items.Load.Custom.S0n3();
                 Items.Load.Custom.Vlad_00003();
                 Items.Load.Custom.yenzgaming();
             }

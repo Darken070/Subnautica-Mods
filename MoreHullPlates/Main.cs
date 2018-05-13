@@ -50,7 +50,7 @@ namespace MoreHullPlates
             UnitySprite = null;
         }
 
-        public AmbiguousSprite(UnityEngine.Sprite _unitySprite)
+        public AmbiguousSprite(Sprite _unitySprite)
         {
             AtlasSprite = null;
             UnitySprite = _unitySprite;
@@ -210,17 +210,20 @@ namespace MoreHullPlates
         public static string ItemInternalName { get; set; }
         public static void Load()
         {
-
             foreach (ItemToAdd item in ItemsToAddHandler.itemsToAdd)
             {
+                Console.WriteLine("before var setting");
                 ItemInternalName = item.InternalName;
                 var _name = item.Name;
                 var _tooltip = item.Tooltip;
                 var _textureLocation = item.TextureLocation;
                 var _spriteLocation = item.SpriteLocation;
 
+                Console.WriteLine("before techtype patching");
                 ItemTechType = TechTypePatcher.AddTechType(ItemInternalName, _name, _tooltip, true);
+                Console.WriteLine("before texture patching");
                 ItemTexture = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/{_textureLocation.AssetBundle}.assets").LoadAsset<Sprite>(_textureLocation.Path).texture;
+                Console.WriteLine("before sprite patching");
                 if (_spriteLocation == null)
                 {
                     ItemSprite.AtlasSprite = new AmbiguousSprite(SpriteManager.Get(TechType.SpecialHullPlate)).AtlasSprite;
@@ -229,7 +232,7 @@ namespace MoreHullPlates
                 {
                     ItemSprite.UnitySprite = new AmbiguousSprite(AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/{_spriteLocation.AssetBundle}.assets").LoadAsset<Sprite>(_spriteLocation.Path)).UnitySprite;
                 }
-
+                Console.WriteLine("before everything else");
                 CraftDataPatcher.customBuildables.Add(ItemTechType);
                 CraftDataPatcher.AddToCustomGroup(TechGroup.Miscellaneous, TechCategory.MiscHullplates, ItemTechType);
                 CustomPrefabHandler.customPrefabs.Add(new CustomPrefab(ItemInternalName, $"Submarine/Build/{ItemInternalName}", ItemTechType, ItemPrefab));

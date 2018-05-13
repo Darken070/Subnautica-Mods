@@ -63,19 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Items\Custom\S0n3.cs" />
-    <Compile Include="Data\Items\Custom\qwiso.cs" />
-    <Compile Include="Data\Items\Custom\Cougarific.cs" />
-    <Compile Include="Data\Items\Custom\Vlad-00003.cs" />
-    <Compile Include="Data\Prefab.cs" />
-    <Compile Include="Data\Items\Custom\Camp%27s Older Brother.cs" />
-    <Compile Include="Data\Items\Custom\RandyKnapp.cs" />
-    <Compile Include="Data\Items\Custom\yenzgaming.cs" />
-    <Compile Include="Data\Items\Custom\AHK1221.cs" />
-    <Compile Include="Data\Items\Custom\AlexejheroYTB.cs" />
-    <Compile Include="Data\Items\Existing\All.cs" />
-    <Compile Include="Data\Sprite.cs" />
-    <Compile Include="Data\TechData.cs" />
     <Compile Include="QPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

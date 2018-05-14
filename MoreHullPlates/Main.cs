@@ -29,14 +29,29 @@ namespace MoreHullPlates
 
         public AssetBundleLocation(string assetBundle, string path)
         {
-            AssetBundle = assetBundle.ToLower();
-            Path = path;
+            try
+            {
+                AssetBundle = assetBundle.ToLower();
+                Path = path;
+            }
+            catch (Exception e)
+            {
+                e.Log();
+            }
         }
 
         public AssetBundleLocation(string assetBundle_And_Path_If_They_Are_The_Same_But_Keep_Capitalization)
         {
-            AssetBundle = assetBundle_And_Path_If_They_Are_The_Same_But_Keep_Capitalization.ToLower();
-            Path = assetBundle_And_Path_If_They_Are_The_Same_But_Keep_Capitalization;
+            try
+            {
+                AssetBundle = assetBundle_And_Path_If_They_Are_The_Same_But_Keep_Capitalization.ToLower();
+                Path = assetBundle_And_Path_If_They_Are_The_Same_But_Keep_Capitalization;
+
+            }
+            catch (Exception e)
+            {
+                e.Log();
+            }
         }
     }
     public class AmbiguousSprite
@@ -46,14 +61,28 @@ namespace MoreHullPlates
 
         public AmbiguousSprite(Atlas.Sprite _atlasSprite)
         {
-            AtlasSprite = _atlasSprite;
-            UnitySprite = null;
+            try
+            {
+                AtlasSprite = _atlasSprite;
+                UnitySprite = null;
+            }
+            catch (Exception e)
+            {
+                e.Log();
+            }
         }
 
         public AmbiguousSprite(Sprite _unitySprite)
         {
-            AtlasSprite = null;
-            UnitySprite = _unitySprite;
+            try
+            {
+                AtlasSprite = null;
+                UnitySprite = _unitySprite;
+            }
+            catch (Exception e)
+            {
+                e.Log();
+            }
         }
     }
     public class ItemToUnlock
@@ -65,13 +94,20 @@ namespace MoreHullPlates
 
         public ItemToUnlock(TechType techType, string name, string tooltip, bool removeFromOtherCustomGroup = false)
         {
+            try
+            {
             TechType = techType;
             Name = name;
             Tooltip = tooltip;
             RemoveFromOtherCustomGroup = removeFromOtherCustomGroup;
+            }
+            catch (Exception e)
+            {
+                e.Log();
+            }
         }
     }
-    public static class ItemsToUnlockHandler
+    public static class ItemsToUnlockList
     {
         public static List<ItemToUnlock> itemsToUnlock = new List<ItemToUnlock>()
         {
@@ -102,14 +138,21 @@ namespace MoreHullPlates
 
         public ItemToAdd(string internalName, string name, string tooltip, AssetBundleLocation textureLocation, AssetBundleLocation spriteLocation)
         {
+            try
+            {
             InternalName = internalName;
             Name = name;
             Tooltip = tooltip;
             TextureLocation = textureLocation;
             SpriteLocation = spriteLocation;
+            }
+            catch (Exception e)
+            {
+                e.Log();
+            }
         }
     }
-    public static class ItemsToAddHandler
+    public static class ItemsToAddList
     {
         public static List<ItemToAdd> itemsToAdd = new List<ItemToAdd>()
         {
@@ -176,7 +219,9 @@ namespace MoreHullPlates
     {
         public static void Load()
         {
-            foreach (ItemToUnlock item in ItemsToUnlockHandler.itemsToUnlock)
+            try
+            {
+            foreach (ItemToUnlock item in ItemsToUnlockList.itemsToUnlock)
             {
                 var _techType = item.TechType;
                 var _name = item.Name;
@@ -200,6 +245,11 @@ namespace MoreHullPlates
                     }
                 }
             }
+            }
+            catch (Exception e)
+            {
+                e.Log();
+            }
         }
     }
     public class CustomItems
@@ -210,7 +260,9 @@ namespace MoreHullPlates
         public static string ItemInternalName { get; set; }
         public static void Load()
         {
-            foreach (ItemToAdd item in ItemsToAddHandler.itemsToAdd)
+            try
+            {
+            foreach (ItemToAdd item in ItemsToAddList.itemsToAdd)
             {
                 Console.WriteLine("before var setting");
                 ItemInternalName = item.InternalName;
@@ -238,6 +290,11 @@ namespace MoreHullPlates
                 CustomPrefabHandler.customPrefabs.Add(new CustomPrefab(ItemInternalName, $"Submarine/Build/{ItemInternalName}", ItemTechType, ItemPrefab));
                 CustomSpriteHandler.customSprites.Add(new CustomSprite(ItemTechType, DefaultSprite.Get));
                 CraftDataPatcher.customTechData.Add(ItemTechType, TechData.Get);
+            }
+            }
+            catch (Exception e)
+            {
+                e.Log();
             }
         }
         public static GameObject ItemPrefab()

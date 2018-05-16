@@ -748,3 +748,13 @@ MoreHullPlates/.vs/MoreHullPlates/v15/Server/sqlite3/storage.ide-shm
 MoreHullPlates/.vs/MoreHullPlates/v15/Server/sqlite3/storage.ide-wal
 MoreHullPlates/obj/Debug/build.force
 SMLHelper/
+Utilities/.vs/Utilities/v15/.suo
+Utilities/.vs/Utilities/v15/Server/sqlite3/db.lock
+Utilities/.vs/Utilities/v15/Server/sqlite3/storage.ide
+Utilities/bin/Debug/Utilities.pdb
+Utilities/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
+Utilities/obj/Debug/Utilities.csproj.FileListAbsolute.txt
+Utilities/obj/Debug/Utilities.dll
+Utilities/obj/Debug/Utilities.pdb
+Utilities/Properties/AssemblyInfo.cs

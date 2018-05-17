@@ -2,7 +2,6 @@
 using SMLHelper.Patchers;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using static MoreHullPlates.Code;
 
@@ -284,9 +283,9 @@ namespace MoreHullPlates
                 return $"\"Exception: {e.GetType()}\"\n\tMessage: {e.Message}\n\tStacktrace: {e.StackTrace}\n" +
                        FormatException(e.InnerException);
             }
-            public static void Log(string text, string caller)
+            public static void Log(string text)
             {
-                Console.WriteLine($"[{caller}] {text}");
+                Console.WriteLine($"[MoreHullPlates] {text}");
             }
         }
     }
@@ -294,7 +293,7 @@ namespace MoreHullPlates
     {   
         public static void Log(this Exception e)
         {
-            Utility.Logging.Log(Utility.Logging.FormatException(e), Assembly.GetCallingAssembly().GetName().Name);
+            Utility.Logging.Log(Utility.Logging.FormatException(e));
         }
     }
 }

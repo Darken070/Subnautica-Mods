@@ -226,10 +226,9 @@ namespace MoreHullPlates
         }
         public class CustomItems
         {
-            public static TechType ItemTechType { get; set; }
-            public static Texture2D ItemTexture { get; set; }
-            public static Sprite UnitySprite { get; set; }
-            public static string ItemInternalName { get; set; }
+            public static TechType ItemTechType;
+            public static Texture2D ItemTexture;
+            public static string ItemInternalName;
             public static void Load()
             {
                 try
@@ -244,25 +243,22 @@ namespace MoreHullPlates
 
                         ItemTechType = TechTypePatcher.AddTechType(ItemInternalName, _name, _tooltip, true);
                         ItemTexture = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/{_textureLocation.AssetBundle}.assets").LoadAsset<Sprite>(_textureLocation.Path).texture;
-                        if (_spriteLocation == null)
-                        {
-                            UnitySprite = null;
-                        }
-                        else
-                        {
-                            UnitySprite = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/{_spriteLocation.AssetBundle}.assets").LoadAsset<Sprite>(_spriteLocation.Path);
-                        }
+                        var UnitySprite = default(Sprite);
+                        //if (_spriteLocation != null)
+                        //{
+                        //    UnitySprite = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/{_spriteLocation.AssetBundle}.assets").LoadAsset<Sprite>(_spriteLocation.Path);
+                        //}
                         CraftDataPatcher.customBuildables.Add(ItemTechType);
                         CraftDataPatcher.AddToCustomGroup(TechGroup.Miscellaneous, TechCategory.MiscHullplates, ItemTechType);
                         CustomPrefabHandler.customPrefabs.Add(new CustomPrefab(ItemInternalName, $"Submarine/Build/{ItemInternalName}", ItemTechType, ItemPrefab));
-                        if (UnitySprite == null)
-                        {
+                        //if (UnitySprite == null)
+                        //{
                             CustomSpriteHandler.customSprites.Add(new CustomSprite(ItemTechType, DefaultSprite.Get));
-                        }
-                        else
-                        {
-                            CustomSpriteHandler.customSprites.Add(new CustomSprite(ItemTechType, UnitySprite));
-                        }
+                        //}
+                        //else
+                        //{
+                        //    CustomSpriteHandler.customSprites.Add(new CustomSprite(ItemTechType, UnitySprite));
+                        //}
                         CraftDataPatcher.customTechData.Add(ItemTechType, TechData.Get);
                     }
                 }

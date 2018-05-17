@@ -244,21 +244,21 @@ namespace MoreHullPlates
                         ItemTechType = TechTypePatcher.AddTechType(ItemInternalName, _name, _tooltip, true);
                         ItemTexture = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/{_textureLocation.AssetBundle}.assets").LoadAsset<Sprite>(_textureLocation.Path).texture;
                         var UnitySprite = default(Sprite);
-                        //if (_spriteLocation != null)
-                        //{
-                        //    UnitySprite = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/{_spriteLocation.AssetBundle}.assets").LoadAsset<Sprite>(_spriteLocation.Path);
-                        //}
+                        if (_spriteLocation != null)
+                        {
+                            UnitySprite = AssetBundle.LoadFromFile($@"./QMods/MoreHullPlates/Assets/{_spriteLocation.AssetBundle}.assets").LoadAsset<Sprite>(_spriteLocation.Path);
+                        }
                         CraftDataPatcher.customBuildables.Add(ItemTechType);
                         CraftDataPatcher.AddToCustomGroup(TechGroup.Miscellaneous, TechCategory.MiscHullplates, ItemTechType);
                         CustomPrefabHandler.customPrefabs.Add(new CustomPrefab(ItemInternalName, $"Submarine/Build/{ItemInternalName}", ItemTechType, ItemPrefab));
-                        //if (UnitySprite == null)
-                        //{
+                        if (UnitySprite == null)
+                        {
                             CustomSpriteHandler.customSprites.Add(new CustomSprite(ItemTechType, DefaultSprite.Get));
-                        //}
-                        //else
-                        //{
-                        //    CustomSpriteHandler.customSprites.Add(new CustomSprite(ItemTechType, UnitySprite));
-                        //}
+                        }
+                        else
+                        {
+                            CustomSpriteHandler.customSprites.Add(new CustomSprite(ItemTechType, UnitySprite));
+                        }
                         CraftDataPatcher.customTechData.Add(ItemTechType, TechData.Get);
                     }
                 }

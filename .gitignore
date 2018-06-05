@@ -1,5 +1,6 @@
 Wiki/
 *.suo
+*.FileListAbsolute.txt
 MoreHullPlates/Data (not used anymore, this is just a backup)
 MoreHullPlates/Unity
 MoreHullPlates - Copy
@@ -792,3 +793,4 @@ DeconstructFireExtinguishers/obj/Debug/CustomItemSizes.pdb
 *.ide-shm
 *.ide
 *.lock
+UnpackIngots/bin/Debug/UnpackIngots.dll

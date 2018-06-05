@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AlexejheroYTB.Utilities;
 
 namespace DeconstructFireExtinguishers
 {
     public class Main
     {
+        Items.AddDummy();
     }
 }

@@ -1,4 +1,5 @@
 Wiki/
+*.suo
 MoreHullPlates/Data (not used anymore, this is just a backup)
 MoreHullPlates/Unity
 MoreHullPlates - Copy
@@ -787,3 +788,7 @@ DeconstructFireExtinguishers/obj/Debug/CustomItemSizes.csproj.FileListAbsolute.t
 DeconstructFireExtinguishers/obj/Debug/CustomItemSizes.dll
 DeconstructFireExtinguishers/obj/Debug/CustomItemSizes.pdb
 .vs/Mods/v15/.suo
+*.ide-wal
+*.ide-shm
+*.ide
+*.lock

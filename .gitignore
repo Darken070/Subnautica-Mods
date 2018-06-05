@@ -37,7 +37,6 @@ MoreIngots/.vs/MoreIngots/v15/Server/sqlite3/storage.ide-shm
 MoreIngots/.vs/MoreIngots/v15/Server/sqlite3/storage.ide
 MoreIngots/.vs/MoreIngots/v15/Server/sqlite3/db.lock
 MoreIngots/.vs/MoreIngots/v15/.suo
-MoreIngots/MoreIngots.sln
 MoreIngots/Unity/New Unity Project/UnityPackageManager/manifest.json
 MoreIngots/Unity/New Unity Project/ProjectSettings/UnityConnectSettings.asset
 MoreIngots/Unity/New Unity Project/ProjectSettings/TimeManager.asset
@@ -760,6 +759,35 @@ Utilities/obj/Debug/Utilities.dll
 Utilities/obj/Debug/Utilities.pdb
 Utilities/Properties/AssemblyInfo.cs
 Utilities/bin/Debug/Utilities.dll
+.vs/Mods/v15/Server/sqlite3/db.lock
+.vs/Mods/v15/Server/sqlite3/storage.ide
+.vs/Mods/v15/Server/sqlite3/storage.ide-shm
+.vs/Mods/v15/Server/sqlite3/storage.ide-wal
+DeconstructFireExtinguishers/.vs/CustomItemSizes/v15/.suo
+DeconstructFireExtinguishers/.vs/CustomItemSizes/v15/Server/sqlite3/db.lock
+DeconstructFireExtinguishers/.vs/CustomItemSizes/v15/Server/sqlite3/storage.ide
+DeconstructFireExtinguishers/bin/Debug/0Harmony.dll
+DeconstructFireExtinguishers/bin/Debug/Assembly-CSharp-firstpass.dll
+DeconstructFireExtinguishers/bin/Debug/Assembly-CSharp.dll
+DeconstructFireExtinguishers/bin/Debug/CustomItemSizes.pdb
+DeconstructFireExtinguishers/bin/Debug/LibNoise.dll
+DeconstructFireExtinguishers/bin/Debug/iTween.dll
+DeconstructFireExtinguishers/bin/Debug/LitJson.dll
+DeconstructFireExtinguishers/bin/Debug/LumenWorks.dll
+DeconstructFireExtinguishers/bin/Debug/Mono.Cecil.dll
+DeconstructFireExtinguishers/bin/Debug/Newtonsoft.Json.dll
+DeconstructFireExtinguishers/bin/Debug/Poly2Tri.dll
+DeconstructFireExtinguishers/bin/Debug/QModInstaller.dll
+DeconstructFireExtinguishers/bin/Debug/SMLHelper.dll
+DeconstructFireExtinguishers/bin/Debug/UnityEngine.dll
+DeconstructFireExtinguishers/bin/Debug/UnityEngine.UI.dll
+DeconstructFireExtinguishers/bin/Debug/Utilites.xml
+DeconstructFireExtinguishers/bin/Debug/Utilites.dll
+DeconstructFireExtinguishers/obj/Debug/CustomItemSizes.csproj.CopyComplete
+DeconstructFireExtinguishers/obj/Debug/CustomItemSizes.csproj.FileListAbsolute.txt
+DeconstructFireExtinguishers/obj/Debug/CustomItemSizes.dll
+DeconstructFireExtinguishers/obj/Debug/CustomItemSizes.pdb
+.vs/Mods/v15/.suo
 *.ide-wal
 *.ide-shm
 *.ide

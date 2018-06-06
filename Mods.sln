@@ -11,9 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnpackIngots", "UnpackIngot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeconstructFireExtinguishers", "DeconstructFireExtinguishers\DeconstructFireExtinguishers.csproj", "{664B1D32-02D1-4AAD-A840-D7E14EB8AC93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{AE2A999C-2F24-4E69-BABD-B54D124E65D9}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Utilities", "Utilities\Utilities.shproj", "{D3795AB6-3288-4329-AA68-B02F28D3250D}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Utilities\Utilities.projitems*{d3795ab6-3288-4329-aa68-b02f28d3250d}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -35,10 +38,6 @@ Global
 		{664B1D32-02D1-4AAD-A840-D7E14EB8AC93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{664B1D32-02D1-4AAD-A840-D7E14EB8AC93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{664B1D32-02D1-4AAD-A840-D7E14EB8AC93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE2A999C-2F24-4E69-BABD-B54D124E65D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE2A999C-2F24-4E69-BABD-B54D124E65D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE2A999C-2F24-4E69-BABD-B54D124E65D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE2A999C-2F24-4E69-BABD-B54D124E65D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

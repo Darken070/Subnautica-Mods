@@ -86,15 +86,15 @@ namespace UnpackIngots
                 {
                     _craftAmount = 0,
                     _ingredients = new List<IngredientHelper>()
-                {
-                    new IngredientHelper(TechType.PlasteelIngot, 1)
-                },
+                    {
+                        new IngredientHelper(TechType.PlasteelIngot, 1)
+                    },
                     _linkedItems = new List<TechType>()
-                {
-                    TechType.TitaniumIngot,
-                    TechType.Lithium,
-                    TechType.Lithium
-                },
+                    {
+                        TechType.TitaniumIngot,
+                        TechType.Lithium,
+                        TechType.Lithium
+                    },
                     _techType = dummy
                 };
                 Log.Debug("Loading TechDatas... (1/2)");
@@ -102,22 +102,22 @@ namespace UnpackIngots
                 {
                     _craftAmount = 0,
                     _ingredients = new List<IngredientHelper>()
-                {
-                    new IngredientHelper(TechType.TitaniumIngot, 1)
-                },
+                    {
+                        new IngredientHelper(TechType.TitaniumIngot, 1)
+                    },
                     _linkedItems = new List<TechType>()
-                {
-                    TechType.Titanium,
-                    TechType.Titanium,
-                    TechType.Titanium,
-                    TechType.Titanium,
-                    TechType.Titanium,
-                    TechType.Titanium,
-                    TechType.Titanium,
-                    TechType.Titanium,
-                    TechType.Titanium,
-                    TechType.Titanium
-                },
+                    {
+                        TechType.Titanium,
+                        TechType.Titanium,
+                        TechType.Titanium,
+                        TechType.Titanium,
+                        TechType.Titanium,
+                        TechType.Titanium,
+                        TechType.Titanium,
+                        TechType.Titanium,
+                        TechType.Titanium,
+                        TechType.Titanium
+                    },
                     _techType = dummy2
                 };
                 Log.Debug("Loading TechDatas... (2/2)");

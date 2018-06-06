@@ -15,6 +15,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Utilities", "Utilities\Util
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Utilities\Utilities.projitems*{664b1d32-02d1-4aad-a840-d7e14eb8ac93}*SharedItemsImports = 4
 		Utilities\Utilities.projitems*{d3795ab6-3288-4329-aa68-b02f28d3250d}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

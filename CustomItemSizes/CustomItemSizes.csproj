@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>.\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -59,10 +59,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>echo y | del "C:\Users\user\Desktop\Subnautica Mods\CustomItemSizes\CustomItemSizes.dll"</PreBuildEvent>
+    <PreBuildEvent>copy /y "$(TargetPath)" "%25QMODS_DIR%25\$(TargetName)\$(TargetFileName)"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>copy /y "C:\Users\user\Desktop\Subnautica Mods\CustomItemSizes\bin\Debug\CustomItemSizes.dll" "D:\Games\Subnautica\QMods\CustomItemSizes"
-move /y "C:\Users\user\Desktop\Subnautica Mods\CustomItemSizes\bin\Debug\CustomItemSizes.dll" "C:\Users\user\Desktop\Subnautica Mods\CustomItemSizes\"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

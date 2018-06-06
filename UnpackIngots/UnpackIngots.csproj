@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>.\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -64,7 +64,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "C:\Users\user\Desktop\Subnautica Mods\UnpackIngots\bin\Debug\UnpackIngots.dll" "D:\Games\Subnautica\QMods\UnpackIngots"
-move /y "C:\Users\user\Desktop\Subnautica Mods\UnpackIngots\bin\Debug\UnpackIngots.dll" "C:\Users\user\Desktop\Subnautica Mods\UnpackIngots\"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>copy /y "$(TargetPath)" "%25QMODS_DIR%25\$(TargetName)\$(TargetFileName)"</PreBuildEvent>
   </PropertyGroup>
 </Project>

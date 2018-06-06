@@ -1,6 +1,7 @@
 ﻿using SMLHelper;
 using SMLHelper.Patchers;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace AlexejheroYTB.Utilities
@@ -54,50 +55,74 @@ namespace AlexejheroYTB.Utilities
         
         public static void Message(string message, bool onlyLogIfTrue = true)
         {
-            Utils.Logging.LogUtils(message, null, onlyLogIfTrue);
+            Utils.LogUtils.Log(message, null, onlyLogIfTrue);
         }
 
         public static void Debug(string message, bool onlyLogIfTrue = true)
         {
-            Utils.Logging.LogUtils(message, "DEBUG", onlyLogIfTrue);
+            Utils.LogUtils.Log(message, "DEBUG", onlyLogIfTrue);
         }
 
         public static void Warning(string message, bool onlyLogIfTrue = true)
         {
-            Utils.Logging.LogUtils(message, "WARNING", onlyLogIfTrue);
+            Utils.LogUtils.Log(message, "WARNING", onlyLogIfTrue);
         }
 
         public static void Error(string message, bool onlyLogIfTrue = true)
         {
-            Utils.Logging.LogUtils(message, "ERROR", onlyLogIfTrue);
+            Utils.LogUtils.Log(message, "ERROR", onlyLogIfTrue);
         }
 
     }
 
     public static class Items
     {
-        
-        public static TechType AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string path, TechDataHelper techData)
+
+        public class AddItemResult
+        {
+            public CustomCraftNode CustomCraftNode;
+            public CustomSprite CustomSprite;
+            public Atlas.Sprite Sprite;
+            public TechDataHelper TechDataHelper;
+            public TechType TechType;
+        }
+
+        public static AddItemResult AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, List<IngredientHelper> ingredientItems, List<TechType> resultingItems)
         {
             TechType techType = TechTypePatcher.AddTechType(name, languageName, languageTooltip);
             Atlas.Sprite sprite = SpriteManager.Get(spriteItem);
             CustomSprite customSprite = new CustomSprite(techType, sprite);
-            CustomCraftNode customCraftNode = new CustomCraftNode(techType, CraftScheme.Fabricator, path);
+            CustomCraftNode customCraftNode = new CustomCraftNode(techType, CraftScheme.Fabricator, fabricatorNodePath);
+            TechDataHelper techData = new TechDataHelper()
+            {
+                _craftAmount = 0,
+                _ingredients = ingredientItems,
+                _linkedItems = resultingItems,
+                _techType = techType
+            };
 
             CustomSpriteHandler.customSprites.Add(customSprite);
             CraftDataPatcher.customTechData.Add(techType, techData);
             CraftTreePatcher.customNodes.Add(customCraftNode);
 
-            return techType;
+            return new AddItemResult()
+            {
+                CustomCraftNode = customCraftNode,
+                CustomSprite = customSprite,
+                Sprite = sprite,
+                TechDataHelper = techData,
+                TechType = techType
+            };
         }
 
     }
 
     internal static class Utils
     {
-        internal static class Logging
+
+        internal static class LogUtils
         {
-            internal static void LogUtils(string message, string messagePrefix, bool debug = true)
+            internal static void Log(string message, string messagePrefix, bool debug = true)
             {
                 if (!debug) return;
                 #region string caller = Assembly.GetCallingAssembly().GetName().Name;
@@ -115,6 +140,7 @@ namespace AlexejheroYTB.Utilities
                 Console.WriteLine($"[{caller}] {prefix} {message}");
             }
         }
+
     }
 
 }

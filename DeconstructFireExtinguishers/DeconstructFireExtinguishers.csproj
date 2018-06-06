@@ -58,6 +58,12 @@
   <Import Project="..\Utilities\Utilities.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>copy /y "$(TargetPath)" "%25QMODS_DIR%25\$(TargetName)\$(TargetFileName)"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>echo "$(TargetPath)"
+echo "%25QMODS_DIR%25\$(TargetName)\$(TargetFileName)"
+copy /y "$(TargetPath)" "%25QMODS_DIR%25\$(TargetName)\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

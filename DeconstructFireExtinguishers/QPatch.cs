@@ -3,6 +3,7 @@ using SMLHelper;
 using SMLHelper.Patchers;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace DeconstructFireExtinguishers
 {
@@ -11,8 +12,8 @@ namespace DeconstructFireExtinguishers
     {
         public static void Patch()
         {
-            Items.AddDummy
-                (
+            var result = Items.AddDummy
+            (
                 name: "DeconstructFireExtinguisherDummy",
                 languageName: "Deconstruct Fire Extinguisher",
                 languageTooltip: "Turn a Fire Extinguisher into 2 Titanium",
@@ -26,8 +27,9 @@ namespace DeconstructFireExtinguishers
                 {
                     TechType.Titanium,
                     TechType.Titanium
-                }
-                );
+                }, 
+                prefabPath: "WorldEntities/Natural/Titanium"
+            );
         }
     }
 

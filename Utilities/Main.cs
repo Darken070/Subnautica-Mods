@@ -3,6 +3,7 @@ using SMLHelper.Patchers;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 namespace AlexejheroYTB.Utilities
 {
@@ -85,9 +86,10 @@ namespace AlexejheroYTB.Utilities
             public Atlas.Sprite Sprite;
             public TechDataHelper TechDataHelper;
             public TechType TechType;
+            public Prefab Prefab;
         }
 
-        public static AddItemResult AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, List<IngredientHelper> ingredientItems, List<TechType> resultingItems)
+        public static AddItemResult AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, List<IngredientHelper> ingredientItems, List<TechType> resultingItems, string prefabPath = null)
         {
             TechType techType = TechTypePatcher.AddTechType(name, languageName, languageTooltip);
             Atlas.Sprite sprite = SpriteManager.Get(spriteItem);
@@ -105,16 +107,60 @@ namespace AlexejheroYTB.Utilities
             CraftDataPatcher.customTechData.Add(techType, techData);
             CraftTreePatcher.customNodes.Add(customCraftNode);
 
-            return new AddItemResult()
+            AddItemResult result = new AddItemResult()
             {
                 CustomCraftNode = customCraftNode,
                 CustomSprite = customSprite,
                 Sprite = sprite,
                 TechDataHelper = techData,
-                TechType = techType
+                TechType = techType,
             };
+
+            if (prefabPath == null)
+                return result;
+
+            Prefab prefab = new Prefab(prefabPath, name, techType);
+            CustomPrefabHandler.customPrefabs.Add(new CustomPrefab(prefab.InternalName, prefab.NewPrefabPath, prefab.Item, prefab.GameObject));
+
+            result.Prefab = prefab;
+
+            return result;
         }
 
+        public class Prefab
+        {
+            public string ExistingPrefabPath;
+            public string InternalName;
+            public TechType Item;
+            public string NewPrefabPath;
+
+            public Prefab(string prefabPath, string internalName, TechType item)
+            {
+                ExistingPrefabPath = prefabPath;
+                InternalName = internalName;
+                Item = item;
+                NewPrefabPath = prefabPath + internalName;
+            }
+
+            public GameObject GameObject()
+            {
+                return RawGameObject(ExistingPrefabPath, InternalName, Item);
+            }
+
+            GameObject RawGameObject(string prefabPath, string internalName, TechType techType)
+            {
+                var prefab = Resources.Load<GameObject>(prefabPath);
+                var obj = UnityEngine.Object.Instantiate(prefab);
+
+                var identifier = obj.GetComponent<PrefabIdentifier>();
+                var techTag = obj.GetComponent<TechTag>();
+
+                identifier.ClassId = internalName;
+                techTag.type = techType;
+
+                return obj;
+            }
+        }
     }
 
     internal static class Utils

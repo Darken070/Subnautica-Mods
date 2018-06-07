@@ -144,19 +144,14 @@ namespace AlexejheroYTB.Utilities
 
             public GameObject GameObject()
             {
-                return RawGameObject(ExistingPrefabPath, InternalName, Item);
-            }
+                if (InternalName == null) return null;
 
-            GameObject RawGameObject(string prefabPath, string internalName, TechType techType)
-            {
-                var prefab = Resources.Load<GameObject>(prefabPath);
-                var obj = UnityEngine.Object.Instantiate(prefab);
+                GameObject prefab = Resources.Load<GameObject>(ExistingPrefabPath);
+                GameObject obj = UnityEngine.Object.Instantiate(prefab);
 
-                var identifier = obj.GetComponent<PrefabIdentifier>();
-                var techTag = obj.GetComponent<TechTag>();
+                PrefabIdentifier identifier = obj.GetComponent<PrefabIdentifier>();
 
-                identifier.ClassId = internalName;
-                techTag.type = techType;
+                identifier.ClassId = InternalName;
 
                 return obj;
             }

@@ -12,7 +12,7 @@ namespace DeconstructFireExtinguishers
     {
         public static void Patch()
         {
-            var result = Items.AddDummy
+            Items.Result result = Items.AddDummy
             (
                 name: "DeconstructFireExtinguisherDummy",
                 languageName: "Deconstruct Fire Extinguisher",

@@ -19,10 +19,7 @@ namespace DeconstructFireExtinguishers
                 languageTooltip: "Turn a Fire Extinguisher into 2 Titanium",
                 spriteItem: TechType.Titanium,
                 fabricatorNodePath: "Resources/AdvancedMaterials/DeconstructFireExtinguisherDummy",
-                ingredientItems: new List<IngredientHelper>()
-                {
-                    new IngredientHelper(TechType.FireExtinguisher, 1)
-                },
+                ingredientItem: new IngredientHelper(TechType.FireExtinguisher, 1),
                 resultingItems: new List<TechType>()
                 {
                     TechType.Titanium,

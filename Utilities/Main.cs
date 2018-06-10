@@ -203,7 +203,7 @@ namespace AlexejheroYTB.Utilities
             return result;
         }
         /// <summary>
-        /// Adds a dummy item
+        /// Adds a dummy item (name is ommited)
         /// </summary>
         /// <param name="languageName">The name of the item</param>
         /// <param name="languageTooltip">The tooltip of the item</param>
@@ -218,7 +218,40 @@ namespace AlexejheroYTB.Utilities
             string parsedName = String.Join("", languageName.Split(' ', '_', '-', '\'', '"'));
             return AddDummy(parsedName, languageName, languageTooltip, spriteItem, fabricatorNodePath, ingredientItems, resultingItems, prefabPath);
         }
-
+        /// <summary>
+        /// Adds a dummy item (only one ingredient)
+        /// </summary>
+        /// <param name="languageName">The name of the item</param>
+        /// <param name="languageTooltip">The tooltip of the item</param>
+        /// <param name="spriteItem">The <see cref="TechType"/> from which to get the <see cref="Atlas.Sprite"/></param>
+        /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
+        /// <param name="ingredientItem">The ingredient item of the recipe</param>
+        /// <param name="resultingItems">The resulting items of the recipe</param>
+        /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
+        /// <returns>A <see cref="Result"/> item</returns>
+        /// </summary>
+        public static Result AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, IngredientHelper ingredientItem, List<TechType> resultingItems, string prefabPath = null)
+        {
+            List<IngredientHelper> ingredientsList = new List<IngredientHelper>() { ingredientItem };
+            return AddDummy(name, languageName, languageTooltip, spriteItem, fabricatorNodePath, ingredientsList, resultingItems, prefabPath);
+        }
+        /// <summary>
+        /// Adds a dummy item (only one result)
+        /// </summary>
+        /// <param name="languageName">The name of the item</param>
+        /// <param name="languageTooltip">The tooltip of the item</param>
+        /// <param name="spriteItem">The <see cref="TechType"/> from which to get the <see cref="Atlas.Sprite"/></param>
+        /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
+        /// <param name="ingredientItems">The ingredient items of the recipe</param>
+        /// <param name="resultingItem">The resulting item of the recipe</param>
+        /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
+        /// <returns>A <see cref="Result"/> item</returns>
+        /// </summary>
+        public static Result AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, List<IngredientHelper> ingredientItems, TechType resultingItem, string prefabPath = null)
+        {
+            List<TechType> resultingList = new List<TechType>() { resultingItem };
+            return AddDummy(name, languageName, languageTooltip, spriteItem, fabricatorNodePath, ingredientItems, resultingList, prefabPath);
+        }
     }
     /// <summary>
     /// Internal utilities class

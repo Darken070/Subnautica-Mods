@@ -33,7 +33,7 @@ namespace AlexejheroYTB.Utilities
         public static bool NullCheck<T>(T var)
         {
             if (var == null) return true;
-            else return false;
+            return false;
         }
         /// <summary>
         /// Null check multiple variables
@@ -50,7 +50,7 @@ namespace AlexejheroYTB.Utilities
             {
                 foreach (T variable in variables)
                 {
-                    if (variable == null) return true;
+                    if (NullCheck(variable)) return true;
                 }
                 return false;
             }
@@ -64,18 +64,41 @@ namespace AlexejheroYTB.Utilities
             {
                 foreach (T variable in variables)
                 {
-                    if (variable != null) return false;
+                    if (!NullCheck(variable)) return false;
                 }
                 return true;
             }
         }
-
     }
     /// <summary>
     /// Main class for logging messages to <see cref="Console"/>
     /// </summary>
     public static class Logging
     {
+        /// <summary>
+        /// Log a message to the console
+        /// </summary>
+        /// <param name="message">The message to log</param>
+        /// <param name="messagePrefix">The prefix to put before the message</param>
+        /// <param name="onlyLogIfTrue">Only log the message if this is true</param>
+        private static void Log(string message, string messagePrefix, bool onlyLogIfTrue = true)
+        {
+            if (!onlyLogIfTrue) return;
+            #region string caller = Assembly.GetCallingAssembly().GetName().Name;
+            string caller;
+            try
+            {
+                caller = Assembly.GetCallingAssembly().GetName().Name;
+            }
+            catch
+            {
+                caller = "ERROR GETTING CALLER";
+            }
+            #endregion
+            string prefix = Values.NullCheck(messagePrefix) ? "" : $"[{messagePrefix}]";
+            Console.WriteLine($"[{caller}] {prefix} {message}");
+        }
+
         /// <summary>
         /// Logs a message to <see cref="Console"/> without a prefix. Alternative to using <see cref="Message(string, bool)"/>
         /// </summary>
@@ -92,7 +115,7 @@ namespace AlexejheroYTB.Utilities
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
         public static void Message(string message, bool onlyLogIfTrue = true)
         {
-            Utils.LogUtils.Log(message, null, onlyLogIfTrue);
+            Log(message, null, onlyLogIfTrue);
         }
         /// <summary>
         /// Logs a message to <see cref="Console"/> with a "DEBUG" prefix
@@ -101,7 +124,7 @@ namespace AlexejheroYTB.Utilities
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
         public static void Debug(string message, bool onlyLogIfTrue = true)
         {
-            Utils.LogUtils.Log(message, "DEBUG", onlyLogIfTrue);
+            Log(message, "DEBUG", onlyLogIfTrue);
         }
         /// <summary>
         /// Logs a message to <see cref="Console"/> with a "WARNING" prefix
@@ -110,7 +133,7 @@ namespace AlexejheroYTB.Utilities
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
         public static void Warning(string message, bool onlyLogIfTrue = true)
         {
-            Utils.LogUtils.Log(message, "WARNING", onlyLogIfTrue);
+            Log(message, "WARNING", onlyLogIfTrue);
         }
         /// <summary>
         /// Logs a message to <see cref="Console"/> with a "ERROR" prefix
@@ -119,9 +142,8 @@ namespace AlexejheroYTB.Utilities
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
         public static void Error(string message, bool onlyLogIfTrue = true)
         {
-            Utils.LogUtils.Log(message, "ERROR", onlyLogIfTrue);
+            Log(message, "ERROR", onlyLogIfTrue);
         }
-
     }
     /// <summary>
     /// Class for managing items
@@ -154,6 +176,88 @@ namespace AlexejheroYTB.Utilities
             /// </summary>
             public TechType TechType;
         }
+        /// <summary>
+        /// Flexible Prefab item for <see cref="CustomPrefabHandler.customPrefabs"/>.Add(<see cref="CustomPrefab"/>)
+        /// </summary>
+        private class PrefabGenerator
+        {
+            /// <summary>
+            /// The prefab path of the existing item
+            /// </summary>
+            public string ExistingPrefabPath;
+            /// <summary>
+            /// The internal name of the new item
+            /// </summary>
+            public string InternalName;
+            /// <summary>
+            /// The <see cref="TechType"/> of the new item
+            /// </summary>
+            public TechType Item;
+            /// <summary>
+            /// The prefab path of the new item. Is generated automatically from <see cref="ExistingPrefabPath"/> + <see cref="InternalName"/>
+            /// </summary>
+            public string NewPrefabPath;
+
+            /// <summary>
+            /// Make a new <see cref="Prefab"/> item
+            /// </summary>
+            /// <param name="existingPrefabPath">The prefab path of the existing item</param>
+            /// <param name="internalName">The internal name of the new item</param>
+            /// <param name="item">The <see cref="TechType"/> of the new item</param>
+            public PrefabGenerator(string existingPrefabPath, string internalName, TechType item)
+            {
+                ExistingPrefabPath = existingPrefabPath;
+                InternalName = internalName;
+                Item = item;
+                NewPrefabPath = existingPrefabPath + internalName;
+            }
+
+            /// <summary>
+            /// Get the <see cref="UnityEngine.GameObject"/> associated with this <see cref="Prefab"/>
+            /// </summary>
+            /// <returns>The <see cref="UnityEngine.GameObject"/> associated with this <see cref="Prefab"/></returns>
+            public GameObject GameObject()
+            {
+                if (InternalName == null)
+                {
+                    Logging.Error("Error setting GameObject. InternalName is null");
+                    Logging.Debug(OutputDebug());
+                }
+
+                if (ExistingPrefabPath == null)
+                {
+                    Logging.Error("Error setting GameObject. ExistingPrefabPath is null");
+                    Logging.Debug(OutputDebug());
+                }
+
+                GameObject prefab = Resources.Load<GameObject>(ExistingPrefabPath);
+                GameObject obj = UnityEngine.Object.Instantiate(prefab);
+
+                PrefabIdentifier identifier = obj.GetComponent<PrefabIdentifier>();
+
+                identifier.ClassId = InternalName;
+
+                return obj;
+            }
+            /// <summary>
+            /// Outputs all information about this <see cref="Prefab"/> object for debugging
+            /// </summary>
+            /// <returns>The string to output to the console</returns>
+            public string OutputDebug()
+            {
+                return
+                    $"ExistingPrefabPath: {(ExistingPrefabPath ?? "null")}, " +
+                    $"InternalName: {(InternalName ?? "null")}, " +
+                    $"Item: {(Item != TechType.None ? Item.ToString() : "null")}" +
+                    $"NewPrefabPath: {(NewPrefabPath ?? "null")}";
+            }
+        }
+        private static Dictionary<TechType, string> Prefabs = new Dictionary<TechType, string>()
+        {
+            { TechType.Titanium      ,   "WorldEntities/Natural/Titanium" },
+            { TechType.FilteredWater , "WorldEntities/Food/FilteredWater" },
+            { TechType.NutrientBlock , "WorldEntities/Food/NutrientBlock" },
+        };
 
         /// <summary>
         /// Adds a dummy item
@@ -163,11 +267,11 @@ namespace AlexejheroYTB.Utilities
         /// <param name="languageTooltip">The tooltip of the item</param>
         /// <param name="spriteItem">The <see cref="TechType"/> from which to get the <see cref="Atlas.Sprite"/></param>
         /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
-        /// <param name="ingredientItems">The ingredient items of the recipe</param>
-        /// <param name="resultingItems">The resulting items of the recipe</param>
+        /// <param name="ingredientItems">The ingredient item(s) of the recipe. Must be either <see cref="IngredientHelper"/> or a <see cref="List{IngredientHelper}"/> of <see cref="IngredientHelper"/></param>
+        /// <param name="resultingItems">The resulting items of the recipe. Must be either <see cref="TechType"/> or a <see cref="List{T}"/> of <see cref="TechType"/></param>
         /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
-        /// <returns>A <see cref="Result"/> item</returns>
-        public static Result AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, List<IngredientHelper> ingredientItems, List<TechType> resultingItems, string prefabPath = null)
+        /// <returns>A <see cref="Result"/></returns>
+        private static Result AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, List<IngredientHelper> ingredientItems, List<TechType> resultingItems, string prefabPath = null)
         {
             TechType techType = TechTypePatcher.AddTechType(name, languageName, languageTooltip);
             Atlas.Sprite sprite = SpriteManager.Get(spriteItem);
@@ -197,176 +301,98 @@ namespace AlexejheroYTB.Utilities
             if (prefabPath == null)
                 return result;
 
-            Utils.ItemUtils.Prefab prefab = new Utils.ItemUtils.Prefab(prefabPath, name, techType);
+            Prefab prefab = new Prefab(prefabPath, name, techType);
             CustomPrefabHandler.customPrefabs.Add(new CustomPrefab(prefab.InternalName, prefab.NewPrefabPath, prefab.Item, prefab.GameObject));
 
             return result;
         }
         /// <summary>
-        /// Adds a dummy item (name is ommited)
+        /// Adds a dummy item
         /// </summary>
+        /// <typeparam name="IngredientHelperOrListOfIngredientHelper"></typeparam>
+        /// <typeparam name="TechTypeOrListOfTechType"></typeparam>
+        /// <param name="name">The internal name of the item. Can be ommited and it will be automatically generated</param>
         /// <param name="languageName">The name of the item</param>
         /// <param name="languageTooltip">The tooltip of the item</param>
         /// <param name="spriteItem">The <see cref="TechType"/> from which to get the <see cref="Atlas.Sprite"/></param>
         /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
-        /// <param name="ingredientItems">The ingredient items of the recipe</param>
-        /// <param name="resultingItems">The resulting items of the recipe</param>
+        /// <param name="ingredientItems">The ingredient item(s) of the recipe. Must be either <see cref="IngredientHelper"/> or a <see cref="List{IngredientHelper}"/> of <see cref="IngredientHelper"/></param>
+        /// <param name="resultingItems">The resulting items of the recipe. Must be either <see cref="TechType"/> or a <see cref="List{T}"/> of <see cref="TechType"/></param>
         /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
-        /// <returns>A <see cref="Result"/> item</returns>
-        public static Result AddDummy(string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, List<IngredientHelper> ingredientItems, List<TechType> resultingItems, string prefabPath = null)
+        /// <returns>A <see cref="Result"/></returns>
+        public static Result AddDummy<IngredientHelperOrListOfIngredientHelper, TechTypeOrListOfTechType>(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, IngredientHelperOrListOfIngredientHelper ingredientItems, TechTypeOrListOfTechType resultingItems, string prefabPath = null)
+        {
+            List<IngredientHelper> ingredientList = new List<IngredientHelper>();
+            if (ingredientItems is IngredientHelper)
+            {
+                ingredientList.Add((IngredientHelper)(object)ingredientItems);
+            }
+            else if (ingredientItems is List<IngredientHelper>)
+            {
+                ingredientList = (List<IngredientHelper>)(object)ingredientItems;
+            }
+            else
+            {
+                throw new ArgumentException("Argument is neither IngredientHelper not List<IngredientHelper>", "ingredientItems");
+            }
+            List<TechType> resultList = new List<TechType>();
+            if (resultingItems is TechType)
+            {
+                resultList.Add((TechType)(object)resultingItems);
+            }
+            else if (resultingItems is List<TechType>)
+            {
+                resultList = (List<TechType>)(object)resultingItems;
+            }
+            else
+            {
+                throw new ArgumentException("Argument is neither TechType not List<TechType>", "resultingItems");
+            }
+            return AddDummy(name, languageName, languageTooltip, spriteItem, fabricatorNodePath, ingredientList, resultList, prefabPath);
+        }
+        /// <summary>
+        /// Adds a dummy item
+        /// </summary>
+        /// <typeparam name="IngredientHelperOrListOfIngredientHelper"></typeparam>
+        /// <typeparam name="TechTypeOrListOfTechType"></typeparam>
+        /// <param name="languageName">The name of the item</param>
+        /// <param name="languageTooltip">The tooltip of the item</param>
+        /// <param name="spriteItem">The <see cref="TechType"/> from which to get the <see cref="Atlas.Sprite"/></param>
+        /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
+        /// <param name="ingredientItems">The ingredient item(s) of the recipe. Must be either <see cref="IngredientHelper"/> or a <see cref="List{IngredientHelper}"/> of <see cref="IngredientHelper"/></param>
+        /// <param name="resultingItems">The resulting items of the recipe. Must be either <see cref="TechType"/> or a <see cref="List{T}"/> of <see cref="TechType"/></param>
+        /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
+        /// <returns>A <see cref="Result"/></returns>
+        public static Result AddDummy<IngredientHelperOrListOfIngredientHelper, TechTypeOrListOfTechType>(string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, IngredientHelperOrListOfIngredientHelper ingredientItems, TechTypeOrListOfTechType resultingItems, string prefabPath = null)
         {
             string parsedName = String.Join("", languageName.Split(' ', '_', '-', '\'', '"'));
-            return AddDummy(parsedName, languageName, languageTooltip, spriteItem, fabricatorNodePath, ingredientItems, resultingItems, prefabPath);
-        }
-        /// <summary>
-        /// Adds a dummy item (only one ingredient)
-        /// </summary>
-        /// <param name="languageName">The name of the item</param>
-        /// <param name="languageTooltip">The tooltip of the item</param>
-        /// <param name="spriteItem">The <see cref="TechType"/> from which to get the <see cref="Atlas.Sprite"/></param>
-        /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
-        /// <param name="ingredientItem">The ingredient item of the recipe</param>
-        /// <param name="resultingItems">The resulting items of the recipe</param>
-        /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
-        /// <returns>A <see cref="Result"/> item</returns>
-        /// </summary>
-        public static Result AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, IngredientHelper ingredientItem, List<TechType> resultingItems, string prefabPath = null)
-        {
-            List<IngredientHelper> ingredientsList = new List<IngredientHelper>() { ingredientItem };
-            return AddDummy(name, languageName, languageTooltip, spriteItem, fabricatorNodePath, ingredientsList, resultingItems, prefabPath);
-        }
-        /// <summary>
-        /// Adds a dummy item (only one result)
-        /// </summary>
-        /// <param name="languageName">The name of the item</param>
-        /// <param name="languageTooltip">The tooltip of the item</param>
-        /// <param name="spriteItem">The <see cref="TechType"/> from which to get the <see cref="Atlas.Sprite"/></param>
-        /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
-        /// <param name="ingredientItems">The ingredient items of the recipe</param>
-        /// <param name="resultingItem">The resulting item of the recipe</param>
-        /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
-        /// <returns>A <see cref="Result"/> item</returns>
-        /// </summary>
-        public static Result AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, List<IngredientHelper> ingredientItems, TechType resultingItem, string prefabPath = null)
-        {
-            List<TechType> resultingList = new List<TechType>() { resultingItem };
-            return AddDummy(name, languageName, languageTooltip, spriteItem, fabricatorNodePath, ingredientItems, resultingList, prefabPath);
-        }
-    }
-    /// <summary>
-    /// Internal utilities class
-    /// </summary>
-    internal static class Utils
-    {
-        /// <summary>
-        /// Utilities for logging
-        /// </summary>
-        internal static class LogUtils
-        {
-            /// <summary>
-            /// Log a message to the console
-            /// </summary>
-            /// <param name="message">The message to log</param>
-            /// <param name="messagePrefix">The prefix to put before the message</param>
-            /// <param name="onlyLogIfTrue">Only log the message if this is true</param>
-            internal static void Log(string message, string messagePrefix, bool onlyLogIfTrue = true)
+            List<IngredientHelper> ingredientList = new List<IngredientHelper>();
+            if (ingredientItems is IngredientHelper)
             {
-                if (!onlyLogIfTrue) return;
-                #region string caller = Assembly.GetCallingAssembly().GetName().Name;
-                string caller;
-                try
-                {
-                    caller = Assembly.GetCallingAssembly().GetName().Name;
-                }
-                catch
-                {
-                    caller = "ERROR GETTING CALLER";
-                }
-                #endregion
-                string prefix = Values.NullCheck(messagePrefix) ? "" : $"[{messagePrefix}]";
-                Console.WriteLine($"[{caller}] {prefix} {message}");
+                ingredientList.Add((IngredientHelper)(object)ingredientItems);
             }
-        }
-        /// <summary>
-        /// Utilities for items
-        /// </summary>
-        internal class ItemUtils
-        {
-            /// <summary>
-            /// Flexible Prefab item for <see cref="CustomPrefabHandler.customPrefabs"/>.Add(<see cref="CustomPrefab"/>)
-            /// </summary>
-            internal class Prefab
+            else if (ingredientItems is List<IngredientHelper>)
             {
-                /// <summary>
-                /// The prefab path of the existing item
-                /// </summary>
-                public string ExistingPrefabPath;
-                /// <summary>
-                /// The internal name of the new item
-                /// </summary>
-                public string InternalName;
-                /// <summary>
-                /// The <see cref="TechType"/> of the new item
-                /// </summary>
-                public TechType Item;
-                /// <summary>
-                /// The prefab path of the new item. Is generated automatically from <see cref="ExistingPrefabPath"/> + <see cref="InternalName"/>
-                /// </summary>
-                public string NewPrefabPath;
-
-                /// <summary>
-                /// Make a new <see cref="Prefab"/> item
-                /// </summary>
-                /// <param name="existingPrefabPath">The prefab path of the existing item</param>
-                /// <param name="internalName">The internal name of the new item</param>
-                /// <param name="item">The <see cref="TechType"/> of the new item</param>
-                public Prefab(string existingPrefabPath, string internalName, TechType item)
-                {
-                    ExistingPrefabPath = existingPrefabPath;
-                    InternalName = internalName;
-                    Item = item;
-                    NewPrefabPath = existingPrefabPath + internalName;
-                }
-                /// <summary>
-                /// Get the <see cref="UnityEngine.GameObject"/> associated with this <see cref="Prefab"/>
-                /// </summary>
-                /// <returns>The <see cref="UnityEngine.GameObject"/> associated with this <see cref="Prefab"/></returns>
-                public GameObject GameObject()
-                {
-                    if (InternalName == null)
-                    {
-                        Logging.Error("Error setting GameObject. InternalName is null");
-                        Logging.Debug(OutputDebug());
-                    }
-
-                    if (ExistingPrefabPath == null)
-                    {
-                        Logging.Error("Error setting GameObject. ExistingPrefabPath is null");
-                        Logging.Debug(OutputDebug());
-                    }
-
-                    GameObject prefab = Resources.Load<GameObject>(ExistingPrefabPath);
-                    GameObject obj = UnityEngine.Object.Instantiate(prefab);
-
-                    PrefabIdentifier identifier = obj.GetComponent<PrefabIdentifier>();
-
-                    identifier.ClassId = InternalName;
-
-                    return obj;
-                }
-                /// <summary>
-                /// Outputs all information about this <see cref="Prefab"/> object for debugging
-                /// </summary>
-                /// <returns>The string to output to the console</returns>
-                public string OutputDebug()
-                {
-                    return
-                        $"ExistingPrefabPath: {(ExistingPrefabPath ?? "null")}, " +
-                        $"InternalName: {(InternalName ?? "null")}, " +
-                        $"Item: {(Item != TechType.None ? Item.ToString() : "null")}" +
-                        $"NewPrefabPath: {(NewPrefabPath ?? "null")}";
-                }
+                ingredientList = (List<IngredientHelper>)(object)ingredientItems;
             }
+            else
+            {
+                throw new ArgumentException("Argument is neither IngredientHelper not List<IngredientHelper>", "ingredientItems");
+            }
+            List<TechType> resultList = new List<TechType>();
+            if (resultingItems is TechType)
+            {
+                resultList.Add((TechType)(object)resultingItems);
+            }
+            else if (resultingItems is List<TechType>)
+            {
+                resultList = (List<TechType>)(object)resultingItems;
+            }
+            else
+            {
+                throw new ArgumentException("Argument is neither TechType not List<TechType>", "resultingItems");
+            }
+            return AddDummy(parsedName, languageName, languageTooltip, spriteItem, fabricatorNodePath, ingredientList, resultList, prefabPath);
         }
     }
 }

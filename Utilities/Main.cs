@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security;
+using System.Text;
 using UnityEngine;
 
 namespace AlexejheroYTB.Utilities
@@ -408,7 +410,7 @@ namespace AlexejheroYTB.Utilities
         /// </summary>
         /// <param name="path">The path of the config. Can be omitted</param>
         /// <returns>An array of <see cref="string"/>s representing the lines found in the file</returns>
-        public static string[] Load(string path = "config")
+        public static Dictionary<string, string> Load(string path = "config")
         {
             string[] config = File.ReadAllLines($@".\{path}.txt");
             if (config[0] != "ALEXEJHEROYTB.UTILITIES CONFIG FILE")
@@ -423,12 +425,19 @@ namespace AlexejheroYTB.Utilities
         /// Creates a config file with the specified path
         /// </summary>
         /// <param name="path">The path of the config. Can be omitted</param>
+        /// <exception cref="EncoderFallbackException"/>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="IOException"/>
         public static void Create(string path = "config")
         {
             if (File.Exists($@".\{path}.txt"))
             {
                 File.Move($@".\{path}.txt", GenerateNext($"{path}-OLD-"));
-                File.CreateText($@".\{path}.txt").Close();
+                File.CreateText($@".\{path}.txt")
+                    .AddLine("ALEXEJHEROYTB.UTILITIES CONFIG FILE")
+                    .AddLine()
+                    .AddLine("# GENERATED AUTOMATICALLY")
+                    .Close();
             }
         }
         /// <summary>
@@ -447,25 +456,113 @@ namespace AlexejheroYTB.Utilities
             }
             return null;
         }
-
-        private static string[] Read(string path = "config")
+        /// <summary>
+        /// Reads all valid lines of the config and saves it as a <see cref="Dictionary{TKey, TValue}"/> of <see cref="string"/> and <see cref="string"/>
+        /// </summary>
+        /// <param name="path">The path of the config</param>
+        /// <returns>A dictionary of all valid lines in the config</returns>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="PathTooLongException"/>
+        /// <exception cref="DirectoryNotFoundException"/>
+        /// <exception cref="IOException"/>
+        /// <exception cref="UnauthorizedAccessException"/>
+        /// <exception cref="FileNotFoundException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="SecurityException"/>
+        /// <exception cref="ArgumentOutOfRangeException"/>
+        private static Dictionary<string, string> Read(string path = "config")
         {
             string[] config = File.ReadAllLines($@".\{path}.txt");
-            foreach(string line in config)
+            foreach (string line in config)
             {
                 if (String.IsNullOrEmpty(line))
                 {
                     config = config.Where(val => val != line).ToArray();
                 }
+                if (line.StartsWith("#"))
+                {
+                    config = config.Where(val => val != line).ToArray();
+                }
+                if (line.Contains("#"))
+                {
+                    int i = line.IndexOf('#');
+                    config.Change(val => val.Substring(0, i++).Trim());
+                }
+                if (!line.Contains(":"))
+                {
+                    config = config.Where(val => val != line).ToArray();
+                }
+            }
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            foreach (string line in config)
+            {
+                string[] splitted = line.Split(':'.Array(), 2);
+                dictionary.Add(splitted[0], splitted[1]);
+            }
+            return dictionary;
+        }
+        /// <summary>
+        /// Writes a string followed by a line terminator to the text stream
+        /// </summary>
+        /// <param name="file">The file to write the text to</param>
+        /// <param name="value">The string to write. If value is null, only the line termination characters are written</param>
+        /// <returns>The same <see cref="StreamWriter"/> it was provided</returns>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="IOException"/>
+        private static StreamWriter AddLine(this StreamWriter file, string value = "")
+        {
+            file.WriteLine();
+            return file;
+        }
+        /// <summary>
+        /// Turns a value into an array containing that value.
+        /// <para/>Extension from <see langword="AlexejheroYTB.Utilities"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private static T[] Array<T>(this T value)
+        {
+            return new[] { value };
+        }
+        /// <summary>
+        /// Changes an array by a given lambda function.
+        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities"/>
+        /// </summary>
+        /// <typeparam name="T">The type of the array</typeparam>
+        /// <param name="source">The array</param>
+        /// <param name="projection">The lambda function to execute on each element of the array</param>
+        /// <param name="onlyChangeIf">Only change the element if this function returns true</param>
+        private static void Change<T>(this IList<T> source, Func<T, T> projection, Func<T, bool> onlyChangeIf = null)
+        {
+            for (int i = 0; i < source.Count; i++)
+            {
+                if (onlyChangeIf == null)
+                {
+                    source[i] = projection(source[i]);
+                    continue;
+                }
+                if (onlyChangeIf(source[i]))
+                {
+                    source[i] = projection(source[i]);
+                }
             }
         }
-
         /// <summary>
         /// Generates the next file path available using the path, the next <see cref="int"/> available, and the suffix
         /// </summary>
         /// <param name="path">The first path of the file</param>
         /// <param name="suffix">The suffix to add to the result</param>
         /// <returns>Generated path</returns>
+        /// <exception cref="IOException"/>
+        /// <exception cref="UnauthorizedAccessException"/>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="PathTooLongException"/>
+        /// <exception cref="DirectoryNotFoundException"/>
+        /// <exception cref="OverflowException"/>
+        /// <exception cref="ArgumentOutOfRangeException"/>
         private static string GenerateNext(string path, string suffix = ".txt")
         {
             for (int i = 1; i <= Directory.GetFiles(@".\").Length; i++)
@@ -475,7 +572,7 @@ namespace AlexejheroYTB.Utilities
                     return $@".\{path}{i}{suffix}";
                 }
             }
-            return $@"{path}R{new System.Random().Next(1, 1000000)}{suffix}";
+            return $@"{path}R{new System.Random().Next(1, 100000)}{suffix}";
         }
     }
 }

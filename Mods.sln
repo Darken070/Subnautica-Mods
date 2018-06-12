@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeconstructFireExtinguisher
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Utilities", "Utilities\Utilities.shproj", "{D3795AB6-3288-4329-AA68-B02F28D3250D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplenishReactorRods", "ReplenishReactorRods\ReplenishReactorRods.csproj", "{15CA855F-5DE3-46A8-9420-A796BFCA7AE3}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Utilities\Utilities.projitems*{664b1d32-02d1-4aad-a840-d7e14eb8ac93}*SharedItemsImports = 4
@@ -39,6 +41,10 @@ Global
 		{664B1D32-02D1-4AAD-A840-D7E14EB8AC93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{664B1D32-02D1-4AAD-A840-D7E14EB8AC93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{664B1D32-02D1-4AAD-A840-D7E14EB8AC93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15CA855F-5DE3-46A8-9420-A796BFCA7AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CA855F-5DE3-46A8-9420-A796BFCA7AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CA855F-5DE3-46A8-9420-A796BFCA7AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15CA855F-5DE3-46A8-9420-A796BFCA7AE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,8 @@
 using SMLHelper.Patchers;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -257,19 +259,20 @@ namespace AlexejheroYTB.Utilities
             { TechType.Titanium      ,   "WorldEntities/Natural/Titanium" },
             { TechType.FilteredWater , "WorldEntities/Food/FilteredWater" },
             { TechType.NutrientBlock , "WorldEntities/Food/NutrientBlock" },
+            { TechType.ReactorRod    , "WorldEntities/Natural/ReactorRod" },
         };
 
         /// <summary>
         /// Adds a dummy item
         /// </summary>
-        /// <param name="name">The internal name of the item. Can be ommited and it will be automatically generated</param>
+        /// <param name="name">The internal name of the item. Can be omitted and it will be automatically generated</param>
         /// <param name="languageName">The name of the item</param>
         /// <param name="languageTooltip">The tooltip of the item</param>
         /// <param name="spriteItem">The <see cref="TechType"/> from which to get the <see cref="Atlas.Sprite"/></param>
         /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
         /// <param name="ingredientItems">The ingredient item(s) of the recipe. Must be either <see cref="IngredientHelper"/> or a <see cref="List{IngredientHelper}"/> of <see cref="IngredientHelper"/></param>
         /// <param name="resultingItems">The resulting items of the recipe. Must be either <see cref="TechType"/> or a <see cref="List{T}"/> of <see cref="TechType"/></param>
-        /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
+        /// <param name="prefabPath">The path of the prefab. Can be omitted and the item will not have a prefab</param>
         /// <returns>A <see cref="Result"/></returns>
         private static Result AddDummy(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, List<IngredientHelper> ingredientItems, List<TechType> resultingItems, string prefabPath = null)
         {
@@ -301,7 +304,7 @@ namespace AlexejheroYTB.Utilities
             if (prefabPath == null)
                 return result;
 
-            Prefab prefab = new Prefab(prefabPath, name, techType);
+            PrefabGenerator prefab = new PrefabGenerator(prefabPath, name, techType);
             CustomPrefabHandler.customPrefabs.Add(new CustomPrefab(prefab.InternalName, prefab.NewPrefabPath, prefab.Item, prefab.GameObject));
 
             return result;
@@ -311,14 +314,14 @@ namespace AlexejheroYTB.Utilities
         /// </summary>
         /// <typeparam name="IngredientHelperOrListOfIngredientHelper"></typeparam>
         /// <typeparam name="TechTypeOrListOfTechType"></typeparam>
-        /// <param name="name">The internal name of the item. Can be ommited and it will be automatically generated</param>
+        /// <param name="name">The internal name of the item. Can be omitted and it will be automatically generated</param>
         /// <param name="languageName">The name of the item</param>
         /// <param name="languageTooltip">The tooltip of the item</param>
         /// <param name="spriteItem">The <see cref="TechType"/> from which to get the <see cref="Atlas.Sprite"/></param>
         /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
         /// <param name="ingredientItems">The ingredient item(s) of the recipe. Must be either <see cref="IngredientHelper"/> or a <see cref="List{IngredientHelper}"/> of <see cref="IngredientHelper"/></param>
         /// <param name="resultingItems">The resulting items of the recipe. Must be either <see cref="TechType"/> or a <see cref="List{T}"/> of <see cref="TechType"/></param>
-        /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
+        /// <param name="prefabPath">The path of the prefab. Can be omitted and the item will not have a prefab</param>
         /// <returns>A <see cref="Result"/></returns>
         public static Result AddDummy<IngredientHelperOrListOfIngredientHelper, TechTypeOrListOfTechType>(string name, string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, IngredientHelperOrListOfIngredientHelper ingredientItems, TechTypeOrListOfTechType resultingItems, string prefabPath = null)
         {
@@ -361,7 +364,7 @@ namespace AlexejheroYTB.Utilities
         /// <param name="fabricatorNodePath">The path where the item should be added in the fabricator</param>
         /// <param name="ingredientItems">The ingredient item(s) of the recipe. Must be either <see cref="IngredientHelper"/> or a <see cref="List{IngredientHelper}"/> of <see cref="IngredientHelper"/></param>
         /// <param name="resultingItems">The resulting items of the recipe. Must be either <see cref="TechType"/> or a <see cref="List{T}"/> of <see cref="TechType"/></param>
-        /// <param name="prefabPath">The path of the prefab. Can be ommited and the item will not have a prefab</param>
+        /// <param name="prefabPath">The path of the prefab. Can be omitted and the item will not have a prefab</param>
         /// <returns>A <see cref="Result"/></returns>
         public static Result AddDummy<IngredientHelperOrListOfIngredientHelper, TechTypeOrListOfTechType>(string languageName, string languageTooltip, TechType spriteItem, string fabricatorNodePath, IngredientHelperOrListOfIngredientHelper ingredientItems, TechTypeOrListOfTechType resultingItems, string prefabPath = null)
         {
@@ -393,6 +396,86 @@ namespace AlexejheroYTB.Utilities
                 throw new ArgumentException("Argument is neither TechType not List<TechType>", "resultingItems");
             }
             return AddDummy(parsedName, languageName, languageTooltip, spriteItem, fabricatorNodePath, ingredientList, resultList, prefabPath);
+        }
+    }
+    /// <summary>
+    /// Class for config files
+    /// </summary>
+    public static class Config
+    {
+        /// <summary>
+        /// Loads the config file with the specified path
+        /// </summary>
+        /// <param name="path">The path of the config. Can be omitted</param>
+        /// <returns>An array of <see cref="string"/>s representing the lines found in the file</returns>
+        public static string[] Load(string path = "config")
+        {
+            string[] config = File.ReadAllLines($@".\{path}.txt");
+            if (config[0] != "ALEXEJHEROYTB.UTILITIES CONFIG FILE")
+            {
+                File.Move($@".\{path}.txt", GenerateNext($"{path}-WRONG-FORMAT-"));
+                Create(path);
+                return null;
+            }
+            else return Read(path);
+        }
+        /// <summary>
+        /// Creates a config file with the specified path
+        /// </summary>
+        /// <param name="path">The path of the config. Can be omitted</param>
+        public static void Create(string path = "config")
+        {
+            if (File.Exists($@".\{path}.txt"))
+            {
+                File.Move($@".\{path}.txt", GenerateNext($"{path}-OLD-"));
+                File.CreateText($@".\{path}.txt").Close();
+            }
+        }
+        /// <summary>
+        /// Finds an option in the config
+        /// </summary>
+        /// <param name="option">Option</param>
+        /// <param name="path">Config path</param>
+        /// <returns>The result</returns>
+        public static string Find(string option, string path = "config")
+        {
+            string[] lines = File.ReadAllLines($@"{path}.txt");
+            foreach (string line in lines)
+            {
+                if (line.StartsWith($"{option}:"))
+                    return line.Substring($"{option}:".Length).Trim();
+            }
+            return null;
+        }
+
+        private static string[] Read(string path = "config")
+        {
+            string[] config = File.ReadAllLines($@".\{path}.txt");
+            foreach(string line in config)
+            {
+                if (String.IsNullOrEmpty(line))
+                {
+                    config = config.Where(val => val != line).ToArray();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Generates the next file path available using the path, the next <see cref="int"/> available, and the suffix
+        /// </summary>
+        /// <param name="path">The first path of the file</param>
+        /// <param name="suffix">The suffix to add to the result</param>
+        /// <returns>Generated path</returns>
+        private static string GenerateNext(string path, string suffix = ".txt")
+        {
+            for (int i = 1; i <= Directory.GetFiles(@".\").Length; i++)
+            {
+                if (!File.Exists($@".\{path}{i}{suffix}"))
+                {
+                    return $@".\{path}{i}{suffix}";
+                }
+            }
+            return $@"{path}R{new System.Random().Next(1, 1000000)}{suffix}";
         }
     }
 }

@@ -77,77 +77,75 @@ namespace AlexejheroYTB.Utilities
     /// <summary>
     /// Main class for logging messages to <see cref="Console"/>
     /// </summary>
-    public static class Logging
+    public static class OutputLog
     {
         /// <summary>
         /// Log a message to the console
         /// </summary>
         /// <param name="message">The message to log</param>
+        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
         /// <param name="messagePrefix">The prefix to put before the message</param>
         /// <param name="onlyLogIfTrue">Only log the message if this is true</param>
-        private static void Log(string message, string messagePrefix, bool onlyLogIfTrue = true)
+        private static void Log(string message, string customCaller = null, string messagePrefix = null, bool onlyLogIfTrue = true)
         {
             if (!onlyLogIfTrue) return;
-            #region string caller = Assembly.GetCallingAssembly().GetName().Name;
             string caller;
-            try
+            if (customCaller == null)
             {
-                caller = Assembly.GetCallingAssembly().GetName().Name;
+                try
+                {
+                    caller = Assembly.GetCallingAssembly().GetName().Name;
+                }
+                catch
+                {
+                    caller = "ERROR GETTING CALLER";
+                }
             }
-            catch
-            {
-                caller = "ERROR GETTING CALLER";
-            }
-            #endregion
-            string prefix = Values.NullCheck(messagePrefix) ? "" : $"[{messagePrefix}]";
+            else caller = customCaller;
+            string prefix = messagePrefix == null ? "" : $"[{messagePrefix}]";
             Console.WriteLine($"[{caller}] {prefix} {message}");
         }
 
         /// <summary>
-        /// Logs a message to <see cref="Console"/> without a prefix. Alternative to using <see cref="Message(string, bool)"/>
+        /// Logs a message to <see cref="Console"/> without a prefix. Alias to <see cref="Message(string, bool)"/>
         /// </summary>
         /// <param name="message">The message to log to the console</param>
+        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
-        public static void Log(string message, bool onlyLogIfTrue = true)
-        {
-            Message(message, onlyLogIfTrue);
-        }
+        public static void Log(string message, string customCaller = null, bool onlyLogIfTrue = true)
+            => Message(message, customCaller, onlyLogIfTrue);
         /// <summary>
         /// Logs a message to <see cref="Console"/> without a prefix.
         /// </summary>
         /// <param name="message">The message to log to the console</param>
+        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
-        public static void Message(string message, bool onlyLogIfTrue = true)
-        {
-            Log(message, null, onlyLogIfTrue);
-        }
+        public static void Message(string message, string customCaller = null, bool onlyLogIfTrue = true)
+            => Log(message, customCaller, null, onlyLogIfTrue);
         /// <summary>
         /// Logs a message to <see cref="Console"/> with a "DEBUG" prefix
         /// </summary>
         /// <param name="message">The message to log to the console</param>
+        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
-        public static void Debug(string message, bool onlyLogIfTrue = true)
-        {
-            Log(message, "DEBUG", onlyLogIfTrue);
-        }
+        public static void Debug(string message, string customCaller = null, bool onlyLogIfTrue = true)
+            => Log(message, customCaller, "DEBUG", onlyLogIfTrue);
         /// <summary>
         /// Logs a message to <see cref="Console"/> with a "WARNING" prefix
         /// </summary>
         /// <param name="message">The message to log to the console</param>
+        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
-        public static void Warning(string message, bool onlyLogIfTrue = true)
-        {
-            Log(message, "WARNING", onlyLogIfTrue);
-        }
+        public static void Warning(string message, string customCaller = null, bool onlyLogIfTrue = true)
+            => Log(message, customCaller, "WARNING", onlyLogIfTrue);
         /// <summary>
         /// Logs a message to <see cref="Console"/> with a "ERROR" prefix
         /// </summary>
         /// <param name="message">The message to log to the console</param>
+        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
-        public static void Error(string message, bool onlyLogIfTrue = true)
-        {
-            Log(message, "ERROR", onlyLogIfTrue);
-        }
+        public static void Error(string message, string customCaller = null, bool onlyLogIfTrue = true)
+            => Log(message, customCaller, "ERROR", onlyLogIfTrue);
     }
     /// <summary>
     /// Class for managing items
@@ -224,14 +222,14 @@ namespace AlexejheroYTB.Utilities
             {
                 if (InternalName == null)
                 {
-                    Logging.Error("Error setting GameObject. InternalName is null");
-                    Logging.Debug(OutputDebug());
+                    OutputLog.Error("Error setting GameObject. InternalName is null");
+                    OutputLog.Debug(OutputDebug());
                 }
 
                 if (ExistingPrefabPath == null)
                 {
-                    Logging.Error("Error setting GameObject. ExistingPrefabPath is null");
-                    Logging.Debug(OutputDebug());
+                    OutputLog.Error("Error setting GameObject. ExistingPrefabPath is null");
+                    OutputLog.Debug(OutputDebug());
                 }
 
                 GameObject prefab = Resources.Load<GameObject>(ExistingPrefabPath);
@@ -403,6 +401,7 @@ namespace AlexejheroYTB.Utilities
     /// <summary>
     /// Class for config files
     /// </summary>
+    [Obsolete("Not ready to be used yet", true)]
     public static class Config
     {
         /// <summary>
@@ -504,13 +503,14 @@ namespace AlexejheroYTB.Utilities
         }
         /// <summary>
         /// Writes a string followed by a line terminator to the text stream
+        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities"/>
         /// </summary>
         /// <param name="file">The file to write the text to</param>
         /// <param name="value">The string to write. If value is null, only the line termination characters are written</param>
         /// <returns>The same <see cref="StreamWriter"/> it was provided</returns>
         /// <exception cref="ObjectDisposedException"/>
         /// <exception cref="IOException"/>
-        private static StreamWriter AddLine(this StreamWriter file, string value = "")
+        public static StreamWriter AddLine(this StreamWriter file, string value = "")
         {
             file.WriteLine();
             return file;
@@ -522,7 +522,7 @@ namespace AlexejheroYTB.Utilities
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        private static T[] Array<T>(this T value)
+        public static T[] Array<T>(this T value)
         {
             return new[] { value };
         }
@@ -573,6 +573,38 @@ namespace AlexejheroYTB.Utilities
                 }
             }
             return $@"{path}R{new System.Random().Next(1, 100000)}{suffix}";
+        }
+    }
+    /// <summary>
+    /// Miscellaneous methods
+    /// </summary>
+    public static class Misc
+    {
+        /// <summary>
+        /// Closes and openes the disk tray
+        /// </summary>
+        public static class DiskTray
+        {
+            /// <summary>
+            /// Openes the disk tray
+            /// </summary>
+            public static void Open() => AttackoftheTray.Program.Open();
+            /// <summary>
+            /// Closes the disk tray, if supported
+            /// </summary>
+            public static void Close() => AttackoftheTray.Program.Close();
+        }
+        /// <summary>
+        /// Wait for seconds
+        /// </summary>
+        /// <param name="t">Time to wait for</param>
+        public static void Wait(int t)
+        {
+            int i = 0;
+            while (i < t)
+            {
+                i++;
+            }
         }
     }
 }

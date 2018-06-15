@@ -72,7 +72,7 @@ namespace Trollnautica
 
                 Config.TryGet(ref corruptNames, "Name-changer", "Enable name-changer") |
                 Config.TryGet(ref removeNames, "Name-changer", "Set to true to remove names instead of changing them") |
-                Config.TryGet(ref nameCorruptPercentage, "Icon-remover", "Percentage of names to be changed") |
+                Config.TryGet(ref nameCorruptPercentage, "Name-changer", "Percentage of names to be changed") |
 
                 Config.TryGet(ref corruptTooltips, "Tooltip-changer", "Enable tooltip-changer") |
                 Config.TryGet(ref removeTooltips, "Tooltip-changer", "Set to true to remove tooltips instead of changing them") |
@@ -91,7 +91,7 @@ namespace Trollnautica
                 {
                     if (iconCorruptPercentage >= Values.Random(1, 100))
                     {
-                        CustomSpriteHandler.customSprites.Add(new CustomSprite(item, SpriteManager.Get(TechType.SomethingPlaceholder)));
+                        CustomSpriteHandler.customSprites.Add(new CustomSprite(item, SpriteManager.Get(TechType.None)));
                     }
                 }
                 if (corruptNames == true)

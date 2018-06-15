@@ -27,7 +27,7 @@ namespace Trollnautica
         {
             "WHY ME?",
             "BOOP!",
-
+            "?!",
         };
 
         public static List<string> tooltipList = new List<string>()
@@ -56,6 +56,9 @@ namespace Trollnautica
             "Omae wa mou, shindeiru. NANI?",
             "That's my spot!",
             "Your Windows license will expire soon",
+            "I really like what you've done with the kitchen",
+            "WHERE IS THE LAMB SAUCE?",
+            "If pi is 3.14, does that mean that pie is 4?",
         };
 
         public static void QPatch()

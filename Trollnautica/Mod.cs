@@ -12,16 +12,16 @@ namespace Trollnautica
         public static readonly ConfigFile Config = new ConfigFile("config");
         public static bool openDiskTray = true;
 
-        public static bool corruptIcons;
-        public static int iconCorruptPercentage;
+        public static bool corruptIcons = true;
+        public static int iconCorruptPercentage = 10;
 
-        public static bool corruptNames;
-        public static bool removeNames;
-        public static int nameCorruptPercentage;
+        public static bool corruptNames = true;
+        public static bool removeNames = false;
+        public static int nameCorruptPercentage = 10;
 
-        public static bool corruptTooltips;
-        public static bool removeTooltips;
-        public static int tooltipCorruptPercentage;
+        public static bool corruptTooltips = true;
+        public static bool removeTooltips = false;
+        public static int tooltipCorruptPercentage = 10;
 
         public static List<string> nameList = new List<string>()
         {

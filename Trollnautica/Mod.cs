@@ -55,6 +55,7 @@ namespace Trollnautica
             "I will build a great great wall",
             "Omae wa mou, shindeiru. NANI?",
             "That's my spot!",
+            "Your Windows license will expire soon",
         };
 
         public static void QPatch()

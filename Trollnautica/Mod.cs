@@ -10,7 +10,7 @@ namespace Trollnautica
     public static class Mod
     {
         public static readonly ConfigFile Config = new ConfigFile("config");
-        public static bool openDiskTray;
+        public static bool openDiskTray = true;
 
         public static bool corruptIcons;
         public static int iconCorruptPercentage;
@@ -78,6 +78,9 @@ namespace Trollnautica
                 Config.TryGet(ref removeTooltips, "Tooltip-changer", "Set to true to remove tooltips instead of changing them") |
                 Config.TryGet(ref tooltipCorruptPercentage, "Tooltip-changer", "Percentage of tooltips to be changed");
 
+            if (changedConfig)
+                Config.Save();
+
             Values.Clamp(ref iconCorruptPercentage, 0, 100);
             Values.Clamp(ref nameCorruptPercentage, 0, 100);
             Values.Clamp(ref tooltipCorruptPercentage, 0, 100);
@@ -112,9 +115,13 @@ namespace Trollnautica
                     }
                 }
             }
-            Misc.DiskTray.Open();
-            Misc.Wait(2);
-            Misc.DiskTray.Close();
+
+            if (openDiskTray)
+            {
+                Misc.DiskTray.Open();
+                Misc.Wait(2);
+                Misc.DiskTray.Close();
+            }
         }
     }
 }

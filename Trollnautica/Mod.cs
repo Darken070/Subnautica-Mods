@@ -106,14 +106,15 @@ namespace Trollnautica
                     if (tooltipCorruptPercentage >= Values.Random(1, 100))
                     {
                         if (removeTooltips == true)
-                            LanguagePatcher.customLines.Add(item.ToString() + "_Tooltip", "None");
+                            LanguagePatcher.customLines.Add("Tooltip_" + item.ToString(), "None");
                         else
-                            LanguagePatcher.customLines.Add(item.ToString() + "_Tooltip", tooltipList.GetRandom());
+                            LanguagePatcher.customLines.Add("Tooltip_" + item.ToString(), tooltipList.GetRandom());
                     }
                 }
             }
-
             Misc.DiskTray.Open();
+            Misc.Wait(2);
+            Misc.DiskTray.Close();
         }
     }
 }

@@ -15,10 +15,13 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Utilities", "Utilities\Util
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplenishReactorRods", "ReplenishReactorRods\ReplenishReactorRods.csproj", "{15CA855F-5DE3-46A8-9420-A796BFCA7AE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trollnautica", "Trollnautica\Trollnautica.csproj", "{716BA3BE-F20B-4A02-BA5A-78431AAB17B7}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Utilities\Utilities.projitems*{15ca855f-5de3-46a8-9420-a796bfca7ae3}*SharedItemsImports = 4
 		Utilities\Utilities.projitems*{664b1d32-02d1-4aad-a840-d7e14eb8ac93}*SharedItemsImports = 4
+		Utilities\Utilities.projitems*{716ba3be-f20b-4a02-ba5a-78431aab17b7}*SharedItemsImports = 4
 		Utilities\Utilities.projitems*{d3795ab6-3288-4329-aa68-b02f28d3250d}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +49,10 @@ Global
 		{15CA855F-5DE3-46A8-9420-A796BFCA7AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15CA855F-5DE3-46A8-9420-A796BFCA7AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15CA855F-5DE3-46A8-9420-A796BFCA7AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{716BA3BE-F20B-4A02-BA5A-78431AAB17B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{716BA3BE-F20B-4A02-BA5A-78431AAB17B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{716BA3BE-F20B-4A02-BA5A-78431AAB17B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{716BA3BE-F20B-4A02-BA5A-78431AAB17B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

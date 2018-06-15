@@ -628,13 +628,9 @@ namespace AlexejheroYTB.Utilities
         /// Wait for seconds
         /// </summary>
         /// <param name="t">Time to wait for</param>
-        public static void Wait(int t)
+        public static void Wait(float t)
         {
-            int i = 0;
-            while (i < t)
-            {
-                i++;
-            }
+            System.Threading.Thread.Sleep((int)Math.Round(t * 1000));
         }
     }
     /// <summary>

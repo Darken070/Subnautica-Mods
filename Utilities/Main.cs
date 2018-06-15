@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security;
-using System.Text;
 using UnityEngine;
+using AlexejheroYTB.Utilities;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace AlexejheroYTB.Utilities
 {
@@ -72,6 +73,68 @@ namespace AlexejheroYTB.Utilities
                 }
                 return true;
             }
+        }
+        /// <summary>
+        /// Clamps a <see langword="float"/> between a min and a max value
+        /// </summary>
+        /// <param name="value">Value to clamp</param>
+        /// <param name="min">Minimum value</param>
+        /// <param name="max">Maximum value</param>
+        /// <returns>The clamped value</returns>
+        public static float Clamp(float value, float min, float max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+        /// <summary>
+        /// Clamps a <see langword="int"/> between a min and a max value
+        /// </summary>
+        /// <param name="value">Value to clamp</param>
+        /// <param name="min">Minimum value</param>
+        /// <param name="max">Maximum value</param>
+        /// <returns>The clamped value</returns>
+        public static int Clamp(int value, int min, int max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+        /// <summary>
+        /// Clamps a <see langword="float"/> between a min and a max value
+        /// </summary>
+        /// <param name="value">Value to clamp</param>
+        /// <param name="min">Minimum value</param>
+        /// <param name="max">Maximum value</param>
+        /// <returns>The clamped value</returns>
+        public static void Clamp(ref float value, float min, float max)
+        {
+            if (value < min) value = min;
+            if (value > max) value = max;
+        }
+        /// <summary>
+        /// Clamps a <see langword="int"/> between a min and a max value
+        /// </summary>
+        /// <param name="value">Value to clamp</param>
+        /// <param name="min">Minimum value</param>
+        /// <param name="max">Maximum value</param>
+        /// <returns>The clamped value</returns>
+        public static void Clamp(ref int value, int min, int max)
+        {
+            if (value < min) value = min;
+            if (value > max) value = max;
+        }
+        /// <summary>
+        /// Generates a random number between a min and a max value. (Can also generate the min or max)
+        /// </summary>
+        /// <param name="min">The minimum value</param>
+        /// <param name="max">The maximum value</param>
+        /// <returns>A random number between <paramref name="min"/> and <paramref name="max"/></returns>
+        /// <exception cref="OverflowException"/>
+        /// <exception cref="ArgumentOutOfRangeException"/>
+        public static int Random(int min, int max)
+        {
+            return new System.Random().Next(min, max++);
         }
     }
     /// <summary>
@@ -401,25 +464,9 @@ namespace AlexejheroYTB.Utilities
     /// <summary>
     /// Class for config files
     /// </summary>
-    [Obsolete("Not ready to be used yet", true)]
+    [Obsolete("WIP. Not ready to be used yet", true)]
     public static class Config
     {
-        /// <summary>
-        /// Loads the config file with the specified path
-        /// </summary>
-        /// <param name="path">The path of the config. Can be omitted</param>
-        /// <returns>An array of <see cref="string"/>s representing the lines found in the file</returns>
-        public static Dictionary<string, string> Load(string path = "config")
-        {
-            string[] config = File.ReadAllLines($@".\{path}.txt");
-            if (config[0] != "ALEXEJHEROYTB.UTILITIES CONFIG FILE")
-            {
-                File.Move($@".\{path}.txt", GenerateNext($"{path}-WRONG-FORMAT-"));
-                Create(path);
-                return null;
-            }
-            else return Read(path);
-        }
         /// <summary>
         /// Creates a config file with the specified path
         /// </summary>
@@ -438,6 +485,22 @@ namespace AlexejheroYTB.Utilities
                     .AddLine("# GENERATED AUTOMATICALLY")
                     .Close();
             }
+        }
+        /// <summary>
+        /// Loads the config file with the specified path
+        /// </summary>
+        /// <param name="path">The path of the config. Can be omitted</param>
+        /// <returns>An array of <see cref="string"/>s representing the lines found in the file</returns>
+        public static Dictionary<string, string> Load(string path = "config")
+        {
+            string[] config = File.ReadAllLines($@".\{path}.txt");
+            if (config[0] != "ALEXEJHEROYTB.UTILITIES CONFIG FILE")
+            {
+                File.Move($@".\{path}.txt", GenerateNext($"{path}-WRONG-FORMAT-"));
+                Create(path);
+                return null;
+            }
+            else return Read(path);
         }
         /// <summary>
         /// Finds an option in the config
@@ -502,54 +565,6 @@ namespace AlexejheroYTB.Utilities
             return dictionary;
         }
         /// <summary>
-        /// Writes a string followed by a line terminator to the text stream
-        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities"/>
-        /// </summary>
-        /// <param name="file">The file to write the text to</param>
-        /// <param name="value">The string to write. If value is null, only the line termination characters are written</param>
-        /// <returns>The same <see cref="StreamWriter"/> it was provided</returns>
-        /// <exception cref="ObjectDisposedException"/>
-        /// <exception cref="IOException"/>
-        public static StreamWriter AddLine(this StreamWriter file, string value = "")
-        {
-            file.WriteLine();
-            return file;
-        }
-        /// <summary>
-        /// Turns a value into an array containing that value.
-        /// <para/>Extension from <see langword="AlexejheroYTB.Utilities"/>
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static T[] Array<T>(this T value)
-        {
-            return new[] { value };
-        }
-        /// <summary>
-        /// Changes an array by a given lambda function.
-        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities"/>
-        /// </summary>
-        /// <typeparam name="T">The type of the array</typeparam>
-        /// <param name="source">The array</param>
-        /// <param name="projection">The lambda function to execute on each element of the array</param>
-        /// <param name="onlyChangeIf">Only change the element if this function returns true</param>
-        private static void Change<T>(this IList<T> source, Func<T, T> projection, Func<T, bool> onlyChangeIf = null)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (onlyChangeIf == null)
-                {
-                    source[i] = projection(source[i]);
-                    continue;
-                }
-                if (onlyChangeIf(source[i]))
-                {
-                    source[i] = projection(source[i]);
-                }
-            }
-        }
-        /// <summary>
         /// Generates the next file path available using the path, the next <see cref="int"/> available, and the suffix
         /// </summary>
         /// <param name="path">The first path of the file</param>
@@ -585,14 +600,29 @@ namespace AlexejheroYTB.Utilities
         /// </summary>
         public static class DiskTray
         {
+            [DllImport("winmm.dll", EntryPoint = "mciSendStringA", CharSet = CharSet.Ansi)]
+            private static extern int mciSendStringA(string lpstrCommand, StringBuilder lpstrReturnString, int uReturnLength, IntPtr hwndCallback);
+            /// <summary>
+            /// Sends a command using <see cref="mciSendStringA(string, StringBuilder, int, IntPtr)"/> with simplified parameters
+            /// </summary>
+            /// <param name="command">The command to send</param>
+            private static void SendCommand(string command)
+                => mciSendStringA(command, null, 0, IntPtr.Zero);
+
             /// <summary>
             /// Openes the disk tray
             /// </summary>
-            public static void Open() => AttackoftheTray.Program.Open();
+            public static void Open()
+            {
+                SendCommand("set cdaudio door open");
+            }
             /// <summary>
             /// Closes the disk tray, if supported
             /// </summary>
-            public static void Close() => AttackoftheTray.Program.Close();
+            public static void Close()
+            {
+                SendCommand("set cdaudio door closed");
+            }
         }
         /// <summary>
         /// Wait for seconds
@@ -606,5 +636,60 @@ namespace AlexejheroYTB.Utilities
                 i++;
             }
         }
+    }
+    /// <summary>
+    /// Extension methods
+    /// </summary>
+    public static class Extensions
+    {
+        /// <summary>
+        /// Writes a string followed by a line terminator to the text stream
+        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities"/>
+        /// </summary>
+        /// <param name="file">The file to write the text to</param>
+        /// <param name="value">The string to write. If value is null, only the line termination characters are written</param>
+        /// <returns>The same <see cref="StreamWriter"/> it was provided</returns>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="IOException"/>
+        public static StreamWriter AddLine(this StreamWriter file, string value = null)
+        {
+            file.WriteLine(value);
+            return file;
+        }
+        /// <summary>
+        /// Turns a value into an array containing that value.
+        /// <para/>Extension from <see langword="AlexejheroYTB.Utilities"/>
+        /// </summary>
+        /// <typeparam name="T">The type of the value</typeparam>
+        /// <param name="value">The value to turn into an array</param>
+        /// <returns></returns>
+        public static T[] Array<T>(this T value)
+        {
+            return new[] { value };
+        }
+        /// <summary>
+        /// Changes an array by a given lambda function.
+        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities"/>
+        /// </summary>
+        /// <typeparam name="T">The type of the array</typeparam>
+        /// <param name="source">The array</param>
+        /// <param name="projection">The lambda function to execute on each element of the array</param>
+        /// <param name="onlyChangeIf">Only change the element if this function returns true</param>
+        public static void Change<T>(this IList<T> source, Func<T, T> projection, Func<T, bool> onlyChangeIf = null)
+        {
+            for (int i = 0; i < source.Count; i++)
+            {
+                if (onlyChangeIf == null)
+                {
+                    source[i] = projection(source[i]);
+                    continue;
+                }
+                if (onlyChangeIf(source[i]))
+                {
+                    source[i] = projection(source[i]);
+                }
+            }
+        }
+
     }
 }

@@ -9,7 +9,6 @@
     <Import_RootNamespace>Utilities</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)DiskTray.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
   </ItemGroup>
 </Project>

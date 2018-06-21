@@ -28,7 +28,7 @@ namespace ReplenishReactorRods
                 prefabPath: "WorldEntities/Natural/ReactorRod"
             );
 
-            //HarmonyInstance Harmony = HarmonyInstance.Create("com.alexejheroytb.replenishreactorrods");
+            //HarmonyInstance Harmony = HarmonyInstance.Create("com.alexejheroytb.subnauticamods.replenishreactorrods");
             //Harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }

@@ -2,8 +2,8 @@
 using AlexejheroYTB.Utilities;
 using System.Collections.Generic;
 //using Harmony;
-using System.Reflection;
-using UnityEngine;
+//using System.Reflection;
+//using UnityEngine;
 
 namespace ReplenishReactorRods
 {
@@ -22,7 +22,7 @@ namespace ReplenishReactorRods
                 ingredientItems: new List<IngredientHelper>()
                 {
                     new IngredientHelper(TechType.DepletedReactorRod, 1),
-                    new IngredientHelper(TechType.Uranium, 3)
+                    new IngredientHelper(TechType.UraniniteCrystal, 3)
                 },
                 resultingItems: TechType.ReactorRod,
                 prefabPath: "WorldEntities/Natural/ReactorRod"

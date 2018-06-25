@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>.\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -60,6 +60,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /y "$(TargetPath)" "D:\Games\Subnautica\QMods\$(TargetName)\$(TargetFileName)"
-echo y | del "$(TargetDir)\Assembly-CSharp.dll" "$(TargetDir)\Assembly-CSharp-firstpass.dll" "$(TargetDir)\DeconstructFireExtinguishers.pdb" "$(TargetDir)\iTween.dll" "$(TargetDir)\LibNoise.dll" "$(TargetDir)\LitJson.dll" "$(TargetDir)\LumenWorks.dll" "$(TargetDir)\Mono.Cecil.dll" "$(TargetDir)\Newtonsoft.Json.dll" "$(TargetDir)\Poly2Tri.dll" "$(TargetDir)\QModInstaller.dll" "$(TargetDir)\SMLHelper.dll" "$(TargetDir)\UnityEngine.dll" "$(TargetDir)\UnityEngine.UI.dll"</PostBuildEvent>
+echo y | del "$(TargetDir)\Assembly-CSharp.dll" "$(TargetDir)\0Harmony.dll" "$(TargetDir)\Assembly-CSharp-firstpass.dll" "$(TargetDir)\ReplenishReactorRods.pdb" "$(TargetDir)\iTween.dll" "$(TargetDir)\LibNoise.dll" "$(TargetDir)\LitJson.dll" "$(TargetDir)\LumenWorks.dll" "$(TargetDir)\Mono.Cecil.dll" "$(TargetDir)\Newtonsoft.Json.dll" "$(TargetDir)\Poly2Tri.dll" "$(TargetDir)\QModInstaller.dll" "$(TargetDir)\SMLHelper.dll" "$(TargetDir)\UnityEngine.dll" "$(TargetDir)\UnityEngine.UI.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -222,7 +222,7 @@ namespace AlexejheroYTB.Utilities
         public static void Error(string message, string customCaller = null, bool onlyLogIfTrue = true)
             => Log(message, customCaller, "ERROR", onlyLogIfTrue);
         /// <summary>
-        /// Logs a message to the player screen
+        /// Logs a message to the player screen using <see cref="ErrorMessage.AddMessage(string)"/>
         /// </summary>
         /// <param name="message">The message to log to the console</param>
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
@@ -243,7 +243,7 @@ namespace AlexejheroYTB.Utilities
         public class Result
         {
             /// <summary>
-            /// The <see cref="CustomCraftNode"/> this item was added to
+            /// The <see cref="SMLHelper.CustomCraftNode"/> this item was added to
             /// </summary>
             public CustomCraftNode CustomCraftNode;
             /// <summary>
@@ -255,16 +255,16 @@ namespace AlexejheroYTB.Utilities
             /// </summary>
             public Atlas.Sprite Sprite;
             /// <summary>
-            /// The <see cref="TechDataHelper"/> that was associated to this item
+            /// The <see cref="SMLHelper.Patchers.TechDataHelper"/> that was associated to this item
             /// </summary>
             public TechDataHelper TechDataHelper;
             /// <summary>
-            /// The <see cref="TechType"/> of the item
+            /// The <see cref="global::TechType"/> of the item
             /// </summary>
             public TechType TechType;
         }
         /// <summary>
-        /// Flexible Prefab item for <see cref="CustomPrefabHandler.customPrefabs"/>.Add(<see cref="CustomPrefab"/>)
+        /// A flexible Prefab item for <see cref="CustomPrefabHandler.customPrefabs"/>.Add(<see cref="CustomPrefab"/>)
         /// </summary>
         private class PrefabGenerator
         {
@@ -300,20 +300,20 @@ namespace AlexejheroYTB.Utilities
             }
 
             /// <summary>
-            /// Get the <see cref="UnityEngine.GameObject"/> associated with this <see cref="Prefab"/>
+            /// Get the <see cref="UnityEngine.GameObject"/> associated with this <see cref="PrefabGenerator"/>
             /// </summary>
-            /// <returns>The <see cref="UnityEngine.GameObject"/> associated with this <see cref="Prefab"/></returns>
+            /// <returns>The <see cref="UnityEngine.GameObject"/> associated with this <see cref="PrefabGenerator"/></returns>
             public GameObject GameObject()
             {
                 if (InternalName == null)
                 {
-                    OutputLog.Error("Error setting GameObject. InternalName is null");
+                    OutputLog.Error("Error setting GameObject. InternalName is null", Assembly.GetCallingAssembly().GetName().Name);
                     OutputLog.Debug(OutputDebug());
                 }
 
                 if (ExistingPrefabPath == null)
                 {
-                    OutputLog.Error("Error setting GameObject. ExistingPrefabPath is null");
+                    OutputLog.Error("Error setting GameObject. ExistingPrefabPath is null", Assembly.GetCallingAssembly().GetName().Name);
                     OutputLog.Debug(OutputDebug());
                 }
 
@@ -513,14 +513,25 @@ namespace AlexejheroYTB.Utilities
                 /// <summary>
                 /// Closes the disk tray
                 /// </summary>
-                Closed
+                Closed,
             }
             /// <summary>
             /// Opens and closes the disk tray
             /// </summary>
             /// <param name="state">The <see cref="DiskTrayState"/> that should be applied</param>
             private static void ManageDiskTray(DiskTrayState state)
-                => SendCommand("set cdaudio door " + state.ToString().ToLower());
+            {
+                switch (state)
+                {
+                    case DiskTrayState.Open:
+                        SendCommand("set cdaudio door open");
+                        break;
+                    case DiskTrayState.Closed:
+                        SendCommand("set cdaudio door closed");
+                        break;
+                }
+                
+            }
             /// <summary>
             /// Openes the disk tray
             /// </summary>
@@ -544,6 +555,9 @@ namespace AlexejheroYTB.Utilities
 
     namespace Extensions
     {
+        /// <summary>
+        /// Extensions for <see cref="Array"/>, which inherits from <see cref="IList{T}"/>
+        /// </summary>
         public static class ArrayExtensions
         {
             /// <summary>
@@ -570,6 +584,23 @@ namespace AlexejheroYTB.Utilities
                 }
             }
         }
+        /// <summary>
+        /// Extensions for <see cref="Assembly"/>
+        /// </summary>
+        public static class AssemblyExtensions
+        {
+            /// <summary>
+            /// Gets the name of an assembly. Shorthand to writing <see cref="Assembly.GetName()"/> and <see cref="AssemblyName.Name"/>
+            /// <para/> Extension from <see langword="AlexejheroYTB.Utilities"/>
+            /// </summary>
+            /// <param name="assembly"></param>
+            /// <returns></returns>
+            public static string Name(this Assembly assembly)
+                => assembly.GetName().Name;
+        }
+        /// <summary>
+        /// Generic extensions for instances of classes
+        /// </summary>
         public static class ClassExtensions
         {
             /// <summary>
@@ -589,6 +620,9 @@ namespace AlexejheroYTB.Utilities
             public static object GetValue<classInstance>(this classInstance instance, string field, BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance) where classInstance : class
                 => typeof(classInstance).GetField(field, bindingFlags).GetValue(instance);
         }
+        /// <summary>
+        /// Generic extensions
+        /// </summary>
         public static class GenericExtensions
         {
             /// <summary>
@@ -598,13 +632,11 @@ namespace AlexejheroYTB.Utilities
             /// <typeparam name="T">The type of the value</typeparam>
             /// <param name="value">The value to turn into an array</param>
             /// <returns>The array</returns>
-            /// <exception cref="InvalidCastException"/>
+            /// <exception cref="ArrayTypeMismatchException"/>
             public static T[] Array<T>(this T value)
             {
                 if (value.GetType().IsArray)
-                {
-                    return (T[])(object)value;
-                }
+                    throw new ArrayTypeMismatchException("The value is already an array!");
                 return new[] { value };
             }
             /// <summary>
@@ -623,9 +655,13 @@ namespace AlexejheroYTB.Utilities
             /// <typeparam name="ResultingObject">The type of the resulting object</typeparam>
             /// <param name="obj">The object to convert</param>
             /// <returns>The resulting object</returns>
+            /// <exception cref="InvalidCastException"/>
             public static ResultingObject As<InitialObject, ResultingObject>(this InitialObject obj)
                 => (ResultingObject)(object)obj;
         }
+        /// <summary>
+        /// Extensions for <see cref="HarmonyInstance"/>
+        /// </summary>
         public static class HarmonyInstanceExtensions
         {
             /// <summary>
@@ -636,6 +672,9 @@ namespace AlexejheroYTB.Utilities
             public static void PatchAll(this HarmonyInstance Harmony)
                 => Harmony.PatchAll(Assembly.GetCallingAssembly());
         }
+        /// <summary>
+        /// Extensions for <see cref="StreamWriter"/>
+        /// </summary>
         public static class StreamWriterExtensions
         {
             /// <summary>
@@ -653,6 +692,9 @@ namespace AlexejheroYTB.Utilities
                 return file;
             }
         }
+        /// <summary>
+        /// Extensions for <see cref="String"/>
+        /// </summary>
         public static class StringExtensions
         {
             /// <summary>

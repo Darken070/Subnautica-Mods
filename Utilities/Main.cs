@@ -181,7 +181,6 @@ namespace AlexejheroYTB.Utilities
             string prefix = messagePrefix == null ? "" : $"[{messagePrefix}]";
             Console.WriteLine($"[{caller}] {prefix} {message}");
         }
-
         /// <summary>
         /// Logs a message to <see cref="Console"/> without a prefix. Alias to <see cref="Message(string, bool)"/>
         /// </summary>
@@ -222,6 +221,16 @@ namespace AlexejheroYTB.Utilities
         /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
         public static void Error(string message, string customCaller = null, bool onlyLogIfTrue = true)
             => Log(message, customCaller, "ERROR", onlyLogIfTrue);
+        /// <summary>
+        /// Logs a message to the player screen
+        /// </summary>
+        /// <param name="message">The message to log to the console</param>
+        /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
+        public static void Screen(string message, bool onlyLogIfTrue = true)
+        {
+            if (onlyLogIfTrue)
+                ErrorMessage.AddMessage(message);
+        }
     }
     /// <summary>
     /// Class for managing items
@@ -480,6 +489,10 @@ namespace AlexejheroYTB.Utilities
             /// Sends a command
             /// </summary>
             /// <param name="lpstrCommand">Command to send</param>
+            /// <param name="lpstrReturnString">Taken care of by <see cref="SendCommand(string)"/></param>
+            /// <param name="uReturnLength">Taken care of by <see cref="SendCommand(string)"/></param>
+            /// <param name="hwndCallback">Taken care of by <see cref="SendCommand(string)"/></param>
+            /// <returns>Taken care of by <see cref="SendCommand(string)"/></returns>
             [DllImport("winmm.dll", EntryPoint = "mciSendStringA", CharSet = CharSet.Ansi)]
             private static extern int SendCommand(string lpstrCommand, StringBuilder lpstrReturnString, int uReturnLength, IntPtr hwndCallback);
             /// <summary>
@@ -489,19 +502,35 @@ namespace AlexejheroYTB.Utilities
             private static void SendCommand(string command)
                 => SendCommand(command, null, 0, IntPtr.Zero);
             /// <summary>
+            /// Stores possible disk tray states
+            /// </summary>
+            private enum DiskTrayState
+            {
+                /// <summary>
+                /// Opens the disk tray
+                /// </summary>
+                Open,
+                /// <summary>
+                /// Closes the disk tray
+                /// </summary>
+                Closed
+            }
+            /// <summary>
+            /// Opens and closes the disk tray
+            /// </summary>
+            /// <param name="state">The <see cref="DiskTrayState"/> that should be applied</param>
+            private static void ManageDiskTray(DiskTrayState state)
+                => SendCommand("set cdaudio door " + state.ToString().ToLower());
+            /// <summary>
             /// Openes the disk tray
             /// </summary>
             public static void Open()
-            {
-                SendCommand("set cdaudio door open");
-            }
+                => ManageDiskTray(DiskTrayState.Open);
             /// <summary>
             /// Closes the disk tray, if supported
             /// </summary>
             public static void Close()
-            {
-                SendCommand("set cdaudio door closed");
-            }
+                => ManageDiskTray(DiskTrayState.Closed);
         }
         /// <summary>
         /// Wait for seconds
@@ -510,15 +539,6 @@ namespace AlexejheroYTB.Utilities
         public static void Wait(float t)
         {
             System.Threading.Thread.Sleep((int)Math.Round(t * 1000));
-        }
-    }
-
-    public static class HarmonyUtils
-    {
-        public static void PatchAll()
-        {
-            HarmonyInstance harmony = HarmonyInstance.Create($"com.alexejheroytb.subnauticamods.{Assembly.GetCallingAssembly().GetName().Name.ToLower().RemoveChars(' ', ',', '-', '_', '.', '"', '\'')}");
-            harmony.PatchAll(Assembly.GetCallingAssembly());
         }
     }
 

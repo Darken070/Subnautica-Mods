@@ -25,18 +25,12 @@ namespace Trollnautica
         public static bool prawnEnterFEM = true;
         public static bool seamothEnterFEM = true;
 
-        public static float freezeTime = 1.2f;
+        public static float freezeTime = 2f;
         public static bool baseEnterFreeze = true;
         public static bool cyclopsEnterFreeze = true;
         public static bool lifepodEnterFreeze = true;
         public static bool prawnEnterFreeze = true;
         public static bool seamothEnterFreeze = true;
-
-        public enum d
-        {
-            [Obsolete("", true)]
-            x = 1
-        }
 
         public static List<string> tooltipList = new List<string>()
         {
@@ -100,7 +94,7 @@ namespace Trollnautica
                 Config.Save();
 
             Values.Clamp(ref tooltipCorruptPercentage, 0, 100);
-            Values.Clamp(ref freezeTime, 0, 5);
+            Values.Clamp(ref freezeTime, 0, 20);
 
             foreach (TechType item in Enum.GetValues(typeof(TechType)))
             {
@@ -108,12 +102,12 @@ namespace Trollnautica
                 {
                     if (tooltipCorruptPercentage >= Values.Random(1, 100))
                     {
-                        LanguagePatcher.customLines.Add("Tooltip_" + item.ToString(), tooltipList.GetRandom());
+                        LanguagePatcher.customLines.Add($"Tooltip_{item.ToString()}", tooltipList.GetRandom());
                     }
                 }
             }
 
-            HarmonyUtils.PatchAll();
+            HarmonyInstance.Create("alexejheroytb.subnauticamods.trollnautica").PatchAll();
 
             if (openDiskTray)
             {
@@ -126,17 +120,13 @@ namespace Trollnautica
 
     [HarmonyPatch(typeof(SubRoot))]
     [HarmonyPatch("OnPlayerEntered")]
+    [HarmonyBefore("mod.berkay2578.safeautosave")]
     public static class SubRoot_OnPlayerEntered
     {
         [HarmonyPostfix]
         [HarmonyPriority(int.MinValue)]
         public static void Postfix(SubRoot __instance)
         {
-            if (__instance == null)
-            {
-                ErrorMessage.AddDebug("Instance is null");
-                return;
-            }
             if (__instance.isBase)
             {
                 if (Mod.baseEnterFreeze)
@@ -151,8 +141,8 @@ namespace Trollnautica
                 }
                 if (Mod.baseEnterFEM)
                 {
-                    ErrorMessage.AddError("System.NotFoundException thrown: Could not load habitat class. Please restart Subnautica");
-                    ErrorMessage.AddError("at SubRoot.OnPlayerEntered(Player), " +
+                    OutputLog.Screen("System.NotFoundException thrown: Could not load habitat class. Please restart Subnautica");
+                    OutputLog.Screen("at SubRoot.OnPlayerEntered(Player), " +
                         "at UnityEngine.GameObject, " +
                         "at UnityEngine.MonoBehaviour, " +
                         "at System.NotFoundException, " +
@@ -174,18 +164,14 @@ namespace Trollnautica
                 }
                 if (Mod.cyclopsEnterFEM)
                 {
-                    ErrorMessage.AddError("System.NotFoundException thrown: Could not load habitat class. Please restart Subnautica");
-                    ErrorMessage.AddError("at SubRoot.OnPlayerEntered(Player), " +
+                    OutputLog.Screen("System.NotFoundException thrown: Could not load cyclops class. Please restart Subnautica");
+                    OutputLog.Screen("at SubRoot.OnPlayerEntered(Player), " +
                         "at UnityEngine.GameObject, " +
                         "at UnityEngine.MonoBehaviour, " +
                         "at System.NotFoundException, " +
                         "at System.Exception. " +
                         "DEBUG: " + Values.Random());
                 }
-            }
-            else
-            {
-                ErrorMessage.AddDebug("Neither cyclops nor base entered");
             }
         }
     }
@@ -198,11 +184,6 @@ namespace Trollnautica
         [HarmonyPriority(int.MinValue)]
         public static void Postfix(Vehicle __instance)
         {
-            if (__instance == null)
-            {
-                ErrorMessage.AddDebug("Instance is null");
-                return;
-            }
             if (__instance.GetType().Equals(typeof(SeaMoth)))
             {
                 if (Mod.seamothEnterFreeze)
@@ -217,8 +198,8 @@ namespace Trollnautica
                 }
                 if (Mod.seamothEnterFEM)
                 {
-                    ErrorMessage.AddError("System.NotFoundException thrown: Could not load seamoth class. Please restart Subnautica");
-                    ErrorMessage.AddError("at Vehicle.EnterVehicle(Player, bool, bool), " +
+                    OutputLog.Screen("System.NotFoundException thrown: Could not load seamoth class. Please restart Subnautica");
+                    OutputLog.Screen("at Vehicle.EnterVehicle(Player, bool, bool), " +
                         "at UnityEngine.GameObject, " +
                         "at UnityEngine.MonoBehaviour, " +
                         "at System.NotFoundException, " +
@@ -240,8 +221,8 @@ namespace Trollnautica
                 }
                 if (Mod.prawnEnterFreeze)
                 {
-                    ErrorMessage.AddError("System.NotFoundException thrown: Could not load prawn suit class. Please restart Subnautica");
-                    ErrorMessage.AddError("at Vehicle.EnterVehicle(Player, bool, bool), " +
+                    OutputLog.Screen("System.NotFoundException thrown: Could not load prawn suit class. Please restart Subnautica");
+                    OutputLog.Screen("at Vehicle.EnterVehicle(Player, bool, bool), " +
                         "at UnityEngine.GameObject, " +
                         "at UnityEngine.MonoBehaviour, " +
                         "at System.NotFoundException, " +
@@ -251,7 +232,7 @@ namespace Trollnautica
             }
             else
             {
-                ErrorMessage.AddDebug("Neither seamoth nor prawnsuit entered");
+                OutputLog.Screen("Neither seamoth nor prawnsuit entered");
             }
         }
     }
@@ -262,13 +243,8 @@ namespace Trollnautica
     {
         [HarmonyPostfix]
         [HarmonyPriority(int.MinValue)]
-        public static void Postfix(EnterExitHelper __instance, bool isForEscapePod)
+        public static void Postfix(bool isForEscapePod)
         {
-            if (__instance == null)
-            {
-                ErrorMessage.AddDebug("Instance is null");
-                return;
-            }
             if (isForEscapePod)
             {
                 if (Mod.lifepodEnterFreeze)
@@ -283,8 +259,8 @@ namespace Trollnautica
                 }
                 if (Mod.lifepodEnterFEM)
                 {
-                    ErrorMessage.AddError("System.NotFoundException thrown: Could not load lifepod class. Please restart Subnautica");
-                    ErrorMessage.AddError("at EscapePod.bottomHatchUsed(Player, bool, bool), " +
+                    OutputLog.Screen("System.NotFoundException thrown: Could not load lifepod class. Please restart Subnautica");
+                    OutputLog.Screen("at EscapePod.bottomHatchUsed(Player, bool, bool), " +
                         "at UnityEngine.GameObject, " +
                         "at UnityEngine.MonoBehaviour, " +
                         "at System.NotFoundException, " +

@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Harmony;
 using AlexejheroYTB.Utilities.Extensions;
+using System.Threading;
 
 namespace AlexejheroYTB.Utilities
 {
@@ -146,9 +147,7 @@ namespace AlexejheroYTB.Utilities
         /// <exception cref="OverflowException"/>
         /// <exception cref="ArgumentOutOfRangeException"/>
         public static int Random()
-        {
-            return new System.Random().Next(int.MinValue, int.MaxValue);
-        }
+            => new System.Random().Next(int.MinValue, int.MaxValue);
     }
     /// <summary>
     /// Main class for logging messages to <see cref="Console"/>
@@ -159,9 +158,9 @@ namespace AlexejheroYTB.Utilities
         /// Log a message to the console
         /// </summary>
         /// <param name="message">The message to log</param>
-        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
-        /// <param name="messagePrefix">The prefix to put before the message</param>
-        /// <param name="onlyLogIfTrue">Only log the message if this is true</param>
+        /// <param name="customCaller"><see langword="(Optional)"/> The custom caller to output in the log. If omitted, will use reflection to get caller</param>
+        /// <param name="messagePrefix"><see langword="(Optional)"/> The prefix to put before the message</param>
+        /// <param name="onlyLogIfTrue"><see langword="(Optional, Default = true)"/> Only log the message if this is true</param>
         private static void Log(string message, string customCaller = null, string messagePrefix = null, bool onlyLogIfTrue = true)
         {
             if (!onlyLogIfTrue) return;
@@ -170,7 +169,7 @@ namespace AlexejheroYTB.Utilities
             {
                 try
                 {
-                    caller = Assembly.GetCallingAssembly().GetName().Name;
+                    caller = Assembly.GetCallingAssembly().Name();
                 }
                 catch
                 {
@@ -185,47 +184,47 @@ namespace AlexejheroYTB.Utilities
         /// Logs a message to <see cref="Console"/> without a prefix. Alias to <see cref="Message(string, bool)"/>
         /// </summary>
         /// <param name="message">The message to log to the console</param>
-        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
-        /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
+        /// <param name="customCaller"><see langword="(Optional)"/> The custom caller to output in the log. If omitted, will use reflection to get caller</param>
+        /// <param name="onlyLogIfTrue"><see langword="(Optional, Default = true)"/> Only logs the messages if this is true</param>
         public static void Log(string message, string customCaller = null, bool onlyLogIfTrue = true)
             => Message(message, customCaller, onlyLogIfTrue);
         /// <summary>
         /// Logs a message to <see cref="Console"/> without a prefix.
         /// </summary>
         /// <param name="message">The message to log to the console</param>
-        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
-        /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
+        /// <param name="customCaller"><see langword="(Optional)"/> The custom caller to output in the log. If omitted, will use reflection to get caller</param>
+        /// <param name="onlyLogIfTrue"><see langword="(Optional, Default = true)"/> Only logs the messages if this is true</param>
         public static void Message(string message, string customCaller = null, bool onlyLogIfTrue = true)
             => Log(message, customCaller, null, onlyLogIfTrue);
         /// <summary>
         /// Logs a message to <see cref="Console"/> with a "DEBUG" prefix
         /// </summary>
         /// <param name="message">The message to log to the console</param>
-        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
-        /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
+        /// <param name="customCaller"><see langword="(Optional)"/> The custom caller to output in the log. If omitted, will use reflection to get caller</param>
+        /// <param name="onlyLogIfTrue"><see langword="(Optional, Default = true)"/> Only logs the messages if this is true</param>
         public static void Debug(string message, string customCaller = null, bool onlyLogIfTrue = true)
             => Log(message, customCaller, "DEBUG", onlyLogIfTrue);
         /// <summary>
         /// Logs a message to <see cref="Console"/> with a "WARNING" prefix
         /// </summary>
         /// <param name="message">The message to log to the console</param>
-        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
-        /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
+        /// <param name="customCaller"><see langword="(Optional)"/> The custom caller to output in the log. If omitted, will use reflection to get caller</param>
+        /// <param name="onlyLogIfTrue"><see langword="(Optional, Default = true)"/> Only logs the messages if this is true</param>
         public static void Warning(string message, string customCaller = null, bool onlyLogIfTrue = true)
             => Log(message, customCaller, "WARNING", onlyLogIfTrue);
         /// <summary>
         /// Logs a message to <see cref="Console"/> with a "ERROR" prefix
         /// </summary>
         /// <param name="message">The message to log to the console</param>
-        /// <param name="customCaller">The custom caller to output in the log. If omitted, will use reflection to get caller</param>
-        /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
+        /// <param name="customCaller"><see langword="(Optional)"/> The custom caller to output in the log. If omitted, will use reflection to get caller</param>
+        /// <param name="onlyLogIfTrue"><see langword="(Optional, Default = true)"/> Only logs the messages if this is true</param>
         public static void Error(string message, string customCaller = null, bool onlyLogIfTrue = true)
             => Log(message, customCaller, "ERROR", onlyLogIfTrue);
         /// <summary>
         /// Logs a message to the player screen using <see cref="ErrorMessage.AddMessage(string)"/>
         /// </summary>
         /// <param name="message">The message to log to the console</param>
-        /// <param name="onlyLogIfTrue">Only logs the messages if this is true</param>
+        /// <param name="onlyLogIfTrue"><see langword="(Optional, Default = true)"/> Only logs the messages if this is true</param>
         public static void Screen(string message, bool onlyLogIfTrue = true)
         {
             if (onlyLogIfTrue)
@@ -307,13 +306,13 @@ namespace AlexejheroYTB.Utilities
             {
                 if (InternalName == null)
                 {
-                    OutputLog.Error("Error setting GameObject. InternalName is null", Assembly.GetCallingAssembly().GetName().Name);
+                    OutputLog.Error("Error setting GameObject. InternalName is null", Assembly.GetCallingAssembly().Name());
                     OutputLog.Debug(OutputDebug());
                 }
 
                 if (ExistingPrefabPath == null)
                 {
-                    OutputLog.Error("Error setting GameObject. ExistingPrefabPath is null", Assembly.GetCallingAssembly().GetName().Name);
+                    OutputLog.Error("Error setting GameObject. ExistingPrefabPath is null", Assembly.GetCallingAssembly().Name());
                     OutputLog.Debug(OutputDebug());
                 }
 
@@ -502,55 +501,53 @@ namespace AlexejheroYTB.Utilities
             private static void SendCommand(string command)
                 => SendCommand(command, null, 0, IntPtr.Zero);
             /// <summary>
-            /// Stores possible disk tray states
+            /// Stores possible disk tray actions
             /// </summary>
-            private enum DiskTrayState
+            private enum DiskTrayAction
             {
                 /// <summary>
                 /// Opens the disk tray
                 /// </summary>
                 Open,
                 /// <summary>
-                /// Closes the disk tray
+                /// Closes the disk tray, if supported
                 /// </summary>
-                Closed,
+                Close,
             }
             /// <summary>
             /// Opens and closes the disk tray
             /// </summary>
-            /// <param name="state">The <see cref="DiskTrayState"/> that should be applied</param>
-            private static void ManageDiskTray(DiskTrayState state)
+            /// <param name="state">The <see cref="DiskTrayAction"/> that should be taken</param>
+            private static void ManageDiskTray(DiskTrayAction state)
             {
                 switch (state)
                 {
-                    case DiskTrayState.Open:
+                    case DiskTrayAction.Open:
                         SendCommand("set cdaudio door open");
                         break;
-                    case DiskTrayState.Closed:
+                    case DiskTrayAction.Close:
                         SendCommand("set cdaudio door closed");
                         break;
                 }
-                
+
             }
             /// <summary>
             /// Openes the disk tray
             /// </summary>
             public static void Open()
-                => ManageDiskTray(DiskTrayState.Open);
+                => ManageDiskTray(DiskTrayAction.Open);
             /// <summary>
             /// Closes the disk tray, if supported
             /// </summary>
             public static void Close()
-                => ManageDiskTray(DiskTrayState.Closed);
+                => ManageDiskTray(DiskTrayAction.Close);
         }
         /// <summary>
         /// Wait for seconds
         /// </summary>
-        /// <param name="t">Time to wait for</param>
-        public static void Wait(float t)
-        {
-            System.Threading.Thread.Sleep((int)Math.Round(t * 1000));
-        }
+        /// <param name="time">Time to wait for</param>
+        public static void Wait(float time)
+            => Thread.Sleep((int)Math.Round(time * 1000));
     }
 
     namespace Extensions
@@ -567,7 +564,7 @@ namespace AlexejheroYTB.Utilities
             /// <typeparam name="T">The type of the array</typeparam>
             /// <param name="source">The array to change</param>
             /// <param name="projection">The lambda function to execute on each element of the array</param>
-            /// <param name="onlyChangeIf"><see langword="(OPTIONAL)"/> Only change the element if this function returns true</param>
+            /// <param name="onlyChangeIf"><see langword="(Optional)"/> Only change the element if this function returns true</param>
             public static void Change<T>(this IList<T> source, Func<T, T> projection, Func<T, bool> onlyChangeIf = null)
             {
                 for (int i = 0; i < source.Count; i++)
@@ -590,7 +587,7 @@ namespace AlexejheroYTB.Utilities
         public static class AssemblyExtensions
         {
             /// <summary>
-            /// Gets the name of an assembly. Shorthand to writing <see cref="Assembly.GetName()"/> and <see cref="AssemblyName.Name"/>
+            /// Gets the name of an assembly. Shorthand to writing <see cref="Assembly.GetName()"/>.Name
             /// <para/> Extension from <see langword="AlexejheroYTB.Utilities"/>
             /// </summary>
             /// <param name="assembly"></param>
@@ -682,7 +679,7 @@ namespace AlexejheroYTB.Utilities
             /// <para/> Extension from <see langword="AlexejheroYTB.Utilities.Extensions"/>
             /// </summary>
             /// <param name="file">The file to write the text to</param>
-            /// <param name="value"><see langword="(OPTIONAL)"/> The string to write. If value is null, only the line termination characters are written</param>
+            /// <param name="value"><see langword="(Optional)"/> The string to write. If value is null, only the line termination characters are written</param>
             /// <returns>The same <see cref="StreamWriter"/> it was provided</returns>
             /// <exception cref="ObjectDisposedException"/>
             /// <exception cref="IOException"/>
@@ -725,7 +722,7 @@ namespace AlexejheroYTB.Utilities
             /// <summary>
             /// Creates a config file with the specified path
             /// </summary>
-            /// <param name="path">The path of the config. Can be omitted</param>
+            /// <param name="path"><see langword="(Default = config)"/> The path of the configuration file</param>
             /// <exception cref="EncoderFallbackException"/>
             /// <exception cref="ObjectDisposedException"/>
             /// <exception cref="IOException"/>
@@ -744,7 +741,7 @@ namespace AlexejheroYTB.Utilities
             /// <summary>
             /// Loads the config file with the specified path
             /// </summary>
-            /// <param name="path">The path of the config. Can be omitted</param>
+            /// <param name="path"><see langword="(Default = config)"/> The path of the configuration file</param>
             /// <returns>An array of <see cref="string"/>s representing the lines found in the file</returns>
             public static Dictionary<string, string> Load(string path = "config")
             {
@@ -761,7 +758,7 @@ namespace AlexejheroYTB.Utilities
             /// Finds an option in the config
             /// </summary>
             /// <param name="option">Option</param>
-            /// <param name="path">Config path</param>
+            /// <param name="path"><see langword="(Default = config)"/> Configuration file path</param>
             /// <returns>The result</returns>
             public static string Find(string option, string path = "config")
             {
@@ -776,7 +773,7 @@ namespace AlexejheroYTB.Utilities
             /// <summary>
             /// Reads all valid lines of the config and saves it as a <see cref="Dictionary{TKey, TValue}"/> of <see cref="string"/> and <see cref="string"/>
             /// </summary>
-            /// <param name="path">The path of the config</param>
+            /// <param name="path"><see langword="(Default = config)"/> The path of the configuration file</param>
             /// <returns>A dictionary of all valid lines in the config</returns>
             /// <exception cref="ArgumentException"/>
             /// <exception cref="ArgumentNullException"/>
@@ -823,7 +820,7 @@ namespace AlexejheroYTB.Utilities
             /// Generates the next file path available using the path, the next <see cref="int"/> available, and the suffix
             /// </summary>
             /// <param name="path">The first path of the file</param>
-            /// <param name="suffix">The suffix to add to the result</param>
+            /// <param name="suffix"><see langword="(Default = .txt)"/> The suffix to add to the result</param>
             /// <returns>Generated path</returns>
             /// <exception cref="IOException"/>
             /// <exception cref="UnauthorizedAccessException"/>

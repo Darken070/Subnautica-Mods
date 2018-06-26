@@ -148,6 +148,66 @@ namespace AlexejheroYTB.Utilities
         /// <exception cref="ArgumentOutOfRangeException"/>
         public static int Random()
             => new System.Random().Next(int.MinValue, int.MaxValue);
+        /// <summary>
+        /// Gets the value of a field from an instance of a class using reflection
+        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities.Extensions"/>
+        /// </summary>
+        /// <typeparam name="classInstance">The class type</typeparam>
+        /// <param name="instance">The instance of <typeparamref name="classInstance"/></param>
+        /// <param name="field">The name of the field</param>
+        /// <param name="bindingFlags">The <see cref="BindingFlags"/> to use with <see cref="Type.GetField(string, BindingFlags)"/></param>
+        /// <returns>The value of field from the instance of the class</returns>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="TargetException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="FieldAccessException"/>
+        /// <exception cref="ArgumentException"/>
+        public static object GetValue<classInstance>(classInstance instance, string field, BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance) where classInstance : class
+            => typeof(classInstance).GetField(field, bindingFlags).GetValue(instance);
+        /// <summary>
+        /// Sets the value of a field from an instance of a class using reflection
+        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities.Extensions"/>
+        /// </summary>
+        /// <typeparam name="classInstance">The class type</typeparam>
+        /// <param name="instance">The instance of <typeparamref name="classInstance"/></param>
+        /// <param name="field">The name of the field</param>
+        /// <param name="newValue">The new value to set</param>
+        /// <param name="bindingFlags">The <see cref="BindingFlags"/> to use with <see cref="Type.GetField(string, BindingFlags)"/></param>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="FieldAccessException"/>
+        /// <exception cref="TargetException"/>
+        /// <exception cref="ArgumentException"/>
+        public static void SetValue<classInstance>(classInstance instance, string field, object newValue, BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance) where classInstance : class
+            => typeof(classInstance).GetField(field, bindingFlags).SetValue(instance, newValue);
+        /// <summary>
+        /// Gets the value of a field from a static class using reflection
+        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities.Extensions"/>
+        /// </summary>
+        /// <typeparam name="class">The class to get the value from</typeparam>
+        /// <param name="field">The name of the field</param>
+        /// <param name="bindingFlags">The <see cref="BindingFlags"/> to use with <see cref="Type.GetField(string, BindingFlags)"/></param>
+        /// <returns>The value of field from the instance of the class</returns>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="TargetException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="FieldAccessException"/>
+        /// <exception cref="ArgumentException"/>
+        public static object GetValue<@class>(string field, BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Static) where @class : class
+            => typeof(@class).GetField(field, bindingFlags).GetValue(null);
+        /// <summary>
+        /// Sets the value of a field from a static class using reflection
+        /// <para/> Extension from <see langword="AlexejheroYTB.Utilities.Extensions"/>
+        /// </summary>
+        /// <typeparam name="class">The class to get the value from</typeparam>
+        /// <param name="field">The name of the field</param>
+        /// <param name="newValue">The new value to set</param>
+        /// <param name="bindingFlags">The <see cref="BindingFlags"/> to use with <see cref="Type.GetField(string, BindingFlags)"/></param>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="FieldAccessException"/>
+        /// <exception cref="TargetException"/>
+        /// <exception cref="ArgumentException"/>
+        public static void SetValue<@class>(string field, object newValue, BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Static) where @class : class
+            => typeof(@class).GetField(field, bindingFlags).SetValue(null, newValue);
     }
     /// <summary>
     /// Main class for logging messages to <see cref="Console"/>
@@ -588,7 +648,7 @@ namespace AlexejheroYTB.Utilities
         {
             /// <summary>
             /// Gets the name of an assembly. Shorthand to writing <see cref="Assembly.GetName()"/>.Name
-            /// <para/> Extension from <see langword="AlexejheroYTB.Utilities"/>
+            /// <para/> Extension from <see langword="AlexejheroYTB.Utilities.Extensions"/>
             /// </summary>
             /// <param name="assembly"></param>
             /// <returns></returns>
@@ -598,13 +658,13 @@ namespace AlexejheroYTB.Utilities
         /// <summary>
         /// Generic extensions for instances of classes
         /// </summary>
-        public static class ClassExtensions
+        public static class ClassInstanceExtensions
         {
             /// <summary>
             /// Gets the value of a field from an instance of a class using reflection
-            /// <para/>Extension from <see langword="AlexejheroYTB.Utilities.Extensions"/>
+            /// <para/> Extension from <see langword="AlexejheroYTB.Utilities.Extensions"/>
             /// </summary>
-            /// <typeparam name="classInstance">The class</typeparam>
+            /// <typeparam name="classInstance">The class type</typeparam>
             /// <param name="instance">The instance of <typeparamref name="classInstance"/></param>
             /// <param name="field">The name of the field</param>
             /// <param name="bindingFlags">The <see cref="BindingFlags"/> to use with <see cref="Type.GetField(string, BindingFlags)"/></param>
@@ -615,7 +675,22 @@ namespace AlexejheroYTB.Utilities
             /// <exception cref="FieldAccessException"/>
             /// <exception cref="ArgumentException"/>
             public static object GetValue<classInstance>(this classInstance instance, string field, BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance) where classInstance : class
-                => typeof(classInstance).GetField(field, bindingFlags).GetValue(instance);
+                => Values.GetValue(instance, field, bindingFlags);
+            /// <summary>
+            /// Sets the value of a field from an instance of a class using reflection
+            /// <para/> Extension from <see langword="AlexejheroYTB.Utilities.Extensions"/>
+            /// </summary>
+            /// <typeparam name="classInstance">The class type</typeparam>
+            /// <param name="instance">The instance of <typeparamref name="classInstance"/></param>
+            /// <param name="field">The name of the field</param>
+            /// <param name="newValue">The new value to set</param>
+            /// <param name="bindingFlags">The <see cref="BindingFlags"/> to use with <see cref="Type.GetField(string, BindingFlags)"/></param>
+            /// <exception cref="ArgumentNullException"/>
+            /// <exception cref="FieldAccessException"/>
+            /// <exception cref="TargetException"/>
+            /// <exception cref="ArgumentException"/>
+            public static void SetValue<classInstance>(this classInstance instance, string field, object newValue, BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance) where classInstance : class
+                => Values.SetValue(instance, field, newValue, bindingFlags);
         }
         /// <summary>
         /// Generic extensions

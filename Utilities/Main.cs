@@ -780,7 +780,7 @@ namespace AlexejheroYTB.Utilities
             public static string RemoveChars(this string str, params char[] chars)
             {
                 char[] array = str.ToCharArray();
-                array = (char[])array.Where(x => Array.IndexOf(array, x) == -1);
+                array = (char[])array.Where(x => Array.IndexOf(chars, x) == -1);
                 return new string(array);
             }
         }

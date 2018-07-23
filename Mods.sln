@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplenishReactorRods", "Rep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trollnautica", "Trollnautica\Trollnautica.csproj", "{716BA3BE-F20B-4A02-BA5A-78431AAB17B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteOxygen", "InfiniteOxygen\InfiniteOxygen.csproj", "{91000055-FB7F-44A1-A99C-F370E8FD1401}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Utilities\Utilities.projitems*{15ca855f-5de3-46a8-9420-a796bfca7ae3}*SharedItemsImports = 4
@@ -53,6 +55,10 @@ Global
 		{716BA3BE-F20B-4A02-BA5A-78431AAB17B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{716BA3BE-F20B-4A02-BA5A-78431AAB17B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{716BA3BE-F20B-4A02-BA5A-78431AAB17B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91000055-FB7F-44A1-A99C-F370E8FD1401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91000055-FB7F-44A1-A99C-F370E8FD1401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91000055-FB7F-44A1-A99C-F370E8FD1401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91000055-FB7F-44A1-A99C-F370E8FD1401}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

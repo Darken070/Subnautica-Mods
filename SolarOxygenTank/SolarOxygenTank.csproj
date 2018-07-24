@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{664B1D32-02D1-4AAD-A840-D7E14EB8AC93}</ProjectGuid>
+    <ProjectGuid>{1D95E46F-C43D-4129-8DCD-8B97E21797EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DeconstructFireExtinguishers</RootNamespace>
-    <AssemblyName>DeconstructFireExtinguishers</AssemblyName>
+    <RootNamespace>SolarOxygenTank</RootNamespace>
+    <AssemblyName>SolarOxygenTank</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>.\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -29,18 +29,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\..\..\Games\Subnautica\Subnautica_Data\Managed\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\Games\Subnautica\Subnautica_Data\Managed\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\..\Games\Subnautica\Subnautica_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="SMLHelper">
       <HintPath>..\..\..\Games\Subnautica\QMods\Modding Helper\SMLHelper.dll</HintPath>
@@ -52,21 +46,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\Games\Subnautica\Subnautica_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\Games\Subnautica\Subnautica_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="QPatch.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="..\Utilities\Utilities.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetPath)" "D:\Games\Subnautica\QMods\$(TargetName)\$(TargetFileName)"
-echo y | del "$(TargetDir)\Assembly-CSharp.dll" "$(TargetDir)\Assembly-CSharp-firstpass.dll" "$(TargetDir)\DeconstructFireExtinguishers.pdb" "$(TargetDir)\iTween.dll" "$(TargetDir)\LibNoise.dll" "$(TargetDir)\LitJson.dll" "$(TargetDir)\LumenWorks.dll" "$(TargetDir)\Mono.Cecil.dll" "$(TargetDir)\Newtonsoft.Json.dll" "$(TargetDir)\Poly2Tri.dll" "$(TargetDir)\QModInstaller.dll" "$(TargetDir)\SMLHelper.dll" "$(TargetDir)\UnityEngine.dll" "$(TargetDir)\UnityEngine.UI.dll"</PostBuildEvent>
-  </PropertyGroup>
 </Project>

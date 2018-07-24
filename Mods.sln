@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trollnautica", "Trollnautic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteOxygen", "InfiniteOxygen\InfiniteOxygen.csproj", "{91000055-FB7F-44A1-A99C-F370E8FD1401}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarOxygenTank", "SolarOxygenTank\SolarOxygenTank.csproj", "{1D95E46F-C43D-4129-8DCD-8B97E21797EE}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Utilities\Utilities.projitems*{15ca855f-5de3-46a8-9420-a796bfca7ae3}*SharedItemsImports = 4
@@ -59,6 +61,10 @@ Global
 		{91000055-FB7F-44A1-A99C-F370E8FD1401}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91000055-FB7F-44A1-A99C-F370E8FD1401}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91000055-FB7F-44A1-A99C-F370E8FD1401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D95E46F-C43D-4129-8DCD-8B97E21797EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D95E46F-C43D-4129-8DCD-8B97E21797EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D95E46F-C43D-4129-8DCD-8B97E21797EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D95E46F-C43D-4129-8DCD-8B97E21797EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

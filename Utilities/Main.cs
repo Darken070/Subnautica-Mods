@@ -10,6 +10,7 @@ using System.Text;
 using Harmony;
 using AlexejheroYTB.Utilities.Extensions;
 using System.Threading;
+using UnityEngine;
 
 namespace AlexejheroYTB.Utilities
 {
